@@ -1,22 +1,31 @@
 {
-  "name": "general-vms-backend",
+  "name": "@hack4impact/general-vms-backend-example",
   "version": "1.0.0",
-  "description": "Test backend for general VMS.",
-  "main": "server.js",
+  "description": "Backend example app.",
+  "main": "src/server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "npm run dev",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/server.ts",
+    "from-js": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hack4impact-calpoly/general-vms.git"
   },
-  "author": "hack4impact-calpoly",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hack4impact-calpoly/general-vms/issues"
   },
-  "homepage": "https://github.com/hack4impact-calpoly/general-vms/backend#readme",
+  "homepage": "https://github.com/hack4impact-calpoly/general-vms#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.5",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  },
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.2"
