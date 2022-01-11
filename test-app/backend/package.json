@@ -38,6 +38,8 @@
     "jest": "^27.4.7",
     "lint-staged": "^12.1.7",
     "nodemon": "^2.0.15",
+    "superagent": "^7.0.1",
+    "supertest": "^6.2.0",
     "ts-jest": "^27.1.2",
     "ts-node": "^10.4.0",
     "tsc-files": "^1.1.3",

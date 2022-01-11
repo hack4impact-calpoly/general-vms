@@ -25,11 +25,5 @@ app.get('*', (req, res) => {
   res.status(400).send('Page not found');
 });
 
-const port = process.env.PORT || 8080;
-
-app.listen(port, () => {
-  console.log(`\nServer running... listening on port ${port}`);
-});
-
 module.exports = app;
 
