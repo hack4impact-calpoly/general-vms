@@ -19,12 +19,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "cross-env CI=true react-scripts test --passWithNoTests",
+    "test": "cross-env CI=true react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "cd ../../ && husky install ./test-app/frontend/.husky",
-    "lint-check": "eslint 'src/**/*.{ts,tsx}' --color",
+    "lint-check": "eslint 'src/**/**.{ts,tsx}' --color",
     "lint-fix": "eslint --fix 'src/**/*.{ts,tsx}' --color",
-    "lint-staged": "lint-staged --config .husky/lint-staged.js"
+    "lint-staged": "lint-staged --config .husky/lint-staged.js",
+    "quality_checks": "npm run test && npm run lint-check",
+    "action": "npm i && npm run quality_checks && npm run lint-fix"
   },
   "eslintConfig": {
     "extends": [

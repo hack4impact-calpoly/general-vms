@@ -1,6 +1,5 @@
-const express = require("express");
-const app = require("../src/server");
-const supertest = require("supertest");
+import app from "../src/server";
+import supertest from "supertest";
 
 test("GET /test", async () => {
   const message = "Hi there!";

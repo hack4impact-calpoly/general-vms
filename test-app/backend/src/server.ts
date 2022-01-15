@@ -1,29 +1,28 @@
-import * as dotenv from "dotenv";
-import * as express from "express";
+import * as dotenv from 'dotenv'
+import express from 'express'
 
-const app = express();
+const app = express()
 
-dotenv.config();
+dotenv.config()
 
-app.use(express.json());
+app.use(express.json())
 app.use(express.urlencoded({
   extended: true
-}));
+}))
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  next();
-});
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+  next()
+})
 
-app.get("/test", (req, res) => {
-  res.send("Hi there!");
-});
+app.get('/test', (req, res) => {
+  res.send('Hi there!')
+})
 
 app.get('*', (req, res) => {
-  res.status(400).send('Page not found');
-});
+  res.status(400).send('Page not found')
+})
 
-module.exports = app;
-
+export default app
