@@ -42,6 +42,7 @@ const UserProviderWrapper: React.FC<UserProviderProps> = ({children, customUser}
   )
 };
 
+// Idea here from https://github.com/testing-library/react-testing-library/issues/780
 const customRender = (ui: React.ReactElement, options?: CustomUserRenderOptions) =>
   render(ui, {
     wrapper: (props: any) => <UserProviderWrapper {...props} {...options?.userProviderProps} />,
