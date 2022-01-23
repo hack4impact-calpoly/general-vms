@@ -21,12 +21,15 @@
     "build": "react-scripts build",
     "test": "cross-env CI=true react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "cd ../../ && husky install ./test-app/frontend/.husky",
-    "lint-check": "eslint 'src/**/**.{ts,tsx}' --color",
-    "lint-fix": "eslint --fix 'src/**/*.{ts,tsx}' --color",
-    "lint-staged": "lint-staged --config .husky/lint-staged.js",
-    "quality_checks": "npm run test && npm run lint-check",
-    "action": "npm i && npm run quality_checks && npm run lint-fix"
+    "prepare": "cd .. && npm run prepare",
+    "lint-check": "eslint 'src/**/**.{ts,tsx}' --color --max-warnings=0",
+    "lint-fix": "npm run lint-check -- --fix",
+    "lint-staged": "lint-staged --config scripts/lint-staged.js",
+    "test-quick": "react-scripts test --bail --watchAll=false --passWithNoTests --findRelatedTests",
+    "quality-checks": "npm run lint-check && npm run test",
+    "install-and-check": "npm i && npm run quality-checks && npm run build",
+    "commit-checks": "npm run lint-staged",
+    "push-checks": "npm run quality-checks"
   },
   "eslintConfig": {
     "extends": [
@@ -56,7 +59,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.28.0",
-    "husky": "^7.0.4",
     "lint-staged": "^12.1.7"
   }
 }

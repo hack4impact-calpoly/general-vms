@@ -1,12 +1,13 @@
-import type {Config} from '@jest/types'
-// Sync object
-const config: Config.InitialOptions = { 
-  preset: 'ts-jest',
-  testEnvironment: 'node',  
-  verbose: true,
-  transform: { 
-    '^.+\\.ts?$': 'ts-jest'
-  }
- }
+import type { Config } from '@jest/types';
 
-export default config
+// Sync object
+const config: Config.InitialOptions = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  verbose: true,
+  transform: {
+    '^.+\\.ts?$': 'ts-jest',
+  },
+};
+
+export default config;

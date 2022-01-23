@@ -2,7 +2,7 @@
 
 name: CI
 
-# Controls when the action will run. Triggers the workflow on push or pull request
+# Controls when the check-and-fix will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
     push:
@@ -35,6 +35,5 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
 
-            - run: npm run action --prefix ./test-app/frontend
+            - run: npm run install-and-check --prefix ./test-app
 
-            - run: npm run action --prefix ./test-app/backend
