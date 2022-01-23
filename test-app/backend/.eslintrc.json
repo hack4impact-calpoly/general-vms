@@ -7,5 +7,6 @@
     "project": ["./tsconfig.json"],
     "sourceType": "module",
     "createDefaultProgram": true
-  }
+  },
+  "ignorePatterns": ["**/scripts/*.js"]
 }
