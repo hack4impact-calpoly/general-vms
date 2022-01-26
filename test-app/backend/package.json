@@ -13,7 +13,7 @@
     "lint-fix": "npm run lint-check -- --fix",
     "lint-staged": "lint-staged --config scripts/lint-staged.js",
     "quality-checks": "npm run lint-check && npm run test && npm run build-check",
-    "install-and-check": "npm i && npm run quality-checks",
+    "install-and-check": "npm i --ignore-scripts && npm run quality-checks",
     "commit-checks": "npm run lint-staged",
     "push-checks": "npm run quality-checks"
   },
@@ -41,7 +41,7 @@
     "eslint-plugin-promise": "^5.2.0",
     "husky": "^7.0.4",
     "jest": "^27.4.7",
-    "lint-staged": "^12.1.7",
+    "lint-staged": "^12.3.2",
     "nodemon": "^2.0.15",
     "superagent": "^7.0.1",
     "supertest": "^6.2.0",

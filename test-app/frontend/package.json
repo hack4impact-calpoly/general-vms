@@ -28,7 +28,7 @@
     "lint-staged": "lint-staged --config scripts/lint-staged.js",
     "test-quick": "react-scripts test --bail --watchAll=false --passWithNoTests --findRelatedTests",
     "quality-checks": "npm run lint-check && npm run test",
-    "install-and-check": "npm i && npm run quality-checks && npm run build",
+    "install-and-check": "npm i --ignore-scripts && npm run quality-checks && npm run build",
     "commit-checks": "npm run lint-staged",
     "push-checks": "npm run quality-checks"
   },

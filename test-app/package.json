@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "General VMS example root directory",
   "scripts": {
-    "prepare": "chmod +x scripts/install-husky.sh && ./scripts/install-husky.sh",
-    "install-and-check": "npm install && lerna run --concurrency=1 --stream install-and-check",
+    "prepare": "node scripts/install-husky.js",
+    "install-and-check": "npm install --ignore-scripts && lerna run --concurrency=1 --stream install-and-check",
     "commit-checks": "lerna run --concurrency=1 --stream commit-checks",
     "push-checks": "lerna run --concurrency=1 --stream push-checks"
   },
