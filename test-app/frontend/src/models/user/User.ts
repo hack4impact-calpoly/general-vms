@@ -1,8 +1,8 @@
 export type UserId = string | number | undefined;
 
 export enum Roles {
-  ADMIN = "admin",
-  VOLUNTEER = "volunteer",
+  ADMIN = 'admin',
+  VOLUNTEER = 'volunteer',
 }
 
 export type Role = Roles | undefined;
@@ -18,11 +18,11 @@ export interface User {
   role: Role,
   userApproved: boolean;
   cognitoSession: object | undefined;
-};
+}
 
 export const INITIAL_USER: User = Object.freeze({
-  name: "",
-  email: "",
+  name: '',
+  email: '',
   userId: undefined,
   userLoggedIn: false,
   role: undefined,

@@ -6,17 +6,17 @@ import { objParser, objStringifier } from '../../test-utils/object-utils';
 import { renderWithUser } from '../../test-utils/user-utils';
 
 const TestComp = () => {
-  const {user, dispatch} = React.useContext(UserContext);
+  const { user, dispatch } = React.useContext(UserContext);
   const [val, setVal] = React.useState('');
   const [propVal, setPropVal] = React.useState('');
-  const [newUserObj, setNewUserObj] = React.useState('');
+  const [newUserObj, setNewUserObj] = React.useState<string>('');
 
   const changePropVal = () => {
-    modifyUser({ [propVal as string]: val }, dispatch);
+    modifyUser({ [propVal]: val }, dispatch);
   };
 
   const modifyUserObj = () => {
-    modifyUser(objParser(newUserObj), dispatch);
+    modifyUser(objParser<Partial<User>>(newUserObj), dispatch);
   };
 
   const setUserObj = () => {
@@ -53,7 +53,7 @@ describe('UserStore provider', () => {
 
   const expectUserEquivalence = (expectedObj: Partial<User>) => {
     const expectedObject = objParser(objStringifier(expectedObj));
-    const userObjDisplayed = screen.getByText('User obj:', {exact: false}).innerHTML;
+    const userObjDisplayed = screen.getByText('User obj:', { exact: false }).innerHTML;
 
     const renderedUserObj = objParser(userObjDisplayed.split('User obj: ')[1]);
     expect(renderedUserObj).toEqual(expectedObject);
@@ -66,15 +66,15 @@ describe('UserStore provider', () => {
     userObjInput = testComp.getByLabelText('user-obj-input') as HTMLInputElement;
   });
 
-  it('should have User initialized with default values', async () => {
+  it('should have User initialized with default values', () => {
     expectUserEquivalence(INITIAL_USER);
   });
 
-  it('should have User name changed', async () => {
-    fireEvent.change(propInput, {target: {value: 'name'}});
-    fireEvent.change(propValInput, {target: {value: TEST_NAME}});
+  it('should have User name changed', () => {
+    fireEvent.change(propInput, { target: { value: 'name' } });
+    fireEvent.change(propValInput, { target: { value: TEST_NAME } });
 
-    const changeBtn = screen.getByText('Try it!') as HTMLButtonElement;
+    const changeBtn = screen.getByText('Try it!');
     fireEvent.click(changeBtn);
 
     expectUserEquivalence({
@@ -83,11 +83,11 @@ describe('UserStore provider', () => {
     });
   });
 
-  it('should have User email changed', async () => {
-    fireEvent.change(propInput, {target: {value: 'name'}});
-    fireEvent.change(propValInput, {target: {value: TEST_EMAIL}});
+  it('should have User email changed', () => {
+    fireEvent.change(propInput, { target: { value: 'name' } });
+    fireEvent.change(propValInput, { target: { value: TEST_EMAIL } });
 
-    const changeBtn = screen.getByText('Try it!') as HTMLButtonElement;
+    const changeBtn = screen.getByText('Try it!');
     fireEvent.click(changeBtn);
 
     expectUserEquivalence({
@@ -96,16 +96,16 @@ describe('UserStore provider', () => {
     });
   });
 
-  it('should have User name, email, and role changed', async () => {
+  it('should have User name, email, and role changed', () => {
     const testObj: Partial<User> = {
       name: TEST_NAME,
       email: TEST_EMAIL,
       role: Roles.ADMIN,
     };
 
-    fireEvent.change(userObjInput, {target: {value: objStringifier(testObj)}});
+    fireEvent.change(userObjInput, { target: { value: objStringifier(testObj) } });
 
-    const changeBtn = screen.getByText('Modify user obj') as HTMLButtonElement;
+    const changeBtn = screen.getByText('Modify user obj');
     fireEvent.click(changeBtn);
 
     expectUserEquivalence({
@@ -114,16 +114,16 @@ describe('UserStore provider', () => {
     });
   });
 
-  it('should have User name and role changed (when modified from existing state)', async () => {
+  it('should have User name and role changed (when modified from existing state)', () => {
     const testObj: Partial<User> = {
       name: TEST_NAME,
       email: TEST_EMAIL,
       role: Roles.ADMIN,
     };
 
-    fireEvent.change(userObjInput, {target: {value: objStringifier(testObj)}});
+    fireEvent.change(userObjInput, { target: { value: objStringifier(testObj) } });
 
-    let changeBtn = screen.getByText('Modify user obj') as HTMLButtonElement;
+    const changeBtn = screen.getByText('Modify user obj');
     fireEvent.click(changeBtn);
 
     const newObj: Partial<User> = {
@@ -131,7 +131,7 @@ describe('UserStore provider', () => {
       role: Roles.VOLUNTEER,
     };
 
-    fireEvent.change(userObjInput, {target: {value: objStringifier(newObj)}});
+    fireEvent.change(userObjInput, { target: { value: objStringifier(newObj) } });
     fireEvent.click(changeBtn);
 
     expectUserEquivalence({
@@ -141,11 +141,11 @@ describe('UserStore provider', () => {
     });
   });
 
-  it('should have entire user object changed', async () => {
-    fireEvent.change(propInput, {target: {value: 'name'}});
-    fireEvent.change(propValInput, {target: {value: TEST_NAME}});
+  it('should have entire user object changed', () => {
+    fireEvent.change(propInput, { target: { value: 'name' } });
+    fireEvent.change(propValInput, { target: { value: TEST_NAME } });
 
-    let changeBtn = screen.getByText('Try it!') as HTMLButtonElement;
+    let changeBtn = screen.getByText('Try it!');
     fireEvent.click(changeBtn);
 
     const testObj: Partial<User> = {
@@ -154,13 +154,13 @@ describe('UserStore provider', () => {
       role: Roles.VOLUNTEER,
       userApproved: true,
       cognitoSession: {
-        idToken: "some-token"
+        idToken: 'some-token',
       },
     };
 
-    fireEvent.change(userObjInput, {target: {value: objStringifier(testObj)}});
+    fireEvent.change(userObjInput, { target: { value: objStringifier(testObj) } });
 
-    changeBtn = screen.getByText('Set user obj') as HTMLButtonElement;
+    changeBtn = screen.getByText('Set user obj');
     fireEvent.click(changeBtn);
 
     // Name should get reset to initial user's name (empty string)
@@ -170,22 +170,22 @@ describe('UserStore provider', () => {
     });
   });
 
-  it('should have reset User stored', async () => {
+  it('should have reset User stored', () => {
     const testObj: Partial<User> = {
       email: TEST_EMAIL,
       userId: 8,
       role: Roles.VOLUNTEER,
       userApproved: true,
       cognitoSession: {
-        idToken: "some-token"
+        idToken: 'some-token',
       },
     };
 
-    fireEvent.change(userObjInput, {target: {value: objStringifier(testObj)}});
-    const changeBtn = screen.getByText('Set user obj') as HTMLButtonElement;
+    fireEvent.change(userObjInput, { target: { value: objStringifier(testObj) } });
+    const changeBtn = screen.getByText('Set user obj');
     fireEvent.click(changeBtn);
 
-    const resetBtn = screen.getByText('Reset user obj') as HTMLButtonElement;
+    const resetBtn = screen.getByText('Reset user obj');
     fireEvent.click(resetBtn);
 
     // Everything should be reset

@@ -1,14 +1,15 @@
-import React from "react";
-import { INITIAL_USER, User } from "./User";
+import React from 'react';
+import { INITIAL_USER, User } from './User';
 
 enum UserActionType {
-  NEW_USER = "NEW_USER",
-  MODIFY_USER = "MODIFY_USER",
-  RESET_USER = "RESET_USER",
+  NEW_USER = 'NEW_USER',
+  MODIFY_USER = 'MODIFY_USER',
+  RESET_USER = 'RESET_USER',
 }
 
 export interface UserReducerState {
   user: Partial<User>;
+  // eslint-disable-next-line no-use-before-define
   dispatch: React.Dispatch<IUserReducer>;
 }
 
@@ -19,7 +20,7 @@ interface IUserReducer {
 
 const INITIAL_STATE: UserReducerState = {
   user: INITIAL_USER,
-  dispatch: () => { throw new Error('Dispatch should have been initialized'); }
+  dispatch: () => { throw new Error('Dispatch should have been initialized'); },
 };
 
 export const userReducer: React.Reducer<UserReducerState, IUserReducer> = (state, { type: actionType, reducerState }) => {
@@ -43,7 +44,7 @@ export const userReducer: React.Reducer<UserReducerState, IUserReducer> = (state
         user: {
           ...state.user,
           ...reducerState.user,
-        }
+        },
       };
     default:
       return state;
@@ -58,7 +59,7 @@ export const modifyUser = (user: Partial<User>, dispatch: React.Dispatch<IUserRe
     reducerState: {
       user,
       dispatch,
-    }
+    },
   });
 };
 
@@ -68,7 +69,7 @@ export const createNewUser = (user: Partial<User>, dispatch: React.Dispatch<IUse
     reducerState: {
       user,
       dispatch,
-    }
+    },
   });
 };
 
@@ -78,7 +79,7 @@ export const resetUser = (dispatch: React.Dispatch<IUserReducer>): void => {
     reducerState: {
       user: {},
       dispatch,
-    }
+    },
   });
 };
 

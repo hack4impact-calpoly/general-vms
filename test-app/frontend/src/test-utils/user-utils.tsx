@@ -1,5 +1,5 @@
-import React from 'react'
-import { render, RenderOptions } from '@testing-library/react'
+import React from 'react';
+import { render, RenderOptions } from '@testing-library/react';
 import { INITIAL_USER, User } from '../models/user/User';
 import { UserContext, userReducer, UserReducerState } from '../models/user/UserStore';
 
@@ -13,7 +13,7 @@ interface CustomUserRenderOptions extends RenderOptions {
 
 const INITIAL_STATE: UserReducerState = {
   user: INITIAL_USER,
-  dispatch: () => { throw new Error('Dispatch should have been initialized'); }
+  dispatch: () => { throw new Error('Dispatch should have been initialized'); },
 };
 
 const CustomUserProvider: React.FC<UserProviderProps> = ({ children, customUser }) => {
@@ -23,7 +23,7 @@ const CustomUserProvider: React.FC<UserProviderProps> = ({ children, customUser 
       ...INITIAL_STATE.user,
       ...customUser,
     },
-  }
+  };
 
   const [user, dispatch] = React.useReducer(userReducer, initialStateUser);
 
@@ -34,17 +34,18 @@ const CustomUserProvider: React.FC<UserProviderProps> = ({ children, customUser 
   );
 };
 
-const UserProviderWrapper: React.FC<UserProviderProps> = ({children, customUser}) => {
+const UserProviderWrapper: React.FC<UserProviderProps> = ({ children, customUser }) => {
   return (
     <CustomUserProvider customUser={customUser}>
       {children}
     </CustomUserProvider>
-  )
+  );
 };
 
 // Idea here from https://github.com/testing-library/react-testing-library/issues/780
 const customRender = (ui: React.ReactElement, options?: CustomUserRenderOptions) =>
   render(ui, {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     wrapper: (props: any) => <UserProviderWrapper {...props} {...options?.userProviderProps} />,
     ...options,
   });
@@ -53,4 +54,4 @@ const customRender = (ui: React.ReactElement, options?: CustomUserRenderOptions)
 export * from '@testing-library/react';
 
 // override render method
-export {customRender as renderWithUser};
+export { customRender as renderWithUser };

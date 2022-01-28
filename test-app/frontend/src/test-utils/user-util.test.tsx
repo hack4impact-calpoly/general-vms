@@ -12,7 +12,7 @@ const BasicProviderWrapper = () => (
 );
 
 const TestComp = () => {
-  const {user} = React.useContext(UserContext);
+  const { user } = React.useContext(UserContext);
 
   return (
     <p>User obj: {objStringifier(user)}</p>
@@ -23,14 +23,14 @@ const TestComp = () => {
 describe('User utility (for tests)', () => {
   const TEST_USER_OBJ: Partial<User> = {
     role: Roles.VOLUNTEER,
-    name: "JEFF",
+    name: 'JEFF',
   };
 
   const expectUserEquivalence = (expectedObj: Partial<User>) => {
-    const expectedObject = objParser(objStringifier(expectedObj));
-    const userObjDisplayed = screen.getByText('User obj:', {exact: false}).innerHTML;
+    const expectedObject = objParser<Partial<User>>(objStringifier(expectedObj));
+    const userObjDisplayed = screen.getByText('User obj:', { exact: false }).innerHTML;
 
-    const renderedUserObj = objParser(userObjDisplayed.split('User obj: ')[1]);
+    const renderedUserObj = objParser<Partial<User>>(userObjDisplayed.split('User obj: ')[1]);
     expect(renderedUserObj).toEqual(expectedObject);
   };
 
@@ -50,6 +50,7 @@ describe('User utility (for tests)', () => {
         customUser: TEST_USER_OBJ,
       },
     });
+
     expectUserEquivalence({
       ...INITIAL_USER,
       ...TEST_USER_OBJ,
