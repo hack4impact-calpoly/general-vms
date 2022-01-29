@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+app_dir="$( dirname -- "$0" )/.."
+
+if [ $? -eq 0 ] && [ -d "$app_dir" ]; then
+    cd "$app_dir"
+    app_dir="$(pwd)" # used for debugging
+fi
+
+npm run commit-checks
