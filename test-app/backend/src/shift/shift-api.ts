@@ -2,7 +2,7 @@ import shift from '/shift-interface';
 import app from '../server'; 
 import isUserAdmin from "../middleware";
 
-app.post('/api/event', isUserAdmin, async (req, res) => {
+app.post('/api/new-shift', isUserAdmin, async (req, res) => {
     console.log("POST: Creating Calendar Event...");
 
     const { start, end, maxVolunteers, title, description,  eventAdmin} = req.body;
