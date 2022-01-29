@@ -1,5 +1,5 @@
 import app from '../server';
-import { isUserAdmin } from '../middleware';
+import isUserAdmin from '../middleware';
 import Database from '../database';
 import shift from './shift-interface';
 
@@ -40,3 +40,5 @@ app.post('/api/new-shift', isUserAdmin, async (req, res) => {
     message: 'New shift successfully created',
   });
 });
+
+app.patch('');
