@@ -1,4 +1,9 @@
+<a href="https://uiuc.hack4impact.org"><img src="https://raw.githubusercontent.com/hack4impact-uiuc/uiuc.hack4impact.org/master/public/images/colored-logo.svg" alt="hack4impact logo" width="150"></a>
 # General VMS
+
+## VMS App Commands
+
+Visit [/test-app](https://github.com/hack4impact-calpoly/general-vms/tree/main/test-app).
 
 ## Purpose
 This is meant to be a system that can be used in future years to quickly create new VMSs. The user should easily be able to use this project to customize their own VMS or immediately deploy a working VMS with some configuration given.

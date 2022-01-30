@@ -27,6 +27,7 @@
     "lint": "eslint 'src/**/**.{ts,tsx}' --color",
     "lint-check": "npm run lint -- --max-warnings=0",
     "lint-fix": "npm run lint -- --fix",
+    "dev": "npm run start",
     "lint-staged": "lint-staged --config scripts/lint-staged.js",
     "test-quick": "react-scripts test --bail --watchAll=false --passWithNoTests --findRelatedTests",
     "quality-checks": "npm run lint-check && npm run test",
