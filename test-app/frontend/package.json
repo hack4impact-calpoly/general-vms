@@ -24,7 +24,7 @@
     "eject": "react-scripts eject",
     "prepare": "cd .. && npm run prepare",
     "dev": "npm run start",
-    "lint-check": "eslint 'src/**/**.{ts,tsx}' --color --max-warnings=0",
+    "lint-check": "eslint \"src/**/**.{ts,tsx}\" --color --max-warnings=0",
     "lint-fix": "npm run lint-check -- --fix",
     "lint-staged": "lint-staged --config scripts/lint-staged.js",
     "test-quick": "react-scripts test --bail --watchAll=false --passWithNoTests --findRelatedTests",
