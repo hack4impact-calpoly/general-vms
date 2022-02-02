@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import ManageVolunteers from './ManageVolunteers/ManageVolunteers';
+import ManageVolunteers, { Volunteer } from './ManageVolunteers/ManageVolunteers';
 import './App.css';
 
 function App() {
@@ -22,7 +22,24 @@ function App() {
       </header>
       <br />
       <div className='TestManageVolunteers'>
-        
+        <ManageVolunteers
+          volunteers = {
+            [
+              {firstName: "James",
+               lastName: "Rounthwaite",
+               userID: "1234"
+              }, 
+              {firstName: "Rachel",
+               lastName: "Rounthwaite",
+               userID: "1234"
+              },
+              {firstName: "Sho",
+              lastName: "Rounthwaite",
+              userID: "1234"
+             }
+              ]
+          }
+        />
       </div>
     </div>
   );

@@ -1,7 +1,14 @@
 import exp from "constants";
 import React, { Component } from "react";
+import { domainToASCII } from "url";
+import VolunteerCard from "./VolunteerCard";
 
-type Volunteer = 
+interface ManageVolunteerProps
+{
+    volunteers: Volunteer[]
+}
+
+export interface Volunteer
 {
     /*
     Mock schema for a volunteer
@@ -14,32 +21,20 @@ type Volunteer =
 
 }
 
-class ManageVolunteers extends React.Component<Volunteer[]>
+export default function ManageVolunteers (props: ManageVolunteerProps)
 {
-    constructor(props: Volunteer[])
-    {
-        super(props);
-    }
+    return (
+        <div>
+            <h1>Volunteer List</h1>
+            {for(let i = 0; i < props.length; i++){
+                <VolunteerCard item={item} key={key}/>
+            }}
 
-    render(): React.ReactNode 
-    {
-        return (
-            <div>
-                <ul>
-                    <li>{this.props[0].firstName}</li>
-                    <li>{this.props[1].firstName}</li>
-                </ul>
-            </div>
-        )
-    }
+
+            {props.map((item, key) => {
+              <VolunteerCard item={item} key={key}/>
+            })}
+        </div>
+    )
 
 }
-
-
-export default ManageVolunteers;
-
-/* Questions: 
-    Are we primarily creating function or class React components? - Or is it case by case? 
-    Do I need to setup the schema for Volunteers? 
-    How do I call it in App.tsx? 
-*/
