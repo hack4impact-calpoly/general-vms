@@ -12,9 +12,6 @@
   },
   "files.autoSave": "off",
   "files.autoSaveDelay": 1000,
-<<<<<<< HEAD
-  "editor.tabSize": 2
-=======
+  "editor.tabSize": 2,
   "files.eol": "\n"
->>>>>>> 497c91a0853677e64662061ecc803792b07180a5
 }
