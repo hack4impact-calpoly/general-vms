@@ -9,7 +9,7 @@
     "build-check": "tsc --noEmit",
     "dev": "nodemon --exec 'ts-node' server.js",
     "prepare": "cd .. && npm run prepare",
-    "lint-check": "eslint 'src/**/*.{ts,tsx}' --color --max-warnings=0",
+    "lint-check": "eslint \"src/**/*.{ts,tsx}\" --color --max-warnings=0",
     "lint-fix": "npm run lint-check -- --fix",
     "lint-staged": "lint-staged --config scripts/lint-staged.js",
     "quality-checks": "npm run lint-check && npm run test && npm run build-check",
