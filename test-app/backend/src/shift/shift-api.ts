@@ -1,6 +1,6 @@
 import app from '../server';
 import isUserAdmin from '../middleware';
-import Database from '../database';
+import Database from '../models/database/database';
 import shift from './shift-interface';
 
 app.post('/api/new-shift', isUserAdmin, async (req, res) => {
@@ -34,6 +34,7 @@ app.post('/api/new-shift', isUserAdmin, async (req, res) => {
     description: description,
     eventAdmin: eventAdmin,
   };
+  // eslint-disable-next-line @typescript-eslint/await-thenable
   await Database.saveShift(newShift);
 
   res.status(201).json({
