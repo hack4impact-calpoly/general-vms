@@ -1,7 +1,7 @@
 import app from '../server';
 import isUserAdmin from '../middleware';
 import Database from '../database';
-import { shift } from './shift-interface';
+import shift from './shift-interface';
 
 app.post('/api/new-shift', isUserAdmin, async (req, res) => {
   console.log('POST: Creating Calendar Event...');
