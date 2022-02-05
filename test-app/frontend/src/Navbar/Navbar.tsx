@@ -3,7 +3,7 @@ import './Navbar.scss';
 
 function NavBar() {
   return (
-    <header className="header-background">
+    <header className="main-header">
       <p className="main-text"><Link to="/">General VMS</Link></p>
       <nav className="navbar">
         <Link to="/">Home</Link>
