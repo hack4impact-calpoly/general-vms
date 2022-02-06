@@ -4,11 +4,11 @@ import './Navbar.scss';
 function NavBar() {
   return (
     <header className="main-header">
-      <p className="main-text"><Link to="/home">General VMS</Link></p>
+      <p className="main-text"><Link to="/">General VMS</Link></p>
       <nav className="navbar">
-        <Link to="/home">Home</Link>
-        <Link to="/home">Volunteers</Link>
-        <Link to="/home">Shifts</Link>
+        <Link to="/">Home</Link>
+        <Link to="/">Volunteers</Link>
+        <Link to="/">Shifts</Link>
         <Link to="/login">Login</Link>
       </nav>
     </header>
