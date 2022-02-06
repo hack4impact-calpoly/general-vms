@@ -4,7 +4,10 @@ import './Navbar.scss';
 function NavBar() {
   return (
     <header className="main-header">
-      <p className="main-text"><Link to="/">General VMS</Link></p>
+      <p className="main-text">
+        <Link to="/"><img className="main-logo" src='../../public/logo192.png' alt="Org Logo" /></Link>
+        <Link to="/">General VMS</Link>
+      </p>
       <nav className="navbar">
         <Link to="/">Home</Link>
         <Link to="/">Volunteers</Link>

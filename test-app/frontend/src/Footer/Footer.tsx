@@ -9,12 +9,12 @@ function Footer() {
           <Col>
             <div className="contact-num">
               <p className="contact">Contact: </p>
-              <p className="number"> (111) 111-0000 </p>
+              <p className="number"> (123) 456-7890 </p>
             </div>
           </Col>
           <Col>
             <p className="middle-info"> &copy; Year NonProfit Organization</p>
-            <p className="middle-info"> NonProfit Org 501(C)(3) Nonprofit Organization</p>
+            <p className="middle-info"> Organization 501(C)(3) Nonprofit Organization</p>
             <p className="middle-info"> Founded in Year by Person</p>
           </Col>
           <Col>
