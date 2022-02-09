@@ -1,33 +1,30 @@
-import React from "react";
+import { Volunteer } from './ManageVolunteers';
 
-export interface Volunteer
-{
-    /*
-    Mock schema for a volunteer
-    to be displayed when rendering all 
-    the volunteers. 
-    */ 
-    firstName: string;
-    lastName: string;
-    userID: string;
-
+function renderEventList(eventLst: string[]) {
+  //   // This function will loop through the ManageVolProps list
+  //   // and render each card
+  const jsxList = [];
+  for (let i = 0; i < eventLst.length; i++) {
+    jsxList.push(
+      <li>{eventLst[i]}</li>,
+    );
+  }
+  return (
+    jsxList
+  );
 }
 
-export default function VolunteerCard (props: Volunteer)
-{
-    return (
-        <div>
-            <ul>
-                <li>{props.firstName}</li>
-                <li>{props.lastName}</li>
-                <li>{props.userID}</li>
-            </ul>
-        </div>
-    )
-
+export default function VolunteerCard(props: Volunteer) {
+  return (
+    <div>
+      <h2>{props.firstName} {props.lastName}</h2>
+      <ul>
+        <li>User ID: {props.userID}</li>
+        <li>Events Attending:</li>
+        <ul>
+          <li>{renderEventList(props.eventsAttending)}</li>
+        </ul>
+      </ul>
+    </div>
+  );
 }
-/* Questions: 
-    Are we primarily creating function or class React components? - Or is it case by case? 
-    Do I need to setup the schema for Volunteers? 
-    How do I call it in App.tsx? 
-*/

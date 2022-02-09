@@ -10,23 +10,35 @@ function Testing() {
       <ManageVolunteers
         volunteers = {
           [
-            {firstName: "James",
-            lastName: "Rounthwaite",
-            userID: "1234"
-            }, 
-            {firstName: "Rachel",
-            lastName: "Rounthwaite",
-            userID: "1234"
+            {
+              firstName: 'James',
+              lastName: 'Rounthwaite',
+              userID: '1234',
+              eventsAttending: ['Beack Clean Up', 'Halloween Party'],
             },
-            {firstName: "Sho",
-            lastName: "Rounthwaite",
-            userID: "1234"
-          }
-            ]
+            {
+              firstName: 'Rachel',
+              lastName: 'Rounthwaite',
+              userID: '4567',
+              eventsAttending: ['Beack Clean Up', 'Halloween Party'],
+            },
+            {
+              firstName: 'Sho',
+              lastName: 'Rounthwaite',
+              userID: '9635',
+              eventsAttending: ['Beack Clean Up', 'Halloween Party'],
+            },
+            {
+              firstName: 'Robin',
+              lastName: 'Rounthwaite',
+              userID: '7589',
+              eventsAttending: ['Beack Clean Up', 'Halloween Party'],
+            },
+          ]
         }
       />
     </div>
-  )
+  );
 }
 
 function App() {

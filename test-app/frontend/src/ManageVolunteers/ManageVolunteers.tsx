@@ -1,40 +1,45 @@
-import exp from "constants";
-import React, { Component } from "react";
-import { domainToASCII } from "url";
-import VolunteerCard from "./VolunteerCard";
-
-interface ManageVolunteerProps
-{
-    volunteers: Volunteer[]
-}
+import VolunteerCard from './VolunteerCard';
 
 export interface Volunteer
 {
-    /*
+  /*
     Mock schema for a volunteer
-    to be displayed when rendering all 
-    the volunteers. 
-    */ 
-    firstName: string;
-    lastName: string;
-    userID: string;
+    to be displayed when rendering all
+    the volunteers.
+    */
+  firstName: string;
+  lastName: string;
+  userID: string;
+  eventsAttending: string[];
 
 }
 
-export default function ManageVolunteers (props: ManageVolunteerProps)
+interface ManageVolunteerProps
 {
-    return (
-        <div>
-            <h1>Volunteer List</h1>
-            {for(let i = 0; i < props.length; i++){
-                <VolunteerCard item={item} key={key}/>
-            }}
+  volunteers: Volunteer[]
+}
 
+function renderCards(volCardLst: Volunteer[]) {
+  // This function will loop through the ManageVolProps list
+  // and render each card
+  const jsxList = [];
+  for (let i = 0; i < volCardLst.length; i++) {
+    jsxList.push(
+      <VolunteerCard {...volCardLst[i]}/>,
+    );
+  }
+  return (
+    jsxList
+  );
+}
 
-            {props.map((item, key) => {
-              <VolunteerCard item={item} key={key}/>
-            })}
-        </div>
-    )
-
+export default function ManageVolunteers(props: ManageVolunteerProps) {
+  return (
+    <div>
+      <h1>Volunteer List</h1>
+      <ul>
+        {renderCards(props.volunteers)}
+      </ul>
+    </div>
+  );
 }
