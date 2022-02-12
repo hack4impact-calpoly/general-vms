@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className="main-footer">
       <Container>
-        <Row>ˇ
+        <Row>
           <Col>
             <div className="contact-num">
               <p className="contact">Contact: </p>

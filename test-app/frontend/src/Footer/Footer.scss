@@ -1,34 +1,30 @@
+@use "../global_variables" as gv;
 @import "~bootstrap/scss/bootstrap";
 
 @font-face {
     font-family: Sofia Pro Regular;
-    src: url("../../public/fonts/Sofia\ Pro\ Regular\ Az.otf");
+    src: url("../assets/fonts/Sofia\ Pro\ Regular\ Az.otf");
 }
 
 @font-face {
     font-family: Sofia Pro Regular;
-    src: url("../../public/fonts/Sofia\ Pro\ Bold\ Az.otf");
+    src: url("../assets/fonts/Sofia\ Pro\ Bold\ Az.otf");
     font-weight: bold;
 }
 
-:root {
-    /* variables */
-    --cg-black: rgb(30, 32, 32);
-    --cg-blue: rgb(6, 87, 152);
-    --cg-grey: rgb(243, 243, 243);
-    --cg-white: rgb(255, 255, 255);
-}
-
 .main-footer {
-    background-color: var(--cg-blue);
+    background-color: gv.$primary-color;
     padding-top: 1%;
-    color: var(--cg-white);
+    color: gv.$light-font;
+
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: gv.$footer-height;
 
     text-align: center;
     align-items: center;
-
-    width: 100%;
-    height: 20vh;
 
     font-family: Sofia Pro Regular, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
         Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
