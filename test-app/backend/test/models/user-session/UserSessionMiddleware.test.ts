@@ -1,19 +1,18 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import { Request, Response } from 'express';
-import { isUserAdmin, isUserApproved, isUserAuthenticated } from '../../../src/models/user-session/middleware';
+import { Response } from 'express';
+import UserAuthMiddleware from '../../../src/models/user-session/middleware';
+import { IGetUserAuthInfoRequest } from '../../../src/models/user-session/types';
 import { IUser, Roles } from '../../../src/models/user/User';
-
-jest.mock('../../../src/models/user-session/UserSessionProviders');
 
 const mockRequest = (user?: Partial<IUser>) => {
   return {
     locals: {
       user,
     },
-  } as Request;
+  } as IGetUserAuthInfoRequest;
 };
 
-// taken from https://codewithhugo.com/express-request-response-mocking/
+// taken from https://codewithhugo.com/express-IGetUserAuthInfoRequest-response-mocking/
 const mockResponse = () => {
   const res = {} as Response;
   res.status = jest.fn().mockReturnValue(res);
@@ -24,7 +23,7 @@ const mockResponse = () => {
 const nextFnMock = jest.fn();
 
 describe('User session middleware', () => {
-  let req: Request;
+  let req: IGetUserAuthInfoRequest;
   let res: Response;
 
   beforeEach(() => {
@@ -37,7 +36,7 @@ describe('User session middleware', () => {
   });
 
   it('should find user as authenticated', async () => {
-    await isUserAuthenticated(req, res, nextFnMock);
+    await UserAuthMiddleware.isUserAuthenticated(req, res, nextFnMock);
     expect(nextFnMock).toHaveBeenCalled();
   });
 
@@ -49,7 +48,7 @@ describe('User session middleware', () => {
       decisionMade: true,
     });
 
-    await isUserAdmin(req, res, nextFnMock);
+    await UserAuthMiddleware.isUserAdmin(req, res, nextFnMock);
 
     expect(nextFnMock).toHaveBeenCalled();
   });
@@ -62,7 +61,7 @@ describe('User session middleware', () => {
       decisionMade: true,
     });
 
-    await isUserAdmin(req, res, nextFnMock);
+    await UserAuthMiddleware.isUserAdmin(req, res, nextFnMock);
 
     expect(res.status).toHaveBeenCalledWith(403);
     expect(nextFnMock).not.toHaveBeenCalled();
@@ -76,7 +75,7 @@ describe('User session middleware', () => {
       decisionMade: true,
     });
 
-    await isUserApproved(req, res, nextFnMock);
+    await UserAuthMiddleware.isUserApproved(req, res, nextFnMock);
 
     expect(nextFnMock).toHaveBeenCalled();
   });
@@ -89,7 +88,7 @@ describe('User session middleware', () => {
       decisionMade: true,
     });
 
-    await isUserApproved(req, res, nextFnMock);
+    await UserAuthMiddleware.isUserApproved(req, res, nextFnMock);
 
     expect(res.status).toHaveBeenCalledWith(403);
     expect(nextFnMock).not.toHaveBeenCalled();
@@ -103,7 +102,7 @@ describe('User session middleware', () => {
       decisionMade: true,
     });
 
-    await isUserApproved(req, res, nextFnMock);
+    await UserAuthMiddleware.isUserApproved(req, res, nextFnMock);
 
     expect(res.status).toHaveBeenCalledWith(403);
     expect(nextFnMock).not.toHaveBeenCalled();
@@ -117,7 +116,7 @@ describe('User session middleware', () => {
       decisionMade: false,
     });
 
-    await isUserApproved(req, res, nextFnMock);
+    await UserAuthMiddleware.isUserApproved(req, res, nextFnMock);
 
     expect(res.status).toHaveBeenCalledWith(403);
     expect(nextFnMock).not.toHaveBeenCalled();

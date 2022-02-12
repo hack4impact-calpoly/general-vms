@@ -1,11 +1,12 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
+import UserAuthMiddleware from './models/user-session/middleware';
+import { IGetUserAuthInfoRequest } from './models/user-session/types';
 
-// test change
+// Initialize stuff
+dotenv.config();
 
 const app = express();
-
-dotenv.config();
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -19,7 +20,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/test', (req, res) => {
+app.get('/test', UserAuthMiddleware.checkUserAuthenticated, (req: IGetUserAuthInfoRequest, res) => {
+  console.log(req?.locals);
   res.send('Hi there!');
 });
 

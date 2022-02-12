@@ -1,4 +1,5 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
+import { IGetUserAuthInfoRequest } from '../../../src/models/user-session/types';
 import { ValidateReqAppendUser } from '../../../src/models/user-session/UserSession';
 import { IUser } from '../../../src/models/user/User';
 
@@ -7,10 +8,10 @@ const TEST_USER = {
 } as unknown as IUser;
 
 const mockRequest = () => {
-  return {} as Request;
+  return {} as IGetUserAuthInfoRequest;
 };
 
-// taken from https://codewithhugo.com/express-request-response-mocking/
+// taken from https://codewithhugo.com/express-IGetUserAuthInfoRequest-response-mocking/
 const mockResponse = () => {
   const res = {} as Response;
   res.status = jest.fn().mockReturnValue(res);
@@ -25,7 +26,7 @@ class ValidateReqAppendUserImpl extends ValidateReqAppendUser {
 }
 
 describe('ValidateReqAppendUser', () => {
-  let req: Request;
+  let req: IGetUserAuthInfoRequest;
   let res: Response;
   let validator: ValidateReqAppendUserImpl;
 
@@ -39,7 +40,7 @@ describe('ValidateReqAppendUser', () => {
     jest.resetAllMocks();
   });
 
-  it('should set locals user object on request when successful', async () => {
+  it('should set locals user object on IGetUserAuthInfoRequest when successful', async () => {
     await validator.validateRequestAndAppendUserMiddleware(req, res, nextFnMock);
 
     expect(validator.getUserFromRequest).toHaveBeenCalled();

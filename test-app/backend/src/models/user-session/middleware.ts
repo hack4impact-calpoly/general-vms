@@ -1,34 +1,60 @@
+import 'reflect-metadata';
 import { NextFunction, Request, Response } from 'express';
+import { TYPES } from '../../types';
 import { ADMIN_ROLES, VALID_ROLES } from '../user/User';
-import UserSessionProviders from './UserSessionProviders';
+import { IGetUserAuthInfoRequest } from './types';
+import { ValidateReqAppendUser } from './UserSession';
+import { container } from '../../env/provider';
+import { voidwrap } from '../../util/void-wrap';
 
-const UserSessionValidator = UserSessionProviders.UserSessionValidator;
+class UserAuthenticationSystem {
+  private _sessionValidator: ValidateReqAppendUser = container.get<ValidateReqAppendUser>(TYPES.UserSessionValidator);
 
-export const isUserAuthenticated = (req: Request, res: Response, next: NextFunction) => {
-  return UserSessionValidator.validateRequestAndAppendUserMiddleware(req, res, next);
+  public isUserAuthenticated(req: Request, res: Response, next: NextFunction): Promise<void> {
+    return this._sessionValidator.validateRequestAndAppendUserMiddleware(req, res, next);
+  }
+
+  public isUserApproved(req: IGetUserAuthInfoRequest, res: Response, next: NextFunction): Promise<void> {
+    return this.isUserAuthenticated(req, res, () => {
+      const user = req.locals?.user;
+      if (!user || !VALID_ROLES.has(user.role) || !user.approved || !user.decisionMade) {
+        res.status(403).json({
+          message: 'User is not approved',
+        }); return;
+      }
+
+      next();
+    });
+  }
+
+  public isUserAdmin(req: IGetUserAuthInfoRequest, res: Response, next: NextFunction): Promise<void> {
+    return this.isUserApproved(req, res, () => {
+      if (!ADMIN_ROLES.has(req.locals.user.role)) {
+        res.status(403).json({
+          message: 'User is not admin',
+        }); return;
+      }
+
+      next();
+    });
+  }
+}
+
+const authSystem = new UserAuthenticationSystem();
+
+const promiseFns = {
+  isUserAuthenticated: (req: Request, res: Response, next: NextFunction) => authSystem.isUserAuthenticated(req, res, next),
+  isUserApproved: (req: Request, res: Response, next: NextFunction) => authSystem.isUserApproved(req, res, next),
+  isUserAdmin: (req: Request, res: Response, next: NextFunction) => authSystem.isUserAdmin(req, res, next),
 };
 
-export const isUserApproved = async (req: Request, res: Response, next: NextFunction) => {
-  return isUserAuthenticated(req, res, () => {
-    const user = req.locals?.user;
-    if (!user || !VALID_ROLES.has(user.role) || !user.approved || !user.decisionMade) {
-      return res.status(403).json({
-        message: 'User is not approved',
-      });
-    }
-
-    next();
-  });
+const voidFns = {
+  checkUserAuthenticated: voidwrap(promiseFns.isUserAuthenticated),
+  checkUserApproved: voidwrap(promiseFns.isUserApproved),
+  checkUserAdmin: voidwrap(promiseFns.isUserAdmin),
 };
 
-export const isUserAdmin = async (req: Request, res: Response, next: NextFunction) => {
-  return isUserApproved(req, res, () => {
-    if (!ADMIN_ROLES.has(req.locals.user.role)) {
-      return res.status(403).json({
-        message: 'User is not admin',
-      });
-    }
-
-    next();
-  });
+export default {
+  ...promiseFns,
+  ...voidFns,
 };
