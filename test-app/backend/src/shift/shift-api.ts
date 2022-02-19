@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 // isUserAdmin should be omitted for testing
-import isUserAdmin from '../middleware';
+// import isUserAdmin from '../middleware';
 import Database from '../models/database/database';
 import { Shift } from './shift-interface';
 import express from 'express';
 
 const router = express.Router();
 
-let database: Database;
+const database: Database = new Database();
 
 const shiftPreProcessor = (shift: Partial<Shift>) => {
   shift.start = new Date(shift.start);
@@ -16,7 +16,7 @@ const shiftPreProcessor = (shift: Partial<Shift>) => {
   return shift as Shift;
 };
 
-router.post('/new-shift', isUserAdmin, async (req, res) => {
+router.post('/new-shift', async (req, res) => {
   console.log('POST: Creating Calendar Event...');
 
   const { start, end, maxVolunteers, title, description, eventAdmin } = req.body as Shift;
@@ -58,7 +58,6 @@ router.post('/new-shift', isUserAdmin, async (req, res) => {
 
   console.log(newShiftProcessed);
 
-  // should be omitted for testing
   database.saveShift(newShiftProcessed);
 
   return res.status(201).send(
