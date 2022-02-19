@@ -5,10 +5,12 @@ import './Navbar.scss';
 function NavBar() {
   return (
     <header className="main-header">
-      <p className="main-text">
-        <Link to="/"><img className="main-logo" src={h4ilogo} alt="Org Logo" /></Link>
-        <Link to="/">General VMS</Link>
-      </p>
+      <div className="logo-nav">
+        <Link to="/">
+          <img className="main-logo" src={h4ilogo} alt="Org Logo" />
+          <span>General VMS</span>
+        </Link>
+      </div>
       <nav className="navbar">
         <Link to="/">Home</Link>
         <Link to="/">Volunteers</Link>

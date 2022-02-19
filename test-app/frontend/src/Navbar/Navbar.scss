@@ -30,20 +30,35 @@
 
     font-family: Sofia Pro Regular, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
         Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
 
-.navbar {
-    position: relative;
-}
+    a {
+        color: gv.$primary-color;
+        margin: 0 12px;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 1.25rem;
+    }
 
-.main-logo {
-    width: 50px;
-    height: 50px;
-}
+    nav {
+        position: relative;
 
-header a {
-    color: gv.$primary-color;
-    margin: 0 12px;
-    font-weight: bold;
-    text-decoration: none;
+        a:hover {
+            color: gv.$primary-color-hover;
+        }
+    }
+
+    .logo-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        width: max-content;
+        white-space: nowrap;
+    }
+
+    .main-logo {
+        width: 50px;
+        height: 50px;
+        margin-right: 10%;
+    }
 }

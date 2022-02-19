@@ -14,8 +14,8 @@
 
 .main-footer {
     background-color: gv.$primary-color;
-    padding-top: 1%;
     color: gv.$light-font;
+    padding: 1% 0;
 
     position: absolute;
     bottom: 0;
@@ -29,8 +29,22 @@
     font-family: Sofia Pro Regular, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
         Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-weight: bold;
-}
 
-.col {
-    align-self: center;
+    margin: 0;
+
+    .middle-info {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .col {
+        align-self: center;
+
+        p {
+            margin-bottom: 0;
+        }
+    }
 }
