@@ -5,7 +5,39 @@ import { Shift } from '../../shift/shift-interface';
 abstract class Database {
   saveShift(newShift: Shift) {
     console.log(newShift);
-    throw new Error('Method not implemented.');
+  }
+
+  findShiftByID(id: string): Shift {
+    console.log(id);
+    const myShift: Shift = {
+      start: new Date(),
+      end: new Date(),
+      maxVolunteers: 2,
+      title: 'My Lovely Title',
+      description: 'I have a description',
+      eventAdmin: 'Adam Meza',
+      getShiftTime: function (): number {
+        return 12;
+      },
+    };
+    return myShift;
+  }
+
+  updateShift(id: string, mod: Partial<Shift>): Shift {
+    console.log(id);
+    console.log(mod);
+    const myShift: Shift = {
+      start: new Date(),
+      end: new Date(),
+      maxVolunteers: 2,
+      title: 'My Lovely Title',
+      description: 'I have a description',
+      eventAdmin: 'Adam Meza',
+      getShiftTime: function (): number {
+        return 12;
+      },
+    };
+    return myShift;
   }
 }
 

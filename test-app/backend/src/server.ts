@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
+import router from './shift/shift-api';
 
 // test change
 
@@ -18,6 +19,8 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   next();
 });
+
+app.use('/api', router);
 
 app.get('/test', (req, res) => {
   res.send('Hi there!');

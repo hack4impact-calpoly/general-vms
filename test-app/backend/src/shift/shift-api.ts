@@ -1,34 +1,48 @@
-import app from '../server';
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+// isUserAdmin should be omitted for testing
 import isUserAdmin from '../middleware';
 import Database from '../models/database/database';
 import { Shift } from './shift-interface';
+import express from 'express';
+
+const router = express.Router();
 
 let database: Database;
 
-app.post('/api/new-shift', isUserAdmin, async (req, res) => {
+const shiftPreProcessor = (shift: Partial<Shift>) => {
+  shift.start = new Date(shift.start);
+  shift.end = new Date(shift.end);
+  return shift as Shift;
+};
+
+router.post('/new-shift', isUserAdmin, async (req, res) => {
   console.log('POST: Creating Calendar Event...');
 
   const { start, end, maxVolunteers, title, description, eventAdmin } = req.body as Shift;
 
   if (!title) {
-    return res.status(400).json({
-      message: 'Must include title',
-    });
+    res.status(400).send(
+      'Must include title',
+    );
+    return;
   }
 
-  if (!start || !end || start >= end) {
-    return res.status(400).json({
-      message: 'Start/End dates are required and Start date must come before end date',
-    });
+  if (!start || !end || start > end) {
+    res.status(400).send(
+      'Start/End dates are required and Start date must come before end date',
+    );
+    return;
   }
 
   if (!maxVolunteers || maxVolunteers <= 0) {
-    return res.status(400).json({
-      message: 'Max Volunteers is required and must be greater than 0',
-    });
+    res.status(400).send(
+      'Max Volunteers is required and must be greater than 0',
+    );
+    return;
   }
 
-  const newShift: Shift = {
+  const newShift: Partial<Shift> = {
     start: start,
     end: end,
     maxVolunteers: maxVolunteers,
@@ -39,10 +53,17 @@ app.post('/api/new-shift', isUserAdmin, async (req, res) => {
       return end.valueOf() - start.valueOf();
     },
   };
-  // eslint-disable-next-line @typescript-eslint/await-thenable
-  await database.saveShift(newShift);
 
-  res.status(201).json({
-    message: 'New shift successfully created',
-  });
+  const newShiftProcessed = shiftPreProcessor(newShift);
+
+  console.log(newShiftProcessed);
+
+  // should be omitted for testing
+  database.saveShift(newShiftProcessed);
+
+  return res.status(201).send(
+    'New shift successfully created',
+  );
 });
+
+export default router;
