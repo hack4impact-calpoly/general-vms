@@ -49,9 +49,6 @@ router.post('/new-shift', async (req, res) => {
     title: title,
     description: description,
     eventAdmin: eventAdmin,
-    getShiftTime: function (): number {
-      return end.valueOf() - start.valueOf();
-    },
   };
 
   const newShiftProcessed = shiftPreProcessor(newShift);

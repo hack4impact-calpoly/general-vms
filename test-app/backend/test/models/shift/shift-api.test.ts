@@ -36,7 +36,7 @@ const badVolShift = {
   eventAdmin: 'Adam Meza',
 };
 
-test('POST  /api/new-shift', async () => {
+test('POST  /api/new-shift; Succcessful shift created', async () => {
   await request(app)
     .post('/api/new-shift')
     .send(myShift)
@@ -44,7 +44,9 @@ test('POST  /api/new-shift', async () => {
     .then((response) => {
       expect(response.text).toBe('New shift successfully created');
     });
+});
 
+test('POST  /api/new-shift; Shift fails to create ecasue there is no title', async () => {
   await request(app)
     .post('/api/new-shift')
     .send(noTitleShift)
@@ -52,7 +54,9 @@ test('POST  /api/new-shift', async () => {
     .then((response) => {
       expect(response.text).toBe('Must include title');
     });
+});
 
+test('POST  /api/new-shift; Shift fails because start date is after end date', async () => {
   await request(app)
     .post('/api/new-shift')
     .send(badDateShift)
@@ -60,7 +64,9 @@ test('POST  /api/new-shift', async () => {
     .then((response) => {
       expect(response.text).toBe('Start/End dates are required and Start date must come before end date');
     });
+});
 
+test('POST  /api/new-shift; Shift fails becasuse max volunteers is 0', async () => {
   await request(app)
     .post('/api/new-shift')
     .send(badVolShift)

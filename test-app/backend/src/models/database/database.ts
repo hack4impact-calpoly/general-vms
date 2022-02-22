@@ -16,9 +16,6 @@ class Database {
       title: 'My Lovely Title',
       description: 'I have a description',
       eventAdmin: 'Adam Meza',
-      getShiftTime: function (): number {
-        return 12;
-      },
     };
     return myShift;
   }
@@ -33,9 +30,6 @@ class Database {
       title: 'My Lovely Title',
       description: 'I have a description',
       eventAdmin: 'Adam Meza',
-      getShiftTime: function (): number {
-        return 12;
-      },
     };
     return myShift;
   }
