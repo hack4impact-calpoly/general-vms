@@ -82,7 +82,7 @@ test('POST  /api/new-shift; shift fails because max volunteers is 0', async () =
     });
 });
 
-test('PATCH  /api/edit-shift/:id; shift is s', async () => {
+test('PATCH  /api/edit-shift/:id; shift is sent a new title and it is modified', async () => {
   await request(app)
     .patch('/api/edit-shift/12')
     .send(patchTitle)

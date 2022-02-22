@@ -16,16 +16,15 @@ class Database {
       title: 'My Lovely Title',
       description: 'I have a description',
       eventAdmin: 'Adam Meza',
-      getShiftTime: function (): number {
-        return 12;
+      getShiftTime: function (this: Shift): number {
+        return this.end.getTime() - this.start.getTime();
       },
     };
     return myShift;
   }
 
   updateShift(id: string, mod: Partial<Shift>): Shift {
-    console.log(id);
-    console.log(mod);
+    console.log('updateShift');
     const myShift: Shift = {
       start: new Date(),
       end: new Date(),
@@ -33,10 +32,25 @@ class Database {
       title: 'My Lovely Title',
       description: 'I have a description',
       eventAdmin: 'Adam Meza',
-      getShiftTime: function (): number {
-        return 12;
+      getShiftTime: function (this: Shift): number {
+        return this.end.getTime() - this.start.getTime();
       },
     };
+    if (mod.title) {
+      myShift.title = mod.title;
+    }
+    if (mod.description) {
+      myShift.description = mod.description;
+    }
+    if (mod.maxVolunteers) {
+      myShift.maxVolunteers = mod.maxVolunteers;
+    }
+    if (mod.start) {
+      myShift.start = mod.start;
+    }
+    if (mod.end) {
+      myShift.end = mod.end;
+    }
     return myShift;
   }
 }
