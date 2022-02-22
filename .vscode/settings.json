@@ -12,5 +12,6 @@
   },
   "files.autoSave": "off",
   "files.autoSaveDelay": 1000,
+  "editor.tabSize": 2,
   "files.eol": "\n"
 }
