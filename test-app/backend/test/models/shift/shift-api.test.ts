@@ -46,7 +46,7 @@ test('POST  /api/new-shift; Succcessful shift created', async () => {
     });
 });
 
-test('POST  /api/new-shift; Shift fails to create ecasue there is no title', async () => {
+test('POST  /api/new-shift; Shift fails to create because there is no title', async () => {
   await request(app)
     .post('/api/new-shift')
     .send(noTitleShift)
@@ -66,7 +66,7 @@ test('POST  /api/new-shift; Shift fails because start date is after end date', a
     });
 });
 
-test('POST  /api/new-shift; Shift fails becasuse max volunteers is 0', async () => {
+test('POST  /api/new-shift; Shift fails because max volunteers is 0', async () => {
   await request(app)
     .post('/api/new-shift')
     .send(badVolShift)
