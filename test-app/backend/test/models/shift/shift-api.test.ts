@@ -1,8 +1,6 @@
 import app from '../../../src/server';
 import request from 'supertest';
 
-global.console.log = jest.fn();
-
 const myShift = {
   start: new Date().getTime(),
   end: new Date().getTime(),
@@ -39,7 +37,20 @@ const badVolShift = {
 };
 
 const patchTitle = {
-  title: 'My Lovely Title',
+  title: 'My EDITED title it is lovely',
+};
+
+const patchDescription = {
+  description: 'My description has been EDITED!',
+};
+
+const patchBadDate = {
+  start: new Date().getTime() + 100,
+};
+
+const patchGoodDates = {
+  start: new Date().getTime(),
+  end: new Date().getTime() + 100,
 };
 
 test('POST  /api/new-shift complete shift is successfuly created', async () => {
@@ -82,10 +93,40 @@ test('POST  /api/new-shift; shift fails because max volunteers is 0', async () =
     });
 });
 
-test('PATCH  /api/edit-shift/:id; shift is sent a new title and it is modified', async () => {
+test('PATCH  /api/edit-shift/:id; shift is sent a new title and it is modified (verified with postman)', async () => {
   await request(app)
     .patch('/api/edit-shift/12')
     .send(patchTitle)
+    .expect(200)
+    .then((response) => {
+      expect(response.text).toBe('Shift has been updated');
+    });
+});
+
+test('PATCH  /api/edit-shift/:id; shift is sent a new description and it is modified (verified with postman)', async () => {
+  await request(app)
+    .patch('/api/edit-shift/12')
+    .send(patchDescription)
+    .expect(200)
+    .then((response) => {
+      expect(response.text).toBe('Shift has been updated');
+    });
+});
+
+test('PATCH  /api/edit-shift/:id; shift fails to be modified because start date is after end date', async () => {
+  await request(app)
+    .patch('/api/edit-shift/12')
+    .send(patchBadDate)
+    .expect(400)
+    .then((response) => {
+      expect(response.text).toBe('Start/End dates are required and Start date must come before end date');
+    });
+});
+
+test('PATCH  /api/edit-shift/:id; Shift is successfully modified because 2 good dates are sent', async () => {
+  await request(app)
+    .patch('/api/edit-shift/12')
+    .send(patchGoodDates)
     .expect(200)
     .then((response) => {
       expect(response.text).toBe('Shift has been updated');

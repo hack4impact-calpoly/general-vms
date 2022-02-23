@@ -5,5 +5,4 @@ export interface Shift {
   title: string,
   description?: string,
   eventAdmin: string,
-  getShiftTime(): number
 }

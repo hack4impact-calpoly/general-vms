@@ -16,9 +16,6 @@ class Database {
       title: 'My Lovely Title',
       description: 'I have a description',
       eventAdmin: 'Adam Meza',
-      getShiftTime: function (this: Shift): number {
-        return this.end.getTime() - this.start.getTime();
-      },
     };
     return myShift;
   }
@@ -32,24 +29,22 @@ class Database {
       title: 'My Lovely Title',
       description: 'I have a description',
       eventAdmin: 'Adam Meza',
-      getShiftTime: function (this: Shift): number {
-        return this.end.getTime() - this.start.getTime();
-      },
     };
     if (mod.title) {
       myShift.title = mod.title;
     }
     if (mod.description) {
       myShift.description = mod.description;
+      console.log('Changed description to: ', mod.description);
     }
     if (mod.maxVolunteers) {
       myShift.maxVolunteers = mod.maxVolunteers;
     }
     if (mod.start) {
-      myShift.start = mod.start;
+      myShift.start = new Date(mod.start);
     }
     if (mod.end) {
-      myShift.end = mod.end;
+      myShift.end = new Date(mod.end);
     }
     return myShift;
   }
