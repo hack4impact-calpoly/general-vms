@@ -53,7 +53,8 @@ const patchGoodDates = {
   end: new Date().getTime() + 100,
 };
 
-test('POST  /api/new-shift complete shift is successfuly created', async () => {
+
+test('POST  /api/new-shift; Succcessful shift created', async () => {
   await request(app)
     .post('/api/new-shift')
     .send(myShift)
@@ -63,7 +64,8 @@ test('POST  /api/new-shift complete shift is successfuly created', async () => {
     });
 });
 
-test('POST  /api/new-shift; shift fails to create becasue no title provided', async () => {
+
+test('POST  /api/new-shift; Shift fails to create because there is no title', async () => {
   await request(app)
     .post('/api/new-shift')
     .send(noTitleShift)
@@ -73,7 +75,8 @@ test('POST  /api/new-shift; shift fails to create becasue no title provided', as
     });
 });
 
-test('POST  /api/new-shift; shift fails to create becasue end date is before start date', async () => {
+
+test('POST  /api/new-shift; Shift fails because start date is after end date', async () => {
   await request(app)
     .post('/api/new-shift')
     .send(badDateShift)
@@ -83,7 +86,8 @@ test('POST  /api/new-shift; shift fails to create becasue end date is before sta
     });
 });
 
-test('POST  /api/new-shift; shift fails because max volunteers is 0', async () => {
+
+test('POST  /api/new-shift; Shift fails because max volunteers is 0', async () => {
   await request(app)
     .post('/api/new-shift')
     .send(badVolShift)
