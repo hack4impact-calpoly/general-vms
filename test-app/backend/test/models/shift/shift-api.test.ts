@@ -53,7 +53,6 @@ const patchGoodDates = {
   end: new Date().getTime() + 100,
 };
 
-
 test('POST  /api/new-shift; Succcessful shift created', async () => {
   await request(app)
     .post('/api/new-shift')
@@ -63,7 +62,6 @@ test('POST  /api/new-shift; Succcessful shift created', async () => {
       expect(response.text).toBe('New shift successfully created');
     });
 });
-
 
 test('POST  /api/new-shift; Shift fails to create because there is no title', async () => {
   await request(app)
@@ -75,7 +73,6 @@ test('POST  /api/new-shift; Shift fails to create because there is no title', as
     });
 });
 
-
 test('POST  /api/new-shift; Shift fails because start date is after end date', async () => {
   await request(app)
     .post('/api/new-shift')
@@ -85,7 +82,6 @@ test('POST  /api/new-shift; Shift fails because start date is after end date', a
       expect(response.text).toBe('Start/End dates are required and Start date must come before end date');
     });
 });
-
 
 test('POST  /api/new-shift; Shift fails because max volunteers is 0', async () => {
   await request(app)
