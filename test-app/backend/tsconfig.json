@@ -8,6 +8,9 @@
   "typeAcquisition": {
     "include": ["jest"]
   },
+  "types": [
+     "common"
+  ],
   "esModuleInterop": true,
   "include": ["./src", "./test", "server.js"]
 }

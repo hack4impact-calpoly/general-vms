@@ -3,8 +3,13 @@ import Login from '../Login/Login';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider } from '../models/user/UserStore';
+import { Connection } from '../api';
 
 function App() {
+//  connection = new Connection("http://localhost:3000");
+  Connection.setSession("auth");
+  Connection.auth.sendMessage("Hello");
+
   return (
     <UserProvider>
       <BrowserRouter>
