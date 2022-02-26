@@ -1,9 +1,9 @@
+import crypto from "crypto";
 import type {BeginAuthRequest, BeginAuthResponse, LoginRequest, LoginResponse } from './authApi';
 import type { AuthService } from './authService';
 import type { IConfig } from "../config";
 import type { AuthSession } from "./types";
 import { SmallerMetadata } from "../metadata";
-import { createContainer, generateId  } from "../ids";
 import type { DB } from "../../backend/src/db/db";
 
 export interface Context {
@@ -48,10 +48,9 @@ export class Container<T extends Base> {
 	MyClass: Constructor<T>;
 
         copy() {
-		return this.MyClass.from({ generateToken: "deewhkw" });
+		return this.MyClass.from({ generateToken: crypto.randomBytes(32).toString("hex") });
 	}
 }
 
-export class AuthServiceImpl extends Base implements AuthService<Context> { 
- 
+export class AuthServiceImpl extends Base implements AuthService<Context> {  
 };

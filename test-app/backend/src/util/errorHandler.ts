@@ -17,3 +17,15 @@ export const errorHandlerMiddleware = (debug = true) => {
 		}
 	};
 };
+
+export const wsErrorHandlerMiddleware = (debug = true) => {
+	const handler = errorHandler(debug);
+	return async (ctx: KoaContext, next: () => Promise<any>) => {
+		try {
+			return await next();
+		} catch (e) {
+			handler(e);				
+			ctx.websocket.send("Error on websocket end");
+		}
+	};
+};

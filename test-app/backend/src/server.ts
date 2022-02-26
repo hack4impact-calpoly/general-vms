@@ -7,7 +7,7 @@ import chalk from 'chalk';
 import { newServiceManager } from './routes/adapter';
 import { DB } from './db/db';
 import { metadata } from './routes/methodMetadata';
-import { errorHandlerMiddleware } from "./util/errorHandler";
+import { errorHandlerMiddleware, wsErrorHandlerMiddleware } from "./util/errorHandler";
 import { mainMiddleware } from "./middleware/main";
 import  { authMiddleware }  from "./middleware/auth";
 import { Container, AuthService, AuthServiceImpl, AuthServiceDefinition } from "common";
@@ -46,6 +46,9 @@ export async function runServer() {
 
   app.use(unaryRouter.routes());
   app.ws.use(streamRouter.routes() as any);
+  app.use(logger());
+  app.use(errorHandlerMiddleware());
+  app.ws.use(wsErrorHandlerMiddleware());
   
 //  app.use((req, res, next) => {
 //    res.header('Access-Control-Allow-Origin', '*');
