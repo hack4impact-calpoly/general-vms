@@ -1,5 +1,11 @@
 @use "../global_variables" as gv;
 
+$extra-padding: 2vh;
+
 .standard-page {
-    padding-bottom: gv.$footer-height;
+    padding-bottom: calc(gv.$footer-height + $extra-padding);
+}
+
+.standard-page-top-padding {
+    padding-top: $extra-padding;
 }
