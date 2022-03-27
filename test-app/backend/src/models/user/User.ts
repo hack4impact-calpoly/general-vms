@@ -8,6 +8,7 @@ export enum Roles {
 
 export type Role = Roles | undefined;
 
+export const ADMIN_ROLES = new Set([Roles.ADMIN]);
 export const STAFF_ROLES = new Set([Roles.ADMIN, Roles.STAFF]);
 export const VALID_ROLES = new Set([Roles.ADMIN, Roles.VOLUNTEER, Roles.STAFF]);
 
@@ -17,6 +18,7 @@ export interface IUser {
   userId: UserId;
   userLoggedIn: boolean;
   role: Role,
-  userApproved: boolean;
+  approved: boolean;
+  decisionMade: boolean;
   cognitoSession: object | undefined;
 }

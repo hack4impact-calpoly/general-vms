@@ -8,6 +8,7 @@ const config: Config.InitialOptions = {
   transform: {
     '^.+\\.ts?$': 'ts-jest',
   },
+  setupFilesAfterEnv: ['./test/setupTests.ts'],
 };
 
 export default config;
