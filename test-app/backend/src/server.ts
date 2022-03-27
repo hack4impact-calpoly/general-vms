@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import UserAuthMiddleware from './models/user-session/middleware';
 import { IGetUserAuthInfoRequest } from './models/user-session/types';
+import router from './shift/shift-api';
 
 // Initialize stuff
 dotenv.config();
@@ -20,8 +21,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/test', UserAuthMiddleware.checkUserAuthenticated, (req: IGetUserAuthInfoRequest, res) => {
+app.get('/test-auth', UserAuthMiddleware.checkUserAuthenticated, (req: IGetUserAuthInfoRequest, res) => {
   console.log(req?.locals);
+  res.send('authenticated!');
+});
+
+app.use('/api', router);
+
+app.get('/test', (req, res) => {
   res.send('Hi there!');
 });
 
