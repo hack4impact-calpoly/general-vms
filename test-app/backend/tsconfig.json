@@ -3,7 +3,11 @@
   "compilerOptions": {
     "outDir": "./lib",
     "allowJs": true,
-    "checkJs": false
+    "checkJs": false,
+    "types": ["reflect-metadata", "jest"],
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "typeAcquisition": {
     "include": ["jest"]
