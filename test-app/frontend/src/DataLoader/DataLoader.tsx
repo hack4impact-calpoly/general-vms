@@ -1,42 +1,76 @@
-import React, { useEffect, useState } from 'react';
-import BarLoader from 'react-spinners/BarLoader';
+import { Alert } from '@mui/material';
+import React, { ElementType, useEffect, useState } from 'react';
+import { ErrorDialog } from '../dialogs/error-dialog/ErrorDialog';
+import { DataCircleLoader, IDataCircleLoaderProps } from './circle-loader/DataCircleLoader';
 
-interface Query {
-  execute: () => Promise<unknown>;
-  onResolve: () => void;
-  onReject: () => void;
+interface Query<T> {
+  execute: () => Promise<T>;
+  onResolve?: () => void;
+  onReject?: () => void;
 }
 
-interface Props {
+interface ILoadingOptions {
   loadingComponent?: React.ReactElement;
-  query: Query;
-  onceLoadedComponent: React.ReactElement;
-  errorComponent: React.ReactElement;
+  defaultDataLoaderOverrides?: IDataCircleLoaderProps;
 }
 
-const DataLoader = ({ loadingComponent, query, onceLoadedComponent, errorComponent } : Props) => {
-  let initialInnerComponent : React.ReactElement = <BarLoader />;
-  if (loadingComponent) {
-    initialInnerComponent = loadingComponent;
-  }
-  const [innerComponent, setInnerComponent] = useState<React.ReactElement>(initialInnerComponent);
+interface Props<T> {
+  loadingOptions?: ILoadingOptions;
+  query: Query<T>;
+  OnceLoadedComponent: ElementType;
+  errorComponent?: React.ReactElement;
+  additionalLoadingCompProps?: object;
+}
+
+const DataLoader = <T, >({
+  loadingOptions,
+  query,
+  OnceLoadedComponent,
+  errorComponent,
+  additionalLoadingCompProps,
+} : Props<T>) => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [data, setData] = useState<T | null>(null);
 
   useEffect(() => {
-    query.execute()
-      .then(
-        () => {
-          query.onResolve();
-          setInnerComponent(onceLoadedComponent);
-        },
-      ).catch(
-        () => {
-          query.onReject();
-          setInnerComponent(errorComponent);
-        },
-      );
+    try {
+      query.execute()
+        .then(
+          (data: T) => {
+            query.onResolve?.();
+            setData(data);
+          },
+        ).catch(
+          (e: Error) => {
+            query.onReject?.();
+            setError(e);
+          },
+        ).finally(() => setLoading(false));
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        setError(e);
+      } else {
+        setError(new Error('An unknown error occurred'));
+      }
+      setLoading(false);
+    }
   }, []);
 
-  return innerComponent;
+  if (loading) {
+    return loadingOptions?.loadingComponent || <DataCircleLoader {...loadingOptions?.defaultDataLoaderOverrides} />;
+  }
+
+  if (error) {
+    return errorComponent || (
+      <>
+        <ErrorDialog open={true} />
+        <Alert severity="error">An error occurred while attempting to load data</Alert>
+      </>
+    );
+  }
+
+  return <OnceLoadedComponent {...additionalLoadingCompProps} data={data} />;
 };
 
 export default DataLoader;
