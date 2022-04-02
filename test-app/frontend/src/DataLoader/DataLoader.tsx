@@ -3,10 +3,10 @@ import React, { ElementType, useEffect, useState } from 'react';
 import { ErrorDialog } from '../dialogs/error-dialog/ErrorDialog';
 import { DataCircleLoader, IDataCircleLoaderProps } from './circle-loader/DataCircleLoader';
 
-interface Query<T> {
+export interface Query<T> {
   execute: () => Promise<T>;
-  onResolve?: () => void;
-  onReject?: () => void;
+  onResolve?: (data: T) => void;
+  onReject?: (e: Error) => void;
 }
 
 interface ILoadingOptions {
@@ -14,7 +14,7 @@ interface ILoadingOptions {
   defaultDataLoaderOverrides?: IDataCircleLoaderProps;
 }
 
-interface Props<T> {
+export interface IDataLoaderProps<T> {
   loadingOptions?: ILoadingOptions;
   query: Query<T>;
   OnceLoadedComponent: ElementType;
@@ -22,13 +22,22 @@ interface Props<T> {
   additionalLoadingCompProps?: object;
 }
 
+export const DataLoaderDefaultErrorComponent = () => {
+  return (
+    <>
+      <ErrorDialog open={true} />
+      <Alert severity="error">An error occurred while attempting to load data</Alert>
+    </>
+  );
+};
+
 const DataLoader = <T, >({
   loadingOptions,
   query,
   OnceLoadedComponent,
   errorComponent,
   additionalLoadingCompProps,
-} : Props<T>) => {
+} : IDataLoaderProps<T>) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [data, setData] = useState<T | null>(null);
@@ -38,12 +47,12 @@ const DataLoader = <T, >({
       query.execute()
         .then(
           (data: T) => {
-            query.onResolve?.();
+            query.onResolve?.(data);
             setData(data);
           },
         ).catch(
           (e: Error) => {
-            query.onReject?.();
+            query.onReject?.(e);
             setError(e);
           },
         ).finally(() => setLoading(false));
@@ -62,12 +71,7 @@ const DataLoader = <T, >({
   }
 
   if (error) {
-    return errorComponent || (
-      <>
-        <ErrorDialog open={true} />
-        <Alert severity="error">An error occurred while attempting to load data</Alert>
-      </>
-    );
+    return errorComponent || <DataLoaderDefaultErrorComponent />;
   }
 
   return <OnceLoadedComponent {...additionalLoadingCompProps} data={data} />;
