@@ -71,6 +71,10 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.28.0",
+    "jest-fetch-mock": "^3.0.3",
     "lint-staged": "^12.1.7"
+  },
+  "jest": {
+    "resetMocks": false
   }
 }
