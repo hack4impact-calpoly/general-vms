@@ -29,6 +29,10 @@ function HttpRequestDataLoaderErrorComponent({ error }: IProps) {
         title = 'Action Forbidden';
         generalMessage = `Your account is not allowed to perform this action. ${FOUR_HUNDREDS_EXTRA_PART}`;
         break;
+      case 404:
+        title = 'Item Not Found';
+        generalMessage = 'The item requested could not be found.';
+        break;
       default:
         title = 'An unexpected error occurred';
         generalMessage = `This action failed due to an unexpected error. If this continues, please contact a site admin`;

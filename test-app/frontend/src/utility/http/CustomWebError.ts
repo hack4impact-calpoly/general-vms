@@ -8,6 +8,7 @@ export class CustomWebError extends Error {
   static BAD_FORMAT = 400;
   static UNAUTHORIZED = 401;
   static FORBIDDEN = 403;
+  static NOT_FOUND = 404;
 
   responseCode: number;
   responseError: string;
@@ -27,6 +28,8 @@ export class CustomWebError extends Error {
         return 'User unauthorized';
       case this.FORBIDDEN:
         return 'User forbidden';
+      case this.NOT_FOUND:
+        return 'Resource not found';
       case this.BAD_FORMAT:
         return 'Bad formatting on request';
       default:
