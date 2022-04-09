@@ -31,12 +31,6 @@ export default function ShiftsPickers() {
           onChange={handleChange}
           renderInput={(params) => <TextField {...params} />}
         />
-        {/* <DateTimePicker
-          label="Date&Time picker"
-          value={value}
-          onChange={handleChange}
-          renderInput={(params) => <TextField {...params} />}
-        /> */}
       </Stack>
     </LocalizationProvider>
   );
