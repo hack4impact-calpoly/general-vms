@@ -36,23 +36,6 @@ const badVolShift = {
   eventAdmin: 'Adam Meza',
 };
 
-const patchTitle = {
-  title: 'My EDITED title it is lovely',
-};
-
-const patchDescription = {
-  description: 'My description has been EDITED!',
-};
-
-const patchBadDate = {
-  start: new Date().getTime() + 100,
-};
-
-const patchGoodDates = {
-  start: new Date().getTime(),
-  end: new Date().getTime() + 100,
-};
-
 test('POST  /api/new-shift; Succcessful shift created', async () => {
   await request(app)
     .post('/api/new-shift')
@@ -93,42 +76,52 @@ test('POST  /api/new-shift; Shift fails because max volunteers is 0', async () =
     });
 });
 
-test('PATCH  /api/edit-shift/:id; shift is sent a new title and it is modified (verified with postman)', async () => {
+test('PUT  /api/shift/12; Succcessful shift updated', async () => {
   await request(app)
-    .patch('/api/edit-shift/12')
-    .send(patchTitle)
+    .put('/api/shift/12')
+    .send(myShift)
     .expect(200)
     .then((response) => {
       expect(response.text).toBe('Shift has been updated');
     });
 });
 
-test('PATCH  /api/edit-shift/:id; shift is sent a new description and it is modified (verified with postman)', async () => {
+test('PUT  /api/shift/12; Shift fails to update because there is no title', async () => {
   await request(app)
-    .patch('/api/edit-shift/12')
-    .send(patchDescription)
-    .expect(200)
+    .put('/api/shift/12')
+    .send(noTitleShift)
+    .expect(400)
     .then((response) => {
-      expect(response.text).toBe('Shift has been updated');
+      expect(response.text).toBe('Must include title');
     });
 });
 
-test('PATCH  /api/edit-shift/:id; shift fails to be modified because start date is after end date', async () => {
+test('PUT  /api/shift/13; Shift fails because start date is after end date', async () => {
   await request(app)
-    .patch('/api/edit-shift/12')
-    .send(patchBadDate)
+    .put('/api/shift/13')
+    .send(badDateShift)
     .expect(400)
     .then((response) => {
       expect(response.text).toBe('Start/End dates are required and Start date must come before end date');
     });
 });
 
-test('PATCH  /api/edit-shift/:id; Shift is successfully modified because 2 good dates are sent', async () => {
+test('PUT  /api/shift/39; Shift fails because max volunteers is 0', async () => {
   await request(app)
-    .patch('/api/edit-shift/12')
-    .send(patchGoodDates)
-    .expect(200)
+    .put('/api/shift/39')
+    .send(badVolShift)
+    .expect(400)
     .then((response) => {
-      expect(response.text).toBe('Shift has been updated');
+      expect(response.text).toBe('Max Volunteers is required and must be greater than 0');
+    });
+});
+
+test('PUT  /api/shift/-1; Shift fails because id is invalid', async () => {
+  await request(app)
+    .put('/api/shift/-1')
+    .send(myShift)
+    .expect(400)
+    .then((response) => {
+      expect(response.text).toBe('Invalid ID');
     });
 });

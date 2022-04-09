@@ -1,34 +1,21 @@
 import { Shift } from '../../shift/shift-interface';
 
-/* This abstract class is a placeholder for ""../../shift/shift-api" */
+/* This class is a placeholder for ""../../shift/shift-api" */
 
 class Database {
   saveShift(newShift: Shift): void {
     console.log(newShift);
   }
 
-  findShiftByID(id: string): Shift {
-    console.log(id);
-    const myShift: Shift = {
-      start: new Date(),
-      end: new Date(),
-      maxVolunteers: 2,
-      title: 'My Lovely Title',
-      description: 'I have a description',
-      eventAdmin: 'Adam Meza',
-    };
-    return myShift;
-  }
-
-  updateShift(id: string, mod: Partial<Shift>): Shift {
+  updateShift(id: string, mod: Shift): Shift {
     console.log('updateShift');
     const myShift: Shift = {
       start: new Date(),
       end: new Date(),
       maxVolunteers: 2,
-      title: 'My Lovely Title',
-      description: 'I have a description',
-      eventAdmin: 'Adam Meza',
+      title: 'This is an Original Title',
+      description: 'A unchanged Description',
+      eventAdmin: 'Joe Joe',
     };
     if (mod.title) {
       myShift.title = mod.title;
