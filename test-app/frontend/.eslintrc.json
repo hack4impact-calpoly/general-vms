@@ -10,7 +10,7 @@
     },
     "ecmaVersion": 13,
     "createDefaultProgram": true,
-    "tsconfigRootDir": ".",
+    "tsconfigRootDir": "/Users/khoaly/College/hack4impact/general-vms/general-vms/test-app/frontend/",
     "sourceType": "module",
     "project": ["./tsconfig.json"]
   },

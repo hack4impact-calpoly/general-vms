@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import h4ilogo from '../assets/images/logo192.png';
+import h4ilogo from '../assets/images/logo-color.png';
 import './Navbar.scss';
 
 function NavBar() {
@@ -14,7 +14,7 @@ function NavBar() {
       <nav className="navbar">
         <Link to="/">Home</Link>
         <Link to="/">Volunteers</Link>
-        <Link to="/">Shifts</Link>
+        <Link to="/shifts">Shifts</Link>
         <Link to="/login">Login</Link>
       </nav>
     </header>
