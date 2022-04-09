@@ -2,13 +2,15 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 // isUserAdmin should be omitted for testing
 // import isUserAdmin from '../middleware';
-import Database from '../models/database/database';
 import { Shift } from './shift-interface';
 import express from 'express';
+import { getDB } from '../models/database/database';
+import { ShiftModel } from './ShiftDB';
+import { IUser } from '../models/user/User';
 
 const router = express.Router();
 
-const database: Database = new Database();
+const database = getDB(ShiftModel);
 
 const shiftPreProcessor = (shift: Partial<Shift>) => {
   if (shift.start) {
@@ -59,7 +61,7 @@ router.post('/new-shift', async (req, res) => {
 
   console.log(newShiftProcessed);
 
-  database.saveShift(newShiftProcessed);
+  database.saveShift({} as IUser, newShiftProcessed);
 
   return res.status(201).send(
     'New shift successfully created',

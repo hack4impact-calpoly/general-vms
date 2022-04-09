@@ -1,6 +1,10 @@
+import './Home.scss';
+
 function Home() {
   return (
-    <p>Home</p>
+    <main>
+      <p>Home</p>
+    </main>
   );
 }
 

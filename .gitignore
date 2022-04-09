@@ -107,3 +107,5 @@ dist
 lib/
 dist/
 out-tsc/
+
+.DS_Store
