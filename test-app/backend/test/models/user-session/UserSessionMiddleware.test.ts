@@ -43,7 +43,6 @@ describe('User session middleware', () => {
   it('should find user to be an admin', async () => {
     req = mockRequest({
       role: Roles.ADMIN,
-      name: 'jeff!',
       approved: true,
       decisionMade: true,
     });
@@ -56,7 +55,6 @@ describe('User session middleware', () => {
   it('should NOT find user to be an admin because they lack the role', async () => {
     req = mockRequest({
       role: Roles.VOLUNTEER,
-      name: 'jeff!',
       approved: true,
       decisionMade: true,
     });
@@ -70,7 +68,6 @@ describe('User session middleware', () => {
   it('should find user as an approved user', async () => {
     req = mockRequest({
       role: Roles.VOLUNTEER,
-      name: 'jeff!',
       approved: true,
       decisionMade: true,
     });
@@ -83,7 +80,6 @@ describe('User session middleware', () => {
   it('should NOT find user as an approved user when no role exists', async () => {
     req = mockRequest({
       role: undefined,
-      name: 'jeff!',
       approved: true,
       decisionMade: true,
     });
@@ -97,7 +93,6 @@ describe('User session middleware', () => {
   it('should NOT find user as an approved user when user has been rejected', async () => {
     req = mockRequest({
       role: Roles.VOLUNTEER,
-      name: 'jeff!',
       approved: false,
       decisionMade: true,
     });
@@ -111,7 +106,6 @@ describe('User session middleware', () => {
   it('should NOT find user as an approved user when user has not had decision made', async () => {
     req = mockRequest({
       role: Roles.VOLUNTEER,
-      name: 'jeff!',
       approved: true,
       decisionMade: false,
     });
