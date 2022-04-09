@@ -3,7 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { ListItemText } from '@mui/material';
-import Pickers from './ShiftsPickers';
+import Pickers from '../ShiftsPickers/ShiftsPickers';
 
 import './ShiftsDialog.scss';
 

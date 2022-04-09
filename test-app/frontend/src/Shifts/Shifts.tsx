@@ -2,7 +2,7 @@ import * as React from 'react';
 import './Shifts.scss';
 import Footer from '../Footer/Footer';
 import Navbar from '../Navbar/Navbar';
-import Dialog from './ShiftsDialog';
+import Dialog from './ShiftsDialog/ShiftsDialog';
 
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
