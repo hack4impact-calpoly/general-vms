@@ -5,6 +5,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider } from '../models/user/UserStore';
 import StandardPage from '../StandardPage/StandardPage';
 
+import awsExports from '../aws-exports';
+import { Amplify } from 'aws-amplify';
+Amplify.configure(awsExports);
+
 function App() {
   return (
     <UserProvider>
