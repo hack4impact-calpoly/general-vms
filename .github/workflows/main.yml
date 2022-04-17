@@ -5,35 +5,55 @@ name: CI
 # Controls when the check-and-fix will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-    push:
-        branches:
-            - main
-            - 'dev/**'
-    pull_request:
-        branches:
-            - main
-            - 'dev/**'
+  push:
+    branches:
+      - main
+      - 'dev/**'
+  pull_request:
+    branches:
+      - main
+      - 'dev/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-    # This workflow contains a single job called "build"
-    build:
-        # The type of runner that the job will run on
-        runs-on: ubuntu-latest
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
 
-        strategy:
-            matrix:
-                node-version: [16.x]
+    strategy:
+      matrix:
+        node-version: [16.x]
 
-        # Steps represent a sequence of tasks that will be executed as part of the job
-        steps:
-            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-            - uses: actions/checkout@v2
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-            - name: Run a one-line script
-              uses: actions/setup-node@v2
-              with:
-                  node-version: ${{ matrix.node-version }}
+      - name: Run a one-line script
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
-            - run: npm run install-and-check --prefix ./test-app
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
 
+      - name: Change to test-app directory
+        run: cd ./test-app
+
+      - name: Install dependencies
+        run: npm run install:ci
+        run: npm install -g @aws-amplify/cli
+
+      # This is needed for the build steps
+      - name: Setup Amplify
+        run: amplify pull --appId d294svmw4up5wq --envName dev
+
+      - name: Quality checks
+        run: npm run quality-checks
