@@ -52,7 +52,22 @@ jobs:
       # This is needed for the build steps
       - name: Setup Amplify
         working-directory: ./test-app
-        run: amplify pull --appId d294svmw4up5wq --envName dev
+        run: |
+          amplify pull \
+            --appId d294svmw4up5wq \
+            --envName dev \
+            --providers '{
+              "awscloudformation":{
+                "configLevel":"project",
+                "useProfile":false,
+                "profileName":"default",
+                "accessKeyId":"${{ secrets.AWS_ACCESS_KEY_ID }}",
+                "secretAccessKey":"${{ secrets.AWS_SECRET_ACCESS_KEY }}",
+                "region":"us-west-1"
+              }
+            }' \
+            --yes
+          echo "Done with Amplify Pull!""
 
       - name: Quality checks
         working-directory: ./test-app
