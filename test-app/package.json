@@ -6,6 +6,7 @@
     "prepare": "node scripts/install-husky.js",
     "install:all": "npm install && lerna run install",
     "install:ci": "npm ci --ignore-scripts && lerna bootstrap --ci --ignore-scripts",
+    "install:ci:cache": "npm install --ignore-scripts && lerna bootstrap --no-ci --ignore-scripts",
     "quality-checks": "lerna run --concurrency=1 --stream quality-checks",
     "dev": "lerna run --stream dev",
     "install-and-check": "npm install --ignore-scripts && lerna run --concurrency=1 --stream install-and-check",

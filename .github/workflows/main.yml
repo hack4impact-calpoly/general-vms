@@ -46,7 +46,7 @@ jobs:
       - name: Install dependencies
         working-directory: ./test-app
         run: |
-          npm run install:ci
+          npm run install:ci:cache
           npm install -g @aws-amplify/cli
 
       # This is needed for the build steps
