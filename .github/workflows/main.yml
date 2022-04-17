@@ -67,7 +67,7 @@ jobs:
               }
             }' \
             --yes
-          echo "Done with Amplify Pull!""
+          echo "Done with Amplify Pull!"
 
       - name: Quality checks
         working-directory: ./test-app
