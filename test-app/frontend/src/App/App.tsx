@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider } from '../models/user/UserStore';
 import StandardPage from '../StandardPage/StandardPage';
+import '../amplify/configure';
 
 function App() {
   return (

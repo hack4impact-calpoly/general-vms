@@ -6,3 +6,8 @@ import '@testing-library/jest-dom';
 import jestFetchMock from 'jest-fetch-mock';
 
 jestFetchMock.enableMocks();
+
+// Needed to get rid of Amplify errors
+window.URL.createObjectURL = jest.fn();
+
+jest.mock('./amplify/configure');

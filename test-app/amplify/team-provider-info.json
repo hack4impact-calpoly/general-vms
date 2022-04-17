@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-generalvms-dev-151321-authRole",
+      "UnauthRoleArn": "arn:aws:iam::633874248049:role/amplify-generalvms-dev-151321-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::633874248049:role/amplify-generalvms-dev-151321-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-generalvms-dev-151321-deployment",
+      "UnauthRoleName": "amplify-generalvms-dev-151321-unauthRole",
+      "StackName": "amplify-generalvms-dev-151321",
+      "StackId": "arn:aws:cloudformation:us-west-1:633874248049:stack/amplify-generalvms-dev-151321/45c32a10-b852-11ec-9bf1-060d151ae235",
+      "AmplifyAppId": "d294svmw4up5wq"
+    },
+    "categories": {
+      "auth": {
+        "generalvmsa8c7d74d": {}
+      }
+    }
+  }
+}

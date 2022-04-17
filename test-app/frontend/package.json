@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-amplify/ui-react": "^2.15.1",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.5.1",
@@ -14,6 +15,7 @@
     "@types/node": "^16.11.19",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "aws-amplify": "^4.3.19",
     "bootstrap": "^5.1.3",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.2",
@@ -38,8 +40,8 @@
     "lint-fix": "npm run lint-check -- --fix",
     "lint-staged": "lint-staged --config scripts/lint-staged.js",
     "test-quick": "react-scripts test --bail --watchAll=false --passWithNoTests --findRelatedTests",
-    "quality-checks": "npm run lint-check && npm run test",
-    "install-and-check": "npm i --ignore-scripts && npm run quality-checks && npm run build",
+    "quality-checks": "npm run lint-check && npm run test && npm run build",
+    "install-and-check": "npm i --ignore-scripts && npm run quality-checks",
     "commit-checks": "npm run lint-staged",
     "push-checks": "npm run quality-checks"
   },
