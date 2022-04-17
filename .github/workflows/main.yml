@@ -47,8 +47,9 @@ jobs:
         run: cd ./test-app
 
       - name: Install dependencies
-        run: npm run install:ci
-        run: npm install -g @aws-amplify/cli
+        run: |
+          npm run install:ci
+          npm install -g @aws-amplify/cli
 
       # This is needed for the build steps
       - name: Setup Amplify
