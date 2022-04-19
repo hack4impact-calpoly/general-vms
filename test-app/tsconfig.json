@@ -20,5 +20,5 @@
   },
   "typeAcquisition": { "include": ["jest"] },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules", "lib", "dist"]
+  "exclude": ["node_modules", "lib", "dist", "**/aws-exports.js"]
 }
