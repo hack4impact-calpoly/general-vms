@@ -5,12 +5,12 @@
 import { Shift } from './shift-interface';
 import express from 'express';
 import { getDB } from '../models/database/database';
-import { ShiftModel } from './ShiftDB';
+import { IShiftDB, ShiftModel } from './ShiftDB';
 import { IUser } from '../models/user/User';
 
 const router = express.Router();
 
-const database = getDB(ShiftModel);
+const database = getDB<IShiftDB>(ShiftModel);
 
 const shiftPreProcessor = (shift: Partial<Shift>) => {
   if (shift.start) {
@@ -111,7 +111,7 @@ router.put('/shift/:id', async (req, res) => {
     eventAdmin: eventAdmin,
   };
   const newShiftProcessed = shiftPreProcessor(newShift);
-  console.log(database.updateShift(id, newShiftProcessed));
+  console.log(database.updateShift({} as Partial<IUser>, newShiftProcessed));
 
   return res.status(200).send(
     'Shift has been updated',

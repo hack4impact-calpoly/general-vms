@@ -1,3 +1,3 @@
 export interface Model {
-  identifier: symbol;
+  databaseId: symbol;
 }

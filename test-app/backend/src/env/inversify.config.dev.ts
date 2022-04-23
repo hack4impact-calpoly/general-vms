@@ -1,33 +1,23 @@
 import 'reflect-metadata';
-import { ContainerModule, injectable, interfaces } from 'inversify';
-import { DatabaseImpls } from '../models/database/database-impls';
+import { ContainerModule, interfaces } from 'inversify';
 import { MockDatabase } from '../models/database/mock-db/mock-database';
 import { ValidateReqAppendUser } from '../models/user-session/UserSession';
 import ExampleUserSessionValidator from '../models/user-session/UserSessionProviders';
-import { UserModel } from '../models/user/UserDB';
-import { ShiftModel } from '../shift/ShiftDB';
+import { IUserDB } from '../models/user/UserDB';
+import { IShiftDB } from '../shift/ShiftDB';
 import { TYPES } from '../types';
 
-@injectable()
-export class DevDatabaseImpls extends DatabaseImpls {
-  static MockDatabase = new MockDatabase();
-
-  constructor() {
-    super([
-      [UserModel, DevDatabaseImpls.MockDatabase],
-      [ShiftModel, DevDatabaseImpls.MockDatabase],
-    ]);
-  }
-}
-
-const containerModule = new ContainerModule((bind: interfaces.Bind) => {
+const sessionModule = new ContainerModule((bind: interfaces.Bind) => {
   bind<ValidateReqAppendUser>(TYPES.UserSessionValidator).to(ExampleUserSessionValidator).inSingletonScope();
 });
 
 const databaseModule = new ContainerModule((bind: interfaces.Bind) => {
-  bind<DatabaseImpls>(TYPES.DatabaseImpls).to(DevDatabaseImpls).inSingletonScope();
+  bind<IUserDB>(TYPES.UserDatabase).to(MockDatabase).inSingletonScope();
+
+  // Bind all DB types to same Mock DB for now
+  bind<IShiftDB>(TYPES.ShiftDatabase).toService(TYPES.UserDatabase);
 });
 
-const containerModules = [containerModule, databaseModule];
+const containerModules = [sessionModule, databaseModule];
 
 export { containerModules };
