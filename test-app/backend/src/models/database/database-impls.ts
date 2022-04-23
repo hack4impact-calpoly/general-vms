@@ -1,3 +1,6 @@
+/**
+ * This is no longer necessary but may be helpful
+ */
 import 'reflect-metadata';
 import { injectable, unmanaged } from 'inversify';
 import DatabaseInstance from './database';
@@ -14,14 +17,14 @@ export class DatabaseImpls {
   }
 
   register(model: Model, dbInstance: DatabaseInstance): void {
-    this.databaseMapping.set(model.identifier, dbInstance);
+    this.databaseMapping.set(model.databaseId, dbInstance);
   }
 
   remove(model: Model): void {
-    this.databaseMapping.delete(model.identifier);
+    this.databaseMapping.delete(model.databaseId);
   }
 
-  get(identifier: symbol): DatabaseInstance {
-    return this.databaseMapping.get(identifier);
+  get(databaseId: symbol): DatabaseInstance {
+    return this.databaseMapping.get(databaseId);
   }
 }

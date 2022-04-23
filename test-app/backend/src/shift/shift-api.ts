@@ -5,12 +5,12 @@
 import { Shift } from './shift-interface';
 import express from 'express';
 import { getDB } from '../models/database/database';
-import { ShiftModel } from './ShiftDB';
+import { IShiftDB, ShiftModel } from './ShiftDB';
 import { IUser } from '../models/user/User';
 
 const router = express.Router();
 
-const database = getDB(ShiftModel);
+const database = getDB<IShiftDB>(ShiftModel);
 
 const shiftPreProcessor = (shift: Partial<Shift>) => {
   shift.start = new Date(shift.start);

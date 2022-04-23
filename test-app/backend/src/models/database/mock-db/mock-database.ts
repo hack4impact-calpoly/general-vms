@@ -1,9 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import 'reflect-metadata';
+import { injectable } from 'inversify';
 import { Shift } from '../../../shift/shift-interface';
+import { IShiftDB } from '../../../shift/ShiftDB';
 import { IUser, IPersonalInfo } from '../../user/User';
-import { DatabaseInstance, GetResponse, UpdateResponse } from '../database';
+import { IUserDB } from '../../user/UserDB';
+import { GetResponse, UpdateResponse } from '../database';
 
-export class MockDatabase implements DatabaseInstance {
+@injectable()
+export class MockDatabase implements IShiftDB, IUserDB {
   setApprovalStatus(user: Partial<IUser>, approved: boolean): UpdateResponse<Partial<IUser>> {
     throw new Error('Method not implemented.');
   }
