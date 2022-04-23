@@ -1,3 +1,4 @@
+import { TYPES } from '../../types';
 import { DeleteResponse, GetResponse, SaveResponse, UpdateResponse } from '../database/database';
 import { Model } from '../database/model';
 import { IPersonalInfo, IUser } from './User';
@@ -15,5 +16,5 @@ export interface IUserDB {
 }
 
 export const UserModel: Model = {
-  identifier: Symbol.for('User'),
+  databaseId: TYPES.UserDatabase,
 };
