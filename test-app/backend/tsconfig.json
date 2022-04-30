@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../tsconfig-base.json",
   "compilerOptions": {
     "outDir": "./lib",
     "allowJs": true,
@@ -7,11 +7,25 @@
     "types": ["reflect-metadata", "jest"],
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "baseUrl": "./",
+    "paths": {
+      "src/*": [
+        "./src/*"
+      ],
+      "@general-vms/shared": [
+        "../shared"
+      ],
+    }
   },
   "typeAcquisition": {
     "include": ["jest"]
   },
   "esModuleInterop": true,
-  "include": ["./src", "./test", "server.js"]
+  "include": ["./src", "./test", "server.js"],
+  "references": [
+    {
+      "path": "../shared"
+    }
+  ]
 }

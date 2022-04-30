@@ -1,10 +1,11 @@
 {
-  "name": "@hack4impact/general-vms-frontend-example",
+  "name": "@general-vms/frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "@general-vms/shared": "file:../shared",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.2",
     "@testing-library/jest-dom": "^5.16.1",

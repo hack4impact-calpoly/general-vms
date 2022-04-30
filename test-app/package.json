@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "General VMS example root directory",
   "scripts": {
-    "prepare": "node scripts/install-husky.js",
+    "prepare": "node scripts/install-husky.js && npm run build:shared",
     "install-all": "npm install && lerna run install",
+    "build:shared": "npm run build --prefix=./shared",
     "dev": "lerna run --stream dev",
     "install-and-check": "npm install --ignore-scripts && lerna run --concurrency=1 --stream install-and-check",
     "commit-checks": "lerna run --concurrency=1 --stream commit-checks",

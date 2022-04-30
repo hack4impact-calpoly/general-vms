@@ -24,5 +24,5 @@
       "version": "detect"
     }
   },
-  "ignorePatterns": ["**/scripts/*.js"]
+  "ignorePatterns": ["**/scripts/*.js", "**/webpack.config.js"]
 }

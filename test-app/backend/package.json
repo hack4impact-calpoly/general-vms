@@ -1,13 +1,14 @@
 {
-  "name": "@hack4impact/general-vms-backend-example",
+  "name": "@general-vms/backend",
   "version": "1.0.0",
   "description": "Backend example app.",
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "ts-node server.js",
-    "build-check": "tsc --noEmit",
-    "dev": "nodemon --exec 'ts-node' server.js",
+    "start": "npm run prebuild && ts-node server.js",
+    "prebuild": "npm run build:shared --prefix=../",
+    "build-check": "npm run prebuild && tsc --noEmit",
+    "dev": "npm run prebuild && nodemon --exec 'ts-node' server.js",
     "prepare": "cd .. && npm run prepare",
     "lint-check": "eslint \"src/**/*.{ts,tsx}\" --color --max-warnings=0",
     "lint-fix": "npm run lint-check -- --fix",
