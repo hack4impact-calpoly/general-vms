@@ -31,21 +31,33 @@ export type FormMetadataViewOnSend = Omit<IFormMetadataView, 'published' | 'star
   endDate?: number,
 };
 
-export const FormDataTransformer: DataTransformerModel<IFormMetadataView, FormMetadataViewOnSend> = {
+export interface FormsBeforeSend {
+  forms: IFormMetadataView[];
+}
+
+export interface FormsOnSend {
+  forms: FormMetadataViewOnSend[];
+}
+
+export const FormDataTransformer: DataTransformerModel<FormsBeforeSend, FormsOnSend> = {
   transform: (data) => {
     return {
-      ...data,
-      published: data.published.getTime(),
-      startDate: data.startDate?.getTime(),
-      endDate: data.endDate?.getTime(),
+      forms: data.forms.map((f) => ({
+        ...f,
+        published: f.published.getTime(),
+        startDate: f.startDate?.getTime(),
+        endDate: f.endDate?.getTime(),
+      })),
     };
   },
   undoTransform: (data) => {
     return {
-      ...data,
-      published: new Date(data.published),
-      startDate: unTransformOptionalDate(data.startDate),
-      endDate: unTransformOptionalDate(data.endDate),
+      forms: data.forms.map((f) => ({
+        ...f,
+        published: new Date(f.published),
+        startDate: unTransformOptionalDate(f.startDate),
+        endDate: unTransformOptionalDate(f.endDate),
+      })),
     };
   },
 };

@@ -6,9 +6,31 @@ import { IShiftDB } from '../../../shift/ShiftDB';
 import { IUser, IPersonalInfo } from '../../user/User';
 import { IUserDB } from '../../user/UserDB';
 import { GetResponse, UpdateResponse } from '../database';
+import { IFormDB } from 'src/forms/form-db';
+import { IFormMetadataView, IFormMetadata } from '@general-vms/shared';
 
 @injectable()
-export class MockDatabase implements IShiftDB, IUserDB {
+export class MockDatabase implements IShiftDB, IUserDB, IFormDB {
+  getForms(): GetResponse<IFormMetadataView[]> {
+    throw new Error('Method not implemented.');
+  }
+
+  getUserForms(user: IUser): GetResponse<IFormMetadataView[]> {
+    throw new Error('Method not implemented.');
+  }
+
+  saveNewForm(user: Partial<IUser>, form: IFormMetadata): void {
+    throw new Error('Method not implemented.');
+  }
+
+  updateForm(user: Partial<IUser>, form: IFormMetadataView): UpdateResponse<IFormMetadataView> {
+    throw new Error('Method not implemented.');
+  }
+
+  deleteForm(form: Partial<IFormMetadataView>): void {
+    throw new Error('Method not implemented.');
+  }
+
   setApprovalStatus(user: Partial<IUser>, approved: boolean): UpdateResponse<Partial<IUser>> {
     throw new Error('Method not implemented.');
   }

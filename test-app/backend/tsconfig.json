@@ -11,10 +11,16 @@
     "baseUrl": "./",
     "paths": {
       "src/*": [
+        "./src",
         "./src/*"
       ],
       "@general-vms/shared": [
-        "../shared"
+        "../shared",
+        "../shared/src/*"
+      ],
+      "@general-vms/shared/*": [
+        "../shared",
+        "../shared/src/*"
       ],
     }
   },

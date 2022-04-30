@@ -40,7 +40,7 @@ describe('FormGrid component', () => {
   });
 
   it('should show no forms message', () => {
-    render(<FormGrid title={'Test Forms'} forms={TEST_FORMS} showOptionsMenu={false} showViewableStatus={false} />);
+    render(<FormGrid title={'Test Forms'} forms={[]} showOptionsMenu={false} showViewableStatus={false} />);
 
     expect(screen.queryByText('There are currently no test forms')).toBeTruthy();
   });

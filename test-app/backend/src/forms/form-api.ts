@@ -12,9 +12,9 @@ router.route('/forms')
     try {
       const forms = await database.getForms();
 
-      res.status(200).json({
-        forms: forms.map(FormDataTransformer.transform),
-      });
+      res.status(200).json(FormDataTransformer.transform({
+        forms,
+      }));
       return;
     } catch (e) {
       console.log(e);

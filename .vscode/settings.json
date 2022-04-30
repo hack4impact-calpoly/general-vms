@@ -14,5 +14,5 @@
   "files.autoSaveDelay": 1000,
   "editor.tabSize": 2,
   "files.eol": "\n",
-  "typescript.preferences.importModuleSpecifier": "non-relative"
+  "typescript.preferences.importModuleSpecifier": "shortest"
 }

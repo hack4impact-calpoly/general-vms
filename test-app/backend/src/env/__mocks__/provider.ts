@@ -6,11 +6,13 @@ import SessionMock from './UserSessionValidator';
 import { IUserDB } from '../../models/user/UserDB';
 import { IShiftDB } from '../../shift/ShiftDB';
 import { MockDatabase } from '../../models/database/mock-db/mock-database';
+import { IFormDB } from 'src/forms/form-db';
 
 const container = new Container();
 
 container.bind<ValidateReqAppendUser>(TYPES.UserSessionValidator).to(SessionMock).inSingletonScope();
 container.bind<IUserDB>(TYPES.UserDatabase).to(MockDatabase).inSingletonScope();
 container.bind<IShiftDB>(TYPES.ShiftDatabase).toService(TYPES.UserDatabase);
+container.bind<IFormDB>(TYPES.FormDatabase).toService(TYPES.UserDatabase);
 
 export { container };
