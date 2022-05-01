@@ -17,7 +17,7 @@ To run locally, run `npm run dev`.
 It is recommended for now to use Visual Studio Code. Open this project (as a folder). VSCode will use the given `.vscode` directory in the project and suggest the extensions to install that will help with the development process. It also includes some helpful settings, like using LF as the end-of-line sequence and telling the linter (ESLint) to fix any files it can upon changes.
 
 ## Installation
-Run `npm install` in each directory OR run `npm run install-all` in the root directory. This will install all `node_modules` and setup Husky.
+Run `npm install` in each directory OR run `npm run install:all` in the root directory. This will install all `node_modules` and setup Husky.
 
 ## Linting
 

@@ -10,12 +10,8 @@ const config: Config.InitialOptions = {
   },
   setupFilesAfterEnv: ['./test/setupTests.ts'],
   modulePathIgnorePatterns: ['<rootDir>/lib/'],
-  transformIgnorePatterns: [
-    'node_modules/(?!(@general-vms))',
-  ],
   rootDir: '.',
   modulePaths: ['<rootDir>', '<rootDir>/src'],
-  roots: ['<rootDir>', '<rootDir>/src'],
 };
 
 export default config;
