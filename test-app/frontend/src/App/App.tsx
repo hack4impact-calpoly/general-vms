@@ -6,6 +6,7 @@ import { UserProvider } from '../models/user/UserStore';
 import StandardPage from '../StandardPage/StandardPage';
 import { FormsViewer } from '../forms/FormsViewer';
 import { MOCK_FORMS } from '@general-vms/shared';
+import '../amplify/configure';
 
 function App() {
   return (
