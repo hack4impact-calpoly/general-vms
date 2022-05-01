@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "lib",
+    "module": "commonjs",
+    "target": "esnext",
+    "declaration": true,
+    "declarationMap": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "composite": true,
+    "rootDir": "."
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "lib"],
+  "references": []
+}

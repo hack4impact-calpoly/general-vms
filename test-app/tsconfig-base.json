@@ -20,5 +20,10 @@
   },
   "typeAcquisition": { "include": ["jest"] },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules", "lib", "dist"]
+  "exclude": ["node_modules", "lib", "dist"],
+  "references": [
+    {
+      "path": "./shared"
+    }
+  ]
 }

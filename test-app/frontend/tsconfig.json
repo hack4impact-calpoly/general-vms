@@ -19,9 +19,28 @@
     "isolatedModules": true,
     "noEmit": true,
     "downlevelIteration": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./",
+    "paths": {
+      "src/*": [
+        "./src/*"
+      ],
+      "@general-vms/shared": [
+        "../shared",
+        "../shared/src/*"
+      ],
+      "@general-vms/shared/*": [
+        "../shared",
+        "../shared/src/*"
+      ],
+    }
   },
   "include": [
     "src"
+  ],
+  "references": [
+    {
+      "path": "../shared"
+    }
   ]
 }

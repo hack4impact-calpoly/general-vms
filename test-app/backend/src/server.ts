@@ -2,7 +2,8 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import UserAuthMiddleware from './models/user-session/middleware';
 import { IGetUserAuthInfoRequest } from './models/user-session/types';
-import router from './shift/shift-api';
+import shiftRouter from './shift/shift-api';
+import formsRouter from './forms/form-api';
 
 // Initialize stuff
 dotenv.config();
@@ -26,7 +27,8 @@ app.get('/test-auth', UserAuthMiddleware.checkUserAuthenticated, (req: IGetUserA
   res.send('authenticated!');
 });
 
-app.use('/api', router);
+// Add other routers
+app.use('/api', shiftRouter, formsRouter);
 
 app.get('/test', (req, res) => {
   res.send('Hi there!');

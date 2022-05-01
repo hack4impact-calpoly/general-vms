@@ -1,0 +1,16 @@
+.form-view-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 20%));
+  gap: 1vw;
+  width: 100%;
+  place-content: center;
+}
+
+.form-view-grid-holder {
+  margin-top: 4vh;
+  width: 100%;
+
+  h2 {
+    margin-bottom: 4vh;
+  }
+}

@@ -1,5 +1,5 @@
 import CircularProgress, { CircularProgressProps } from '@mui/material/CircularProgress';
-import styles from './DataCircleLoader.module.scss';
+import './DataCircleLoader.scss';
 
 export interface IDataCircleLoaderProps extends CircularProgressProps {
   caption?: React.ReactNode;
@@ -7,7 +7,7 @@ export interface IDataCircleLoaderProps extends CircularProgressProps {
 
 export function DataCircleLoader({ caption, ...circleLoaderProps }: IDataCircleLoaderProps) {
   return (
-    <div className={styles.loadingContainer}>
+    <div className='circle-loader-loading-container'>
       <CircularProgress {...circleLoaderProps} />
       {caption || 'Loading...'}
     </div>
