@@ -4,8 +4,8 @@
   "description": "Shared package between other packages",
   "main": "lib/src/index.js",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc -w",
+    "build": "npx tsc",
+    "dev": "npx tsc -w",
     "lint": "eslint \"src/**/**.{ts,tsx}\" --color",
     "lint-check": "npm run lint -- --max-warnings=0",
     "lint-fix": "npm run lint-check -- --fix",
@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/hack4impact-calpoly/general-vms/issues"
   },
-  "homepage": "https://github.com/hack4impact-calpoly/general-vms#readme"
+  "homepage": "https://github.com/hack4impact-calpoly/general-vms#readme",
+  "devDependencies": {
+    "typescript": "^4.6.4"
+  }
 }
