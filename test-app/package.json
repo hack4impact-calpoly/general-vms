@@ -36,6 +36,7 @@
     "lerna": "^4.0.0"
   },
   "dependencies": {
+    "@general-vms/shared": "file:shared",
     "typescript": "^4.5.5"
   }
 }
