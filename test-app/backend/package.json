@@ -13,7 +13,7 @@
     "lint-check": "eslint \"src/**/*.{ts,tsx}\" --color --max-warnings=0",
     "lint-fix": "npm run lint-check -- --fix",
     "lint-staged": "lint-staged --config scripts/lint-staged.js",
-    "quality-checks": "npm run lint-check && ls ../shared/lib && ls ./node_modules/ && npm run test && npm run build-check",
+    "quality-checks": "cat package.json && npm install --ignore-scripts && npm run lint-check && ls ../shared/lib && ls ./node_modules/ && npm run test && npm run build-check",
     "install-and-check": "npm i --ignore-scripts && npm run quality-checks",
     "commit-checks": "npm run lint-staged",
     "push-checks": "npm run quality-checks"
