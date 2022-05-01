@@ -10,7 +10,7 @@
     "lint-check": "npm run lint -- --max-warnings=0",
     "lint-fix": "npm run lint-check -- --fix",
     "quality-checks": "npm run lint-check && npm run build",
-    "install-and-check": "npm i --ignore-scripts"
+    "install-and-check": "npm i --ignore-scripts && npm run quality-checks"
   },
   "repository": {
     "type": "git",
