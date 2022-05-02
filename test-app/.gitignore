@@ -108,6 +108,9 @@ lib/
 dist/
 out-tsc/
 
+
+.amplify.env
+
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*
