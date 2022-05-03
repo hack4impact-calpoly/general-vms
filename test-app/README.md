@@ -68,3 +68,28 @@ This builds an application. Run `npm run build` in any directory.
 ## Deploying
 
 TO DO. COMING SOON.
+
+## Setting up Amplify
+
+**NOTE**: You must be in the /test-app directory.
+
+You will also need either an AWS Profile setup with access to Amplify OR just the key ID and secret access key.
+
+For setting up a profile (**RECOMMENDED**):
+   - You will **still need a key ID and secret access key in this setup**. You just don't have to re-setup stuff.
+   - Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+   - Run `aws configure --profile <name of your profile>`
+   - For region, enter `us-west-1`
+   - For output format, enter `json`
+   - Run `npm run setup:amplify -- --profileName <name of profile>`
+
+If you are **not** using a profile, you have 2 choices for running the Amplify setup:
+   1. Use environment variables:
+      - **RECOMMENDED**: Make a `.amplify.env` file in the /test-app directory and put in environment variables:
+         > `AWS_AMPLIFY_VMS_ACCESS_KEY_ID`,` AWS_AMPLIFY_VMS_SECRET_ACCESS_KEY`
+      - You can also just export these environment variables manually
+
+   2. Using just the command line:
+      > `npm run setup:amplify -- --accessKey <access key ID> --secretAccessKey <secret access key>`
+
+Confirm everything worked by doing: `ls frontend/src/aws-exports.js` and the file should show up
