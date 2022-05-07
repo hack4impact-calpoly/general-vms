@@ -2,13 +2,15 @@ export type UserId = string | number | undefined;
 
 export enum Roles {
   ADMIN = 'admin',
+  STAFF = 'staff',
   VOLUNTEER = 'volunteer',
 }
 
 export type Role = Roles | undefined;
 
 export const ADMIN_ROLES = new Set([Roles.ADMIN]);
-export const VALID_ROLES = new Set([Roles.ADMIN, Roles.VOLUNTEER]);
+export const STAFF_ROLES = new Set([Roles.STAFF, Roles.ADMIN]);
+export const ALL_ROLES = new Set([Roles.ADMIN, Roles.STAFF, Roles.VOLUNTEER]);
 
 export interface User {
   name: string;
