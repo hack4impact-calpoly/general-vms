@@ -2,7 +2,7 @@
   "name": "@general-vms/frontend",
   "version": "0.1.0",
   "dependencies": {
-    "@aws-amplify/ui-react": "^2.16.1",
+    "@aws-amplify/ui-react": "^2.15.8",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@general-vms/shared": "file:../shared",
