@@ -8,7 +8,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "copy-all-assets": "npm run copy-assets-for-cdk --prefix=../"
   },
   "devDependencies": {
     "aws-cdk": "2.20.0",

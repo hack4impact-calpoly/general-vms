@@ -8,7 +8,7 @@
   ],
   "eslint.format.enable": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": false
+    "source.fixAll.eslint": true
   },
   "files.autoSave": "off",
   "files.autoSaveDelay": 1000,

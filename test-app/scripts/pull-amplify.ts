@@ -14,9 +14,12 @@ const getProjectConfig = () => {
         path.join(__dirname, '..', 'amplify', '.config', 'project-config.json'),
       ).toString(),
     );
-  } catch (e) {}
+  } catch (e) {
+    throw new Error('Could not find or parse the project-config.json file!');
+  }
 
   return {
+    projectName: parsedProjectConfig.projectName,
     frontend: parsedProjectConfig.frontend || 'javascript',
     framework:
       parsedProjectConfig?.[parsedProjectConfig.frontend].framework ??
@@ -86,6 +89,8 @@ async function pullAmplify() {
 
   console.log('\nAttempting to pull!\n');
 
+  const projectConfig = getProjectConfig();
+
   await runAmplifyCommand(
     'pull',
     {
@@ -98,8 +103,13 @@ async function pullAmplify() {
     {
       appId,
       envName,
+      projectName: projectConfig.projectName,
     },
-    getProjectConfig(),
+    {
+      framework: projectConfig.framework,
+      frontend: projectConfig.frontend,
+      config: projectConfig.config,
+    },
   );
 }
 

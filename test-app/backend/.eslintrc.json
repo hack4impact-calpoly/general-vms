@@ -8,5 +8,5 @@
     "sourceType": "module",
     "createDefaultProgram": true
   },
-  "ignorePatterns": ["**/scripts/*.js"]
+  "ignorePatterns": ["**/scripts/*.js", "webpack.config.js"]
 }

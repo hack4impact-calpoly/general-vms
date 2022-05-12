@@ -6,4 +6,8 @@ const TYPES = {
   FormDatabase: Symbol.for('FormDatabase'),
 };
 
-export { TYPES };
+interface IServiceSetup {
+  setup?: () => void;
+}
+
+export { TYPES, IServiceSetup };

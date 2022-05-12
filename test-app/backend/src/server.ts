@@ -10,6 +10,9 @@ dotenv.config();
 
 const app = express();
 
+console.log('Frontend origin:');
+console.log(process.env.FRONTEND_ORIGIN);
+
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true,
@@ -30,11 +33,19 @@ app.get('/test-auth', UserAuthMiddleware.checkUserAuthenticated, (req: IGetUserA
 // Add other routers
 app.use('/api', shiftRouter, formsRouter);
 
-app.get('/test', (req, res) => {
+app.get('/api/custom-test', (_req, res) => {
+  console.log('Frontend origin:');
+  console.log(process.env.FRONTEND_ORIGIN);
+  res.send('Custom test GET!');
+});
+
+app.get('/test', (_req, res) => {
   res.send('Hi there!');
 });
 
-app.get('*', (req, res) => {
+app.all('*', (req, res) => {
+  console.log('Request:');
+  console.log(req);
   res.status(400).send('Page not found');
 });
 
