@@ -2,6 +2,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { StackProps } from 'aws-cdk-lib';
 import { AmplifyStack } from '../lib/amplify-stack';
+import { BackendStack } from '../lib/backend/backend-stack';
 import { VMS_CONSTANTS } from '../lib/constants';
 
 interface IStage {
@@ -31,7 +32,13 @@ stages.forEach((stage) => {
     }
   };
 
-  new AmplifyStack(app, `${VMS_CONSTANTS.generalName}-AmplifyStack`, {
+  const backendStack = new BackendStack(app, `${VMS_CONSTANTS.generalName}-BackendStack`, {
+    ...baseStageProps,
+    name: VMS_CONSTANTS.generalName,
+    frontendDomain: VMS_CONSTANTS.domainName,
+  });
+
+  const amplifyStack = new AmplifyStack(app, `${VMS_CONSTANTS.generalName}-AmplifyStack`, {
     ...baseStageProps,
     name: VMS_CONSTANTS.generalName,
     repository: VMS_CONSTANTS.ghRepoUrl,
@@ -45,8 +52,14 @@ stages.forEach((stage) => {
       {
         branchName: 'amplify-test',
         stage: 'PRODUCTION',
+        prefix: 'cole',
       }
     ],
     backendName: stage.backendName,
+    domainName: VMS_CONSTANTS.domainName,
+    backendApiDomain: backendStack.getCleanedInvokeUrl(),
   });
+
+  // Backend stack needs to be deployed first
+  amplifyStack.addDependency(backendStack);
 });

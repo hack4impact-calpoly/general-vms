@@ -4,19 +4,23 @@ async function initAmplify() {
   // Initial newline
   console.log();
 
-  await setup({
+  const setupObj = {
     appId: 'AWS_AMPLIFY_VMS_APP_ID',
     envName: 'AWS_AMPLIFY_VMS_ENV_NAME',
-  });
+    projectName: 'AWS_AMPLIFY_VMS_PROJECT_NAME',
+  };
+
+  await setup(setupObj);
 
   const appId = process.env.AWS_AMPLIFY_VMS_APP_ID;
+  const projectName = process.env.AWS_AMPLIFY_VMS_PROJECT_NAME;
   const envName = process.env.AWS_AMPLIFY_VMS_ENV_NAME || 'dev';
   const profileName = process.env.AWS_AMPLIFY_VMS_PROFILE_NAME;
   const useProfileName = !!profileName || false;
   const region = process.env.AWS_AMPLIFY_VMS_REGION || 'us-west-1';
 
-  if (!appId || !envName) {
-    throw new Error('AppID and Environment Name must be specified!');
+  if (!appId || !envName || !projectName) {
+    throw new Error(`AppID, Environment Name, and projectName must be specified! Expected args: ${Object.keys(setupObj).toString()}`);
   }
 
   console.log('\nAttempting to init!\n');
@@ -33,6 +37,7 @@ async function initAmplify() {
     {
       appId,
       envName,
+      projectName,
     },
     {
       frontend: 'javascript',

@@ -8,9 +8,14 @@ import { IUserDB } from '../../user/UserDB';
 import { GetResponse, UpdateResponse } from '../database';
 import { IFormDB } from 'src/forms/form-db';
 import { IFormMetadataView, IFormMetadata } from '@general-vms/shared';
+import { IServiceSetup } from 'src/types';
 
 @injectable()
-export class MockDatabase implements IShiftDB, IUserDB, IFormDB {
+export class MockDatabase implements IShiftDB, IUserDB, IFormDB, IServiceSetup {
+  setup() {
+    console.log('Setting up Mock DB!');
+  }
+
   getForms(): GetResponse<IFormMetadataView[]> {
     throw new Error('Method not implemented.');
   }

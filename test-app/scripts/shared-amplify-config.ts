@@ -25,6 +25,7 @@ export interface IAmplifyConfig {
   appId: string;
   envName: string;
   defaultEditor?: string;
+  projectName: string;
 }
 
 export interface IFrontendConfig {
