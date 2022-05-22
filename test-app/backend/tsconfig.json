@@ -4,10 +4,12 @@
     "outDir": "./lib",
     "allowJs": true,
     "checkJs": false,
+    "sourceMap": true,
     "types": ["reflect-metadata", "jest"],
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "target": "es2015",
     "baseUrl": "./",
     "paths": {
       "src/*": [
@@ -28,7 +30,7 @@
     "include": ["jest"]
   },
   "esModuleInterop": true,
-  "include": ["./src", "./test", "server.js"],
+  "include": ["./src", "./test"],
   "references": [
     {
       "path": "../shared"

@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "generalvmsa8c7d74d_identitypool_a8c7d74d",
+    "identityPoolName": "CognitoAuthConfigGeneralVMSTest_identitypool_8098a158",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "generaa8c7d74d",
-    "userPoolName": "generalvmsa8c7d74d_userpool_a8c7d74d",
+    "resourceNameTruncated": "cdk8098a158",
+    "userPoolName": "CognitoAuthConfigGeneralVMSTest_userpool_8098a158",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -14,11 +14,15 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Your verification code",
+    "emailVerificationSubject": "Verification Code for General VMS Test",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
-    "passwordPolicyCharacters": [],
+    "passwordPolicyCharacters": [
+      "Requires Numbers",
+      "Requires Uppercase",
+      "Requires Lowercase"
+    ],
     "requiredAttributes": [
       "email",
       "name"
@@ -30,17 +34,22 @@
       "email"
     ],
     "userpoolClientReadAttributes": [
-      "email"
+      "email",
+      "name",
+      "email_verified"
     ],
-    "userpoolClientLambdaRole": "generaa8c7d74d_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "Cognit8098a158_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "a8c7d74d",
-    "resourceName": "generalvmsa8c7d74d",
+    "sharedId": "8098a158",
+    "resourceName": "CognitoAuthConfigGeneralVMSTest",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "default",
-    "triggers": {},
-    "userPoolGroupList": [],
     "serviceName": "Cognito",
+    "useDefault": "manual",
+    "userPoolGroups": false,
+    "userPoolGroupList": [],
+    "adminQueries": false,
+    "thirdPartyAuth": false,
+    "authProviders": [],
     "useEnabledMfas": false
   }
 }

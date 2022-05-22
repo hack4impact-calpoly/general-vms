@@ -9,10 +9,14 @@ import { TYPES } from '../types';
 import { IFormDB } from 'src/forms/form-db';
 
 const sessionModule = new ContainerModule((bind: interfaces.Bind) => {
+  console.log('Binding session services...');
+
   bind<ValidateReqAppendUser>(TYPES.UserSessionValidator).to(ExampleUserSessionValidator).inSingletonScope();
 });
 
 const databaseModule = new ContainerModule((bind: interfaces.Bind) => {
+  console.log('Binding DB services...');
+
   bind<IUserDB>(TYPES.UserDatabase).to(MockDatabase).inSingletonScope();
 
   // Bind all DB types to same Mock DB for now

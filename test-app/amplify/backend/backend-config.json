@@ -1,6 +1,6 @@
 {
   "auth": {
-    "generalvmsa8c7d74d": {
+    "CognitoAuthConfigGeneralVMSTest": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -14,7 +14,11 @@
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
+          "passwordPolicyCharacters": [
+            "REQUIRES_NUMBERS",
+            "REQUIRES_UPPERCASE",
+            "REQUIRES_LOWERCASE"
+          ]
         },
         "mfaConfiguration": "OFF",
         "mfaTypes": [

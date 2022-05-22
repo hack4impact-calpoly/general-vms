@@ -12,6 +12,7 @@
       "suppressschemamigrationprompt": true,
       "securityenhancementnotification": true,
       "showfieldauthnotification": false,
+      "usesubusernamefordefaultidentityclaim": false,
       "securityEnhancementNotification": false
     },
     "frontend-ios": {

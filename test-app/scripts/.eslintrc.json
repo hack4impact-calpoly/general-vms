@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "../.eslintrc.json"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 13,
+    "project": ["./scripts/tsconfig.json"],
+    "sourceType": "module",
+    "createDefaultProgram": true
+  }
+}

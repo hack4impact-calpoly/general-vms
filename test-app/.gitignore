@@ -130,4 +130,5 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 **.sample
+cdk-assets/
 #amplify-do-not-edit-end

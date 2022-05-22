@@ -1,0 +1,44 @@
+{
+  "version": 2,
+  "resourceName": "cognito-auth-config",
+  "serviceConfiguration": {
+    "serviceName": "Cognito",
+    "userPoolConfiguration": {
+      "signinMethod": "USERNAME",
+      "requiredAttributes": [
+        "EMAIL",
+        "NAME"
+      ],
+      "passwordPolicy": {
+        "minimumLength": 8,
+        "additionalConstraints": [
+          "REQUIRE_DIGIT",
+          "REQUIRE_UPPERCASE",
+          "REQUIRE_LOWERCASE"
+        ]
+      },
+      "mfa": {
+        "mode": "OFF"
+      },
+      "readAttributes": [
+        "EMAIL",
+        "NAME",
+        "EMAIL_VERIFIED"
+      ],
+      "writeAttributes": [
+        "EMAIL"
+      ],
+      "autoVerifiedAttributes": [
+        {
+          "type": "EMAIL",
+          "verificationMessage": "Your verification code is {####}",
+          "verificationSubject": "Verification Code"
+        }
+      ]
+    },
+    "includeIdentityPool": true,
+    "identityPoolConfiguration": {
+      "unauthenticatedLogin": false
+    }
+  }
+}

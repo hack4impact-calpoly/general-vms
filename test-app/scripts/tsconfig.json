@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig-base.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "types": ["node"],
+    "checkJs": false,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true
+  },
+  "include": ["**.ts"],
+}
