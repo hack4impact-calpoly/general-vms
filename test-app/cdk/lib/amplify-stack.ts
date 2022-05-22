@@ -194,7 +194,6 @@ export class AmplifyStack extends Stack {
     }
 
     this.branches = props.branches.map(({ branchName, stage, ...otherBranchProps }) => {
-
       return new amplify.CfnBranch(this, `${branchName}Branch`, {
         appId: this.amplifyApp.attrAppId,
         branchName: branchName,

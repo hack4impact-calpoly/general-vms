@@ -1,0 +1,671 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AmplifyStack should create with default resources 1`] = `
+Object {
+  "Outputs": Object {
+    "AmplifyAppIdOutput": Object {
+      "Description": "Amplify App ID",
+      "Export": Object {
+        "Name": "AmplifyTest-amplify-appid",
+      },
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "TestAmplifyStackAmplifyCfnApp",
+          "AppId",
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "AmplifyDomain": Object {
+      "Properties": Object {
+        "AppId": Object {
+          "Fn::GetAtt": Array [
+            "TestAmplifyStackAmplifyCfnApp",
+            "AppId",
+          ],
+        },
+        "DomainName": "custom-domain",
+        "SubDomainSettings": Array [
+          Object {
+            "BranchName": "test-branch",
+            "Prefix": "",
+          },
+        ],
+      },
+      "Type": "AWS::Amplify::Domain",
+    },
+    "TestAmplifyStackAmplifyCfnApp": Object {
+      "Properties": Object {
+        "AccessToken": "{{resolve:secretsmanager:secret name:SecretString:secret key::}}",
+        "BuildSpec": "version: \\"1.0\\"
+applications:
+  - appRoot: frontend
+    backend:
+      phases:
+        build:
+          commands:
+            - \\"# Execute Amplify CLI with the helper script\\"
+            - echo \\"Amplify PUSH\\"
+            - amplifyPush --simple
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm ci --ignore-scripts --prefix=../
+            - npm ci --ignore-scripts --prefix=../shared
+            - npm run build --prefix=../shared
+            - npm ci --ignore-scripts
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: build
+        files:
+          - \\"**/*\\"
+      cache:
+        paths:
+          - node_modules/**/*
+",
+        "CustomRules": Array [
+          Object {
+            "Source": "/api/<*>",
+            "Status": "200",
+            "Target": "backend-domain.com/api/<*>",
+          },
+          Object {
+            "Source": "</^[^.]+$|\\\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json)$)([^.]+$)/>",
+            "Status": "200",
+            "Target": "/index.html",
+          },
+        ],
+        "EnableBranchAutoDeletion": false,
+        "EnvironmentVariables": Array [
+          Object {
+            "Name": "DISABLE_ESLINT_PLUGIN",
+            "Value": "true",
+          },
+          Object {
+            "Name": "AMPLIFY_MONOREPO_APP_ROOT",
+            "Value": "frontend",
+          },
+          Object {
+            "Name": "AMPLIFY_DIFF_DEPLOY",
+            "Value": "false",
+          },
+          Object {
+            "Name": "_LIVE_UPDATES",
+            "Value": "[{\\"name\\":\\"Amplify CLI\\",\\"pkg\\":\\"@aws-amplify/cli\\",\\"type\\":\\"npm\\",\\"version\\":\\"latest\\"}]",
+          },
+        ],
+        "IAMServiceRole": "arn:aws:iam::633874248049:role/amplifyconsole-backend-role",
+        "Name": "AmplifyTest",
+        "Repository": "some-repo-url",
+      },
+      "Type": "AWS::Amplify::App",
+    },
+    "testbranchBranch": Object {
+      "Properties": Object {
+        "AppId": Object {
+          "Fn::GetAtt": Array [
+            "TestAmplifyStackAmplifyCfnApp",
+            "AppId",
+          ],
+        },
+        "BranchName": "test-branch",
+        "EnableAutoBuild": true,
+        "EnvironmentVariables": Array [
+          Object {
+            "Name": "USER_BRANCH",
+            "Value": "backend",
+          },
+          Object {
+            "Name": "test",
+            "Value": "test-value",
+          },
+        ],
+        "Stage": "prod",
+      },
+      "Type": "AWS::Amplify::Branch",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`AmplifyStack should create with default resources when build spec is false 1`] = `
+Object {
+  "Outputs": Object {
+    "AmplifyAppIdOutput": Object {
+      "Description": "Amplify App ID",
+      "Export": Object {
+        "Name": "AmplifyTest-amplify-appid",
+      },
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "TestAmplifyStackAmplifyCfnApp",
+          "AppId",
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "AmplifyDomain": Object {
+      "Properties": Object {
+        "AppId": Object {
+          "Fn::GetAtt": Array [
+            "TestAmplifyStackAmplifyCfnApp",
+            "AppId",
+          ],
+        },
+        "DomainName": "custom-domain",
+        "SubDomainSettings": Array [
+          Object {
+            "BranchName": "test-branch",
+            "Prefix": "",
+          },
+        ],
+      },
+      "Type": "AWS::Amplify::Domain",
+    },
+    "TestAmplifyStackAmplifyCfnApp": Object {
+      "Properties": Object {
+        "AccessToken": "{{resolve:secretsmanager:secret name:SecretString:secret key::}}",
+        "CustomRules": Array [
+          Object {
+            "Source": "/api/<*>",
+            "Status": "200",
+            "Target": "backend-domain.com/api/<*>",
+          },
+          Object {
+            "Source": "</^[^.]+$|\\\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json)$)([^.]+$)/>",
+            "Status": "200",
+            "Target": "/index.html",
+          },
+        ],
+        "EnableBranchAutoDeletion": false,
+        "EnvironmentVariables": Array [
+          Object {
+            "Name": "DISABLE_ESLINT_PLUGIN",
+            "Value": "true",
+          },
+          Object {
+            "Name": "AMPLIFY_MONOREPO_APP_ROOT",
+            "Value": "frontend",
+          },
+          Object {
+            "Name": "AMPLIFY_DIFF_DEPLOY",
+            "Value": "false",
+          },
+          Object {
+            "Name": "_LIVE_UPDATES",
+            "Value": "[{\\"name\\":\\"Amplify CLI\\",\\"pkg\\":\\"@aws-amplify/cli\\",\\"type\\":\\"npm\\",\\"version\\":\\"latest\\"}]",
+          },
+        ],
+        "IAMServiceRole": "arn:aws:iam::633874248049:role/amplifyconsole-backend-role",
+        "Name": "AmplifyTest",
+        "Repository": "some-repo-url",
+      },
+      "Type": "AWS::Amplify::App",
+    },
+    "testbranchBranch": Object {
+      "Properties": Object {
+        "AppId": Object {
+          "Fn::GetAtt": Array [
+            "TestAmplifyStackAmplifyCfnApp",
+            "AppId",
+          ],
+        },
+        "BranchName": "test-branch",
+        "EnableAutoBuild": true,
+        "EnvironmentVariables": Array [
+          Object {
+            "Name": "USER_BRANCH",
+            "Value": "backend",
+          },
+          Object {
+            "Name": "test",
+            "Value": "test-value",
+          },
+        ],
+        "Stage": "prod",
+      },
+      "Type": "AWS::Amplify::Branch",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`AmplifyStack should create with default resources when multiple branches given 1`] = `
+Object {
+  "Outputs": Object {
+    "AmplifyAppIdOutput": Object {
+      "Description": "Amplify App ID",
+      "Export": Object {
+        "Name": "AmplifyTest-amplify-appid",
+      },
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "TestAmplifyStackAmplifyCfnApp",
+          "AppId",
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "TestAmplifyStackAmplifyCfnApp": Object {
+      "Properties": Object {
+        "AccessToken": "{{resolve:secretsmanager:secret name:SecretString:secret key::}}",
+        "CustomRules": Array [
+          Object {
+            "Source": "</^[^.]+$|\\\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json)$)([^.]+$)/>",
+            "Status": "200",
+            "Target": "/index.html",
+          },
+        ],
+        "EnableBranchAutoDeletion": false,
+        "EnvironmentVariables": Array [
+          Object {
+            "Name": "DISABLE_ESLINT_PLUGIN",
+            "Value": "true",
+          },
+          Object {
+            "Name": "AMPLIFY_MONOREPO_APP_ROOT",
+            "Value": "frontend",
+          },
+          Object {
+            "Name": "AMPLIFY_DIFF_DEPLOY",
+            "Value": "false",
+          },
+          Object {
+            "Name": "_LIVE_UPDATES",
+            "Value": "[{\\"name\\":\\"Amplify CLI\\",\\"pkg\\":\\"@aws-amplify/cli\\",\\"type\\":\\"npm\\",\\"version\\":\\"latest\\"}]",
+          },
+        ],
+        "IAMServiceRole": "arn:aws:iam::633874248049:role/amplifyconsole-backend-role",
+        "Name": "AmplifyTest",
+        "Repository": "some-repo-url",
+      },
+      "Type": "AWS::Amplify::App",
+    },
+    "testbranch2Branch": Object {
+      "Properties": Object {
+        "AppId": Object {
+          "Fn::GetAtt": Array [
+            "TestAmplifyStackAmplifyCfnApp",
+            "AppId",
+          ],
+        },
+        "BranchName": "test-branch-2",
+        "EnableAutoBuild": true,
+        "EnvironmentVariables": Array [
+          Object {
+            "Name": "USER_BRANCH",
+            "Value": "backend",
+          },
+        ],
+        "Stage": "test",
+      },
+      "Type": "AWS::Amplify::Branch",
+    },
+    "testbranchBranch": Object {
+      "Properties": Object {
+        "AppId": Object {
+          "Fn::GetAtt": Array [
+            "TestAmplifyStackAmplifyCfnApp",
+            "AppId",
+          ],
+        },
+        "BranchName": "test-branch",
+        "EnableAutoBuild": true,
+        "EnvironmentVariables": Array [
+          Object {
+            "Name": "USER_BRANCH",
+            "Value": "backend",
+          },
+          Object {
+            "Name": "test",
+            "Value": "test-value",
+          },
+        ],
+        "Stage": "prod",
+      },
+      "Type": "AWS::Amplify::Branch",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`AmplifyStack should create with default resources when no backend api domain name is given 1`] = `
+Object {
+  "Outputs": Object {
+    "AmplifyAppIdOutput": Object {
+      "Description": "Amplify App ID",
+      "Export": Object {
+        "Name": "AmplifyTest-amplify-appid",
+      },
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "TestAmplifyStackAmplifyCfnApp",
+          "AppId",
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "TestAmplifyStackAmplifyCfnApp": Object {
+      "Properties": Object {
+        "AccessToken": "{{resolve:secretsmanager:secret name:SecretString:secret key::}}",
+        "CustomRules": Array [
+          Object {
+            "Source": "</^[^.]+$|\\\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json)$)([^.]+$)/>",
+            "Status": "200",
+            "Target": "/index.html",
+          },
+        ],
+        "EnableBranchAutoDeletion": false,
+        "EnvironmentVariables": Array [
+          Object {
+            "Name": "DISABLE_ESLINT_PLUGIN",
+            "Value": "true",
+          },
+          Object {
+            "Name": "AMPLIFY_MONOREPO_APP_ROOT",
+            "Value": "frontend",
+          },
+          Object {
+            "Name": "AMPLIFY_DIFF_DEPLOY",
+            "Value": "false",
+          },
+          Object {
+            "Name": "_LIVE_UPDATES",
+            "Value": "[{\\"name\\":\\"Amplify CLI\\",\\"pkg\\":\\"@aws-amplify/cli\\",\\"type\\":\\"npm\\",\\"version\\":\\"latest\\"}]",
+          },
+        ],
+        "IAMServiceRole": "arn:aws:iam::633874248049:role/amplifyconsole-backend-role",
+        "Name": "AmplifyTest",
+        "Repository": "some-repo-url",
+      },
+      "Type": "AWS::Amplify::App",
+    },
+    "testbranchBranch": Object {
+      "Properties": Object {
+        "AppId": Object {
+          "Fn::GetAtt": Array [
+            "TestAmplifyStackAmplifyCfnApp",
+            "AppId",
+          ],
+        },
+        "BranchName": "test-branch",
+        "EnableAutoBuild": true,
+        "EnvironmentVariables": Array [
+          Object {
+            "Name": "USER_BRANCH",
+            "Value": "backend",
+          },
+          Object {
+            "Name": "test",
+            "Value": "test-value",
+          },
+        ],
+        "Stage": "prod",
+      },
+      "Type": "AWS::Amplify::Branch",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`AmplifyStack should create with default resources when no domain name is provided 1`] = `
+Object {
+  "Outputs": Object {
+    "AmplifyAppIdOutput": Object {
+      "Description": "Amplify App ID",
+      "Export": Object {
+        "Name": "AmplifyTest-amplify-appid",
+      },
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "TestAmplifyStackAmplifyCfnApp",
+          "AppId",
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "TestAmplifyStackAmplifyCfnApp": Object {
+      "Properties": Object {
+        "AccessToken": "{{resolve:secretsmanager:secret name:SecretString:secret key::}}",
+        "CustomRules": Array [
+          Object {
+            "Source": "/api/<*>",
+            "Status": "200",
+            "Target": "backend-domain.com/api/<*>",
+          },
+          Object {
+            "Source": "</^[^.]+$|\\\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json)$)([^.]+$)/>",
+            "Status": "200",
+            "Target": "/index.html",
+          },
+        ],
+        "EnableBranchAutoDeletion": false,
+        "EnvironmentVariables": Array [
+          Object {
+            "Name": "DISABLE_ESLINT_PLUGIN",
+            "Value": "true",
+          },
+          Object {
+            "Name": "AMPLIFY_MONOREPO_APP_ROOT",
+            "Value": "frontend",
+          },
+          Object {
+            "Name": "AMPLIFY_DIFF_DEPLOY",
+            "Value": "false",
+          },
+          Object {
+            "Name": "_LIVE_UPDATES",
+            "Value": "[{\\"name\\":\\"Amplify CLI\\",\\"pkg\\":\\"@aws-amplify/cli\\",\\"type\\":\\"npm\\",\\"version\\":\\"latest\\"}]",
+          },
+        ],
+        "IAMServiceRole": "arn:aws:iam::633874248049:role/amplifyconsole-backend-role",
+        "Name": "AmplifyTest",
+        "Repository": "some-repo-url",
+      },
+      "Type": "AWS::Amplify::App",
+    },
+    "testbranchBranch": Object {
+      "Properties": Object {
+        "AppId": Object {
+          "Fn::GetAtt": Array [
+            "TestAmplifyStackAmplifyCfnApp",
+            "AppId",
+          ],
+        },
+        "BranchName": "test-branch",
+        "EnableAutoBuild": true,
+        "EnvironmentVariables": Array [
+          Object {
+            "Name": "USER_BRANCH",
+            "Value": "backend",
+          },
+          Object {
+            "Name": "test",
+            "Value": "test-value",
+          },
+        ],
+        "Stage": "prod",
+      },
+      "Type": "AWS::Amplify::Branch",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
