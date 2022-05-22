@@ -116,9 +116,15 @@ export interface IAmplifyStackProps extends StackProps {
    * Whether the Backend for Amplify has been made. Leave empty or undefined if not
    */
   backendName?: string;
-
+  /**
+   * Base domain name for the website
+   */
   domainName?: string;
-
+  /**
+   * Backend's API domain
+   *
+   * @example 2169821.execute-api.prod.amazonaws.com
+   */
   backendApiDomain?: string;
 }
 
