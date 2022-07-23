@@ -12,4 +12,20 @@ class FormState {
   }
 }
 
+export enum FormFieldType {
+  TEXT,
+  NUMERIC,
+  EMAIL,
+  DATE,
+  DATERANGE,
+  MULTI
+}
+
+export interface IFormFieldMetadata {
+  label: string,
+  type: FormFieldType,
+  required?: boolean,
+  values?: string[]
+}
+
 export default FormState;

@@ -1,3 +1,5 @@
+import { Form } from 'src/forms/form/Form';
+import { FormFieldType } from 'src/forms/FormState';
 import Home from '../Home/Home';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
@@ -14,6 +16,22 @@ function Private() {
   return <p>Private!</p>;
 }
 
+const personalInfoFields = [
+  {
+    label: 'First Name',
+    type: FormFieldType.TEXT,
+  },
+  {
+    label: 'Last Name',
+    type: FormFieldType.TEXT,
+  },
+  {
+    label: 'Vehicle Type',
+    type: FormFieldType.MULTI,
+    values: ['SUV', 'Sedan', 'Hybrid'],
+  },
+];
+
 function App() {
   return (
     <UserProvider>
@@ -22,6 +40,7 @@ function App() {
           <Routes>
             <Route path="/" element={<StandardPage component={<Home />} />} />
             <Route path="/forms" element={<StandardPage component={<FormsViewer forms={MOCK_FORMS} />} />} />
+            <Route path="/personal-info" element={<StandardPage component={<Form title= 'Personal Information' fields ={personalInfoFields}/>} />} />
             <Route path="/home" element={<Navigate replace to="/" />} />
             <Route path="/tester" element={<AuthRoute allowedRoles={ALL_ROLES}><Private /></AuthRoute>} />
             <Route path="*" element={<p>404</p>} />
