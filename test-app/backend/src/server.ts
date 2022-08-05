@@ -43,10 +43,11 @@ app.get('/test', (_req, res) => {
   res.send('Hi there!');
 });
 
+// Catch all route for 404s
 app.all('*', (req, res) => {
   console.log('Request:');
-  console.log(req);
-  res.status(400).send('Page not found');
+  console.log(req.path);
+  res.status(404).send('Page not found');
 });
 
 export default app;

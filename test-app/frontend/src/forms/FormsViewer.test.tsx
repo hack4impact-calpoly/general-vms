@@ -7,7 +7,7 @@ import { renderWithUser } from 'src/test-utils/user-utils';
 const TEST_FORMS = [
   {
     formId: 'hello',
-    formType: FormType.WAIVER,
+    formType: FormType.enum.WAIVER,
     published: new Date(),
     publisher: 'Ben Glossner',
     title: 'Bus Waiver',
@@ -18,7 +18,7 @@ const TEST_FORMS = [
   },
   {
     formId: 'hello2',
-    formType: FormType.WAIVER,
+    formType: FormType.enum.WAIVER,
     published: new Date(),
     publisher: 'Ben Glossner',
     title: 'Other Waiver',

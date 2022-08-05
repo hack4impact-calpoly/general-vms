@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata';
 import { injectable } from 'inversify';
-import { Shift } from '../../../shift/shift-interface';
-import { IShiftDB } from '../../../shift/ShiftDB';
+import { IShiftDB } from '../../../shift/shift-db';
 import { IUser, IPersonalInfo } from '../../user/User';
 import { IUserDB } from '../../user/UserDB';
 import { GetResponse, UpdateResponse } from '../database';
 import { IFormDB } from 'src/forms/form-db';
-import { IFormMetadataView, IFormMetadata } from '@general-vms/shared';
+import { IFormMetadataView, IFormMetadata, IShift } from '@general-vms/shared';
 import { IServiceSetup } from 'src/types';
 
 @injectable()
 export class MockDatabase implements IShiftDB, IUserDB, IFormDB, IServiceSetup {
   setup() {
     console.log('Setting up Mock DB!');
+
+    return Promise.resolve();
   }
 
   getForms(): GetResponse<IFormMetadataView[]> {
@@ -48,11 +49,11 @@ export class MockDatabase implements IShiftDB, IUserDB, IFormDB, IServiceSetup {
     throw new Error('Method not implemented.');
   }
 
-  getShifts(): GetResponse<Shift[]> {
+  getShifts(): GetResponse<IShift[]> {
     throw new Error('Method not implemented.');
   }
 
-  getUserShifts(user: IUser): GetResponse<Shift[]> {
+  getUserShifts(user: IUser): GetResponse<IShift[]> {
     throw new Error('Method not implemented.');
   }
 
@@ -80,18 +81,18 @@ export class MockDatabase implements IShiftDB, IUserDB, IFormDB, IServiceSetup {
     throw new Error('Method not implemented.');
   }
 
-  saveShift(user: IUser, shift: Shift) {
+  saveShift(user: IUser, shift: IShift) {
     console.log(shift);
   }
 
-  deleteShift(shift: Shift) {
+  deleteShift(shift: IShift) {
     throw new Error('Method not implemented.');
   }
 
-  updateShift(id: Partial<IUser>, mod: Shift): UpdateResponse<Shift> {
+  updateShift(id: Partial<IUser>, mod: IShift): UpdateResponse<IShift> {
     console.log(id);
     console.log(mod);
-    const myShift: Shift = {
+    const myShift: IShift = {
       start: new Date(),
       end: new Date(),
       maxVolunteers: 2,

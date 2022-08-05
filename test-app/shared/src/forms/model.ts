@@ -1,29 +1,31 @@
 import { DataTransformerModel } from '../model';
 import { unTransformOptionalDate } from '../utils/date';
-
-export enum FormType {
-  WAIVER = 'WAIVER',
-}
+import { z } from 'zod';
 
 export enum FormTiming {
   ACTIVE, UPCOMING, CLOSED,
 }
 
-export interface IFormMetadata {
-  title: string;
-  description?: string;
-  published: Date;
-  publisher: string;
-  viewable: boolean;
-  timing: FormTiming;
-  startDate?: Date;
-  endDate?: Date;
-  formType: FormType;
-}
+export const FormType = z.enum(['WAIVER']);
 
-export interface IFormMetadataView extends IFormMetadata {
-  formId: unknown;
-}
+export const FormMetadata = z.object({
+  title: z.string(),
+  description: z.optional(z.string()),
+  published: z.date(),
+  publisher: z.string(),
+  viewable: z.boolean(),
+  timing: z.nativeEnum(FormTiming),
+  startDate: z.optional(z.date()),
+  endDate: z.optional(z.date()),
+  formType: FormType,
+});
+export type IFormMetadata = z.infer<typeof FormMetadata>;
+
+export const FormMetadataView = FormMetadata.extend({
+  formId: z.unknown(),
+});
+
+export type IFormMetadataView = z.infer<typeof FormMetadataView>;
 
 export type FormMetadataViewOnSend = Omit<IFormMetadataView, 'published' | 'startDate' | 'endDate'> & {
   published: number,
