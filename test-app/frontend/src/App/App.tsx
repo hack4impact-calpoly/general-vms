@@ -1,5 +1,4 @@
-import { CustomForm } from 'src/forms/form/Form';
-import { personalInfoSchema } from 'src/forms/schema';
+import PersonalInfo from 'src/PersonalInfo/PersonalInfo';
 import Home from '../Home/Home';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
@@ -17,8 +16,6 @@ function Private() {
 }
 
 function App() {
-  // TODO-rtotale: Submit personal info
-  const onSubmitPersonalInfo = (data: object) => console.log(data);
   return (
     <UserProvider>
       <Authenticator.Provider>
@@ -26,7 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<StandardPage component={<Home />} />} />
             <Route path="/forms" element={<StandardPage component={<FormsViewer forms={MOCK_FORMS} />} />} />
-            <Route path="/personal-info" element={<StandardPage component={<CustomForm schema={personalInfoSchema} onSubmit={onSubmitPersonalInfo}/>} />} />
+            <Route path="/personal-info" element={<StandardPage component={<PersonalInfo/>} />} />
             <Route path="/home" element={<Navigate replace to="/" />} />
             <Route path="/tester" element={<AuthRoute allowedRoles={ALL_ROLES}><Private /></AuthRoute>} />
             <Route path="*" element={<p>404</p>} />
