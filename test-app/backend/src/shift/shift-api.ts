@@ -13,36 +13,11 @@ const router = express.Router();
 
 const database = getDB<IShiftDB>(ShiftModel);
 
-const shiftPreProcessor = (shift: Partial<IShift>): Partial<IShift> => {
-  if (shift.start) {
-    shift.start = new Date(shift.start);
-  }
-  if (shift.end) {
-    shift.end = new Date(shift.end);
-  }
-  return shift;
-};
-
 router.post('/new-shift', bodyValidate<IShift>({ schema: ShiftSchema }), (req: IAuthAndValidatedReq<IShift>, res) => {
   console.log('POST: Creating Calendar Event...');
   console.log(req.body);
 
-  const { start, end, maxVolunteers, title, description, eventAdmin } = req.body;
-
-  const newShift: Partial<IShift> = {
-    start: start,
-    end: end,
-    maxVolunteers: maxVolunteers,
-    title: title,
-    description: description,
-    eventAdmin: eventAdmin,
-  };
-
-  const newShiftProcessed = shiftPreProcessor(newShift);
-
-  console.log(newShiftProcessed);
-
-  database.saveShift({} as IUser, newShiftProcessed as IShift);
+  database.saveShift({} as IUser, req.body);
 
   return res.status(201).send(
     'New shift successfully created',
@@ -65,15 +40,15 @@ router.put(
     const { start, end, maxVolunteers, title, description, eventAdmin } = req.body;
 
     const newShift: Partial<IShift> = {
-      start: start,
-      end: end,
-      maxVolunteers: maxVolunteers,
-      title: title,
-      description: description,
-      eventAdmin: eventAdmin,
+      start,
+      end,
+      maxVolunteers,
+      title,
+      description,
+      eventAdmin,
     };
-    const newShiftProcessed = shiftPreProcessor(newShift);
-    console.log(database.updateShift({} as Partial<IUser>, newShiftProcessed as IShift));
+
+    console.log(database.updateShift({} as Partial<IUser>, newShift as IShift));
 
     return res.status(200).send(
       'Shift has been updated',
