@@ -18,7 +18,7 @@ export const CustomForm = ({ schema, onSubmit }: IProps) => {
     <div className="container">
       <Form noHtml5Validate
         schema={schema}
-        onSubmit={() => onSubmit}
+        onSubmit={onSubmit}
       />
     </div>
   );
