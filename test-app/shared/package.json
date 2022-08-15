@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Shared package between other packages",
   "main": "lib/src/index.js",
+  "engines": {
+    "node": ">=14.14.0",
+    "npm": ">=7"
+  },
   "scripts": {
     "build": "npx tsc",
     "dev": "npx tsc -w",

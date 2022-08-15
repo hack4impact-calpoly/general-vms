@@ -2,6 +2,10 @@
   "name": "general-vms",
   "version": "1.0.0",
   "description": "General VMS example root directory",
+  "engines": {
+    "node": ">=14.14.0",
+    "npm": ">=7"
+  },
   "scripts": {
     "prepare": "node scripts/install-husky.js && npm run build:shared",
     "install:all": "npm install && lerna bootstrap --no-ci",

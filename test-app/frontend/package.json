@@ -1,6 +1,10 @@
 {
   "name": "@general-vms/frontend",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=14.14.0",
+    "npm": ">=7"
+  },
   "dependencies": {
     "@aws-amplify/ui-react": "^2.15.8",
     "@emotion/react": "^11.8.2",
