@@ -1,8 +1,8 @@
 import app from '../../../src/server';
 import request from 'supertest';
-import { z } from 'zod';
-import { ErrorResponse } from 'src/errors';
 import { getShallowCopyWithoutProps } from 'test/test-utils';
+import { IShift } from '../../../../shared/lib/src';
+import { runValidationTest } from 'test/test-utils/validation';
 
 const BASE_SHIFT = {
   start: new Date().getTime(),
@@ -13,109 +13,64 @@ const BASE_SHIFT = {
   eventAdmin: 'Adam Meza',
 };
 
-type IValidationError = z.ZodIssue[];
-
-type IExpectedInput = { shift: object };
-type IBaseSetupFn = (s: IExpectedInput) => { req: request.Test };
-
-interface IValidationProblem {
-  path: string[];
-  message: string;
-}
-
 describe('Shift API', () => {
-  function runTest(
-    shift: object,
-    baseSetupFn: IBaseSetupFn,
-    expectedStatus: number,
-    after: (r: request.Response) => void,
-  ) {
-    const { req } = baseSetupFn({ shift });
-
-    return req.expect(expectedStatus).then(after);
-  }
-
-  function runValidationTestError(
-    shift: object,
-    baseSetupFn: IBaseSetupFn,
-    errorProblems: IValidationProblem[],
-  ) {
-    return runTest(shift, baseSetupFn, 400, ({ text }) => {
-      const err = JSON.parse(text) as ErrorResponse;
-      expect(err.details).not.toBeUndefined();
-      expect(err.status).toBe(400);
-
-      const issues = JSON.parse(err.details.message) as IValidationError;
-      expect(issues.length).toBe(errorProblems.length);
-
-      issues.forEach((iss, i) => {
-        expect(iss.path).toEqual(errorProblems[i].path);
-        expect(iss.message).toEqual(errorProblems[i].message);
-      });
-    });
-  }
-
   describe('POST /api/new-shift', () => {
     const endpoint = '/api/new-shift';
 
-    function baseSetup({ shift }: IExpectedInput) {
+    function baseSetup(shift: Partial<IShift> | object) {
       return {
         req: request(app).post(endpoint).send(shift),
       };
     }
 
-    function runTestNewShift(
-      shift: object,
-      expectedStatus: number,
-      after: (r: request.Response) => void,
-    ) {
-      return runTest(shift, baseSetup, expectedStatus, after);
-    }
-
-    function runValidationTestErrorNewShift(
-      shift: object,
-      errorProblems: IValidationProblem[],
-    ) {
-      return runValidationTestError(shift, baseSetup, errorProblems);
-    }
-
     test('Successful shift created', async () => {
-      await runTestNewShift(BASE_SHIFT, 201, ({ text }) => {
-        expect(text).toBe('New shift successfully created');
-      });
+      const { req } = baseSetup(BASE_SHIFT);
+
+      const { text } = await req.expect(201);
+
+      expect(text).toBe('New shift successfully created');
     });
 
     test('Shift fails to create because there is no title', async () => {
-      await runValidationTestErrorNewShift(getShallowCopyWithoutProps(BASE_SHIFT, 'title'), [
-        { path: ['title'], message: 'Required' },
-      ]);
+      await runValidationTest({
+        req: baseSetup(getShallowCopyWithoutProps(BASE_SHIFT, 'title')).req,
+        expectedErrors: [
+          { path: ['title'], message: 'Required' },
+        ],
+      });
     });
 
     test('Shift fails because start date is after end date', async () => {
-      await runValidationTestErrorNewShift({
-        ...BASE_SHIFT,
-        start: BASE_SHIFT.end + 2,
-      }, [
-        { path: [], message: 'start date must come before end date' },
-      ]);
+      await runValidationTest({
+        req: baseSetup({
+          ...BASE_SHIFT,
+          start: BASE_SHIFT.end + 2,
+        }).req,
+        expectedErrors: [
+          { path: [], message: 'start date must come before end date' },
+        ],
+      });
     });
 
     test('Shift fails because max volunteers is 0', async () => {
-      await runValidationTestErrorNewShift({
-        ...BASE_SHIFT,
-        maxVolunteers: 0,
-      }, [
-        {
-          path: ['maxVolunteers'],
-          message: 'Number must be greater than or equal to 1',
-        },
-      ]);
+      await runValidationTest({
+        req: baseSetup({
+          ...BASE_SHIFT,
+          maxVolunteers: 0,
+        }).req,
+        expectedErrors: [
+          {
+            path: ['maxVolunteers'],
+            message: 'Number must be greater than or equal to 1',
+          },
+        ],
+      });
     });
   });
 
   describe('PUT /api/shift/:id', () => {
     function getBaseSetup(e: string) {
-      return ({ shift }: IExpectedInput) => {
+      return (shift: Partial<IShift> | object) => {
         return {
           req: request(app).put(e).send(shift),
         };
@@ -123,39 +78,50 @@ describe('Shift API', () => {
     }
 
     test('Succcessful shift updated', async () => {
-      await runTest(BASE_SHIFT, getBaseSetup('/api/shift/12'), 200, ({ text }) => {
-        expect(text).toBe('Shift has been updated');
-      });
+      const { req } = getBaseSetup('/api/shift/12')(BASE_SHIFT);
+
+      const { text } = await req.expect(200);
+
+      expect(text).toBe('Shift has been updated');
     });
 
     test('Shift fails because start date is after end date', async () => {
-      await runValidationTestError({
-        ...BASE_SHIFT,
-        start: BASE_SHIFT.end + 2,
-      }, getBaseSetup('/api/shift/12'), [
-        { path: [], message: 'start date must come before end date' },
-      ]);
+      await runValidationTest({
+        req: getBaseSetup('/api/shift/12')({
+          ...BASE_SHIFT,
+          start: BASE_SHIFT.end + 2,
+        }).req,
+        expectedErrors: [
+          { path: [], message: 'start date must come before end date' },
+        ],
+      });
     });
 
     test('Shift fails because max volunteers is 0', async () => {
-      await runValidationTestError({
-        ...BASE_SHIFT,
-        maxVolunteers: 0,
-      }, getBaseSetup('/api/shift/12'), [
-        {
-          path: ['maxVolunteers'],
-          message: 'Number must be greater than or equal to 1',
-        },
-      ]);
+      await runValidationTest({
+        req: getBaseSetup('/api/shift/12')({
+          ...BASE_SHIFT,
+          maxVolunteers: 0,
+        }).req,
+        expectedErrors: [
+          {
+            path: ['maxVolunteers'],
+            message: 'Number must be greater than or equal to 1',
+          },
+        ],
+      });
     });
 
     test('Shift fails because id is invalid', async () => {
-      await runValidationTestError(BASE_SHIFT, getBaseSetup('/api/shift/-1'), [
-        {
-          path: ['id'],
-          message: 'Number must be greater than or equal to 0',
-        },
-      ]);
+      await runValidationTest({
+        req: getBaseSetup('/api/shift/-1')(BASE_SHIFT).req,
+        expectedErrors: [
+          {
+            path: ['id'],
+            message: 'Number must be greater than or equal to 0',
+          },
+        ],
+      });
     });
   });
 });
