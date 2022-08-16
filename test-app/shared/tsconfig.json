@@ -8,10 +8,13 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
     "composite": true,
+    "esModuleInterop": true,
     "rootDir": "."
   },
-  "include": ["src"],
+  "include": ["src", "scripts/**.ts", "src/**/*.json"],
   "exclude": ["node_modules", "lib"],
   "references": []
 }

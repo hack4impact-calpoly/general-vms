@@ -1,10 +1,10 @@
 import 'reflect-metadata';
 import { Container, ContainerModule, interfaces } from 'inversify';
-import { IServiceSetup, TYPES } from 'src/types';
+import { ALL_IDENTIFIERS, IServiceSetup, IServiceSetupPromise } from 'src/types';
 
 const env = process.env.NODE_ENV || 'development';
 
-const container = new Container();
+const container = new Container({ skipBaseClassChecks: true, autoBindInjectable: true });
 let containerModules: ContainerModule[];
 switch (env) {
   // both are same right now.
@@ -18,18 +18,23 @@ switch (env) {
 
 container.load(...containerModules);
 
-const ALL_IDENTIFIERS = Object.values(TYPES);
 const services: Set<IServiceSetup> = new Set();
+
+const setupPromises: IServiceSetupPromise[] = [];
 
 ALL_IDENTIFIERS.forEach((identifier) => {
   container.onActivation(identifier, (_context: interfaces.Context, actualObj: IServiceSetup) => {
+    // We don't want to setup the same service. Note that we do this by object, NOT identifier
     if (!services.has(actualObj)) {
       services.add(actualObj);
-      actualObj.setup?.();
+      setupPromises.push({
+        identifier,
+        promise: actualObj.setup?.() ?? Promise.resolve(),
+      });
     }
 
     return actualObj;
   });
 });
 
-export { container };
+export { container, setupPromises };

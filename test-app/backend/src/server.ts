@@ -4,6 +4,7 @@ import UserAuthMiddleware from './models/user-session/middleware';
 import { IGetUserAuthInfoRequest } from './models/user-session/types';
 import shiftRouter from './shift/shift-api';
 import formsRouter from './forms/form-api';
+import { setupErrorHandlingMiddleware } from './errors/middleware';
 
 // Initialize stuff
 dotenv.config();
@@ -18,7 +19,7 @@ app.use(express.urlencoded({
   extended: true,
 }));
 
-app.use((req, res, next) => {
+app.use((_req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -43,10 +44,14 @@ app.get('/test', (_req, res) => {
   res.send('Hi there!');
 });
 
+// Catch all route for 404s
 app.all('*', (req, res) => {
   console.log('Request:');
-  console.log(req);
-  res.status(400).send('Page not found');
+  console.log(req.path);
+  res.status(404).send('Page not found');
 });
+
+// Last middleware setup (called after everything)
+setupErrorHandlingMiddleware(app);
 
 export default app;

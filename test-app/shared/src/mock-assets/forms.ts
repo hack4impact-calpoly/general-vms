@@ -3,7 +3,7 @@ import { FormType, FormTiming, IFormMetadataView } from '../forms';
 export const MOCK_FORMS: IFormMetadataView[] = [
   {
     formId: 'hello',
-    formType: FormType.WAIVER,
+    formType: FormType.enum.WAIVER,
     published: new Date(),
     publisher: 'Ben Glossner',
     title: 'Bus Waiver',
@@ -14,7 +14,7 @@ export const MOCK_FORMS: IFormMetadataView[] = [
   },
   {
     formId: 'hello',
-    formType: FormType.WAIVER,
+    formType: FormType.enum.WAIVER,
     published: new Date(),
     publisher: 'Ben Glossner',
     title: 'Waiver',
@@ -26,7 +26,7 @@ export const MOCK_FORMS: IFormMetadataView[] = [
   },
   {
     formId: 'hello',
-    formType: FormType.WAIVER,
+    formType: FormType.enum.WAIVER,
     published: new Date(),
     publisher: 'Ben Glossner',
     title: 'Super very huge Longer Form Title',
@@ -37,7 +37,7 @@ export const MOCK_FORMS: IFormMetadataView[] = [
   },
   {
     formId: 'hello',
-    formType: FormType.WAIVER,
+    formType: FormType.enum.WAIVER,
     published: new Date(),
     publisher: 'Ben Glossner',
     title: 'Waiver',
@@ -48,7 +48,7 @@ export const MOCK_FORMS: IFormMetadataView[] = [
   },
   {
     formId: 'hello',
-    formType: FormType.WAIVER,
+    formType: FormType.enum.WAIVER,
     published: new Date(),
     publisher: 'Ben Glossner',
     title: 'Waiver',
@@ -59,7 +59,7 @@ export const MOCK_FORMS: IFormMetadataView[] = [
   },
   {
     formId: 'hello',
-    formType: FormType.WAIVER,
+    formType: FormType.enum.WAIVER,
     published: new Date(),
     publisher: 'Ben Glossner',
     title: 'Waiver',

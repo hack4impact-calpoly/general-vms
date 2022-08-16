@@ -4,7 +4,7 @@ import { FormTiming, FormType, IFormMetadataView } from '@general-vms/shared';
 
 const TEST_FORM: IFormMetadataView = {
   formId: 'hello',
-  formType: FormType.WAIVER,
+  formType: FormType.enum.WAIVER,
   published: new Date(),
   publisher: 'Ben Glossner',
   title: 'Waiver',

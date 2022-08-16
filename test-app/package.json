@@ -10,6 +10,7 @@
     "setup:amplify": "node scripts/sync-amplify.js",
     "quality-checks": "lerna run --concurrency=1 --stream quality-checks",
     "dev": "lerna run --stream dev",
+    "lint": "lerna run lint",
     "install-and-check": "npm install --ignore-scripts && lerna run --concurrency=1 --stream install-and-check",
     "commit-checks": "lerna run --concurrency=1 --stream commit-checks",
     "push-checks": "lerna run --concurrency=1 --stream push-checks",
