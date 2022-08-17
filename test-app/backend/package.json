@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Backend example app.",
   "main": "lib/server.js",
+  "engines": {
+    "node": ">=14.14.0",
+    "npm": ">=7"
+  },
   "scripts": {
     "test": "jest",
     "test:path": "jest --testPathFilePattern",
