@@ -1,18 +1,18 @@
-import 'reflect-metadata';
-import { Container, ContainerModule, interfaces } from 'inversify';
-import { ALL_IDENTIFIERS, IServiceSetup, IServiceSetupPromise } from 'src/types';
+import "reflect-metadata";
+import { Container, ContainerModule, interfaces } from "inversify";
+import { ALL_IDENTIFIERS, IServiceSetup, IServiceSetupPromise } from "src/types";
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || "development";
 
 const container = new Container({ skipBaseClassChecks: true, autoBindInjectable: true });
 let containerModules: ContainerModule[];
 switch (env) {
   // both are same right now.
-  case 'production':
-  case 'development':
+  case "production":
+  case "development":
   default:
     // eslint-disable-next-line
-    containerModules = require('./inversify.config.dev').containerModules;
+    containerModules = require("./inversify.config.dev").containerModules;
     break;
 }
 

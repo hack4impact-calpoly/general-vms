@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface IProps {
   children?: React.ReactNode;
@@ -18,14 +18,14 @@ Authenticator.Provider = ({ children }: IProps) => {
 };
 
 const DEFAULT_AUTH = {
-  route: 'authenticated',
+  route: "authenticated",
   user: {
-    username: 'test_username',
+    username: "test_username",
     attributes: {
-      email: 'test+email@email.com',
+      email: "test+email@email.com",
     },
     getSignInUserSession: () => ({
-      getAccessToken: () => 'test_token',
+      getAccessToken: () => "test_token",
     }),
   },
 };

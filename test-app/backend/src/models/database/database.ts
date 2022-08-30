@@ -1,6 +1,6 @@
-import 'reflect-metadata';
-import { container } from '../../env/provider';
-import { Model } from './model';
+import "reflect-metadata";
+import { container } from "../../env/provider";
+import { Model } from "./model";
 
 export type UpdateResponse<T> = Promise<T>;
 export type DeleteResponse = void;

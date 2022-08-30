@@ -16,8 +16,11 @@
     "dev": "lerna run --stream dev",
     "lint": "lerna run lint",
     "install-and-check": "npm install --ignore-scripts && lerna run --concurrency=1 --stream install-and-check",
-    "commit-checks": "lerna run --concurrency=1 --stream commit-checks",
-    "push-checks": "lerna run --concurrency=1 --stream push-checks",
+    "commit-checks": "npm run format:check && lerna run --concurrency=1 --stream commit-checks",
+    "push-checks": "npm run format:check && lerna run --concurrency=1 --stream push-checks",
+    "format:write:no-dir": "npx prettier --write",
+    "format:write": "npx prettier --write .",
+    "format:check": "npx prettier --check .",
     "copy-assets-for-cdk": "lerna run copy-assets-for-cdk"
   },
   "repository": {
@@ -35,12 +38,14 @@
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "husky": "^7.0.4",
     "lerna": "^4.0.0",
+    "prettier": "2.7.1",
     "ts-node": "^10.7.0"
   },
   "dependencies": {

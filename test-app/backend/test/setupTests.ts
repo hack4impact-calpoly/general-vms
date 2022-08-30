@@ -1,1 +1,1 @@
-jest.mock('../src/env/provider');
+jest.mock("../src/env/provider");

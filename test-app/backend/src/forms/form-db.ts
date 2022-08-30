@@ -1,8 +1,13 @@
-import { DeleteResponse, GetResponse, SaveResponse, UpdateResponse } from '../models/database/database';
-import { Model } from '../models/database/model';
-import { IUser } from '../models/user/User';
-import { TYPES } from '../types';
-import { IFormMetadata, IFormMetadataView } from '@general-vms/shared';
+import {
+  DeleteResponse,
+  GetResponse,
+  SaveResponse,
+  UpdateResponse,
+} from "../models/database/database";
+import { Model } from "../models/database/model";
+import { IUser } from "../models/user/User";
+import { TYPES } from "../types";
+import { IFormMetadata, IFormMetadataView } from "@general-vms/shared";
 
 export interface IFormDB {
   getForms(): GetResponse<IFormMetadataView[]>;

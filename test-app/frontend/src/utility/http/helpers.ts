@@ -1,11 +1,11 @@
-import { IHttpQueryOptions } from './types';
+import { IHttpQueryOptions } from "./types";
 
 export function generateFetchArgs(opts: IHttpQueryOptions): RequestInit {
   const headers = new Headers(opts.headers || {});
   let body: string | null = null;
 
   if (opts.payloadOpts?.isJson) {
-    headers.append('Content-Type', 'application/json');
+    headers.append("Content-Type", "application/json");
     body = JSON.stringify(opts.payloadOpts.payload);
   }
 
@@ -13,7 +13,7 @@ export function generateFetchArgs(opts: IHttpQueryOptions): RequestInit {
     method: opts.method,
     body,
     headers: headers,
-    redirect: 'follow',
+    redirect: "follow",
     ...opts.fetchKwargs,
   };
 

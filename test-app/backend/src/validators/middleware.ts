@@ -1,12 +1,12 @@
-import { Response, NextFunction } from 'express';
-import { sendErrorResponse, sendUnexpectedError } from 'src/errors';
-import { container } from 'src/env/provider';
-import { IGetUserAuthInfoRequest } from 'src/models/user-session/types';
-import { TYPES } from 'src/types';
-import { IValidateAttrs, SchemaRequestInputValidator } from './request-input-validator';
-import { ignoreCatch } from 'src/util';
+import { Response, NextFunction } from "express";
+import { sendErrorResponse, sendUnexpectedError } from "src/errors";
+import { container } from "src/env/provider";
+import { IGetUserAuthInfoRequest } from "src/models/user-session/types";
+import { TYPES } from "src/types";
+import { IValidateAttrs, SchemaRequestInputValidator } from "./request-input-validator";
+import { ignoreCatch } from "src/util";
 
-type AllowedRequestProps = 'body' | 'params';
+type AllowedRequestProps = "body" | "params";
 
 function partialReqValidate<T>(reqProp: AllowedRequestProps, attrs: IValidateAttrs) {
   const validator = container.get<SchemaRequestInputValidator>(TYPES.RequestInputValidator);
@@ -31,9 +31,9 @@ function partialReqValidate<T>(reqProp: AllowedRequestProps, attrs: IValidateAtt
 }
 
 export function bodyValidate<T>(attrs: IValidateAttrs) {
-  return partialReqValidate<T>('body', attrs);
+  return partialReqValidate<T>("body", attrs);
 }
 
 export function paramValidate<T>(attrs: IValidateAttrs) {
-  return partialReqValidate<T>('params', attrs);
+  return partialReqValidate<T>("params", attrs);
 }

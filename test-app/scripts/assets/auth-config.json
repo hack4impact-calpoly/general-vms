@@ -5,29 +5,16 @@
     "serviceName": "Cognito",
     "userPoolConfiguration": {
       "signinMethod": "USERNAME",
-      "requiredAttributes": [
-        "EMAIL",
-        "NAME"
-      ],
+      "requiredAttributes": ["EMAIL", "NAME"],
       "passwordPolicy": {
         "minimumLength": 8,
-        "additionalConstraints": [
-          "REQUIRE_DIGIT",
-          "REQUIRE_UPPERCASE",
-          "REQUIRE_LOWERCASE"
-        ]
+        "additionalConstraints": ["REQUIRE_DIGIT", "REQUIRE_UPPERCASE", "REQUIRE_LOWERCASE"]
       },
       "mfa": {
         "mode": "OFF"
       },
-      "readAttributes": [
-        "EMAIL",
-        "NAME",
-        "EMAIL_VERIFIED"
-      ],
-      "writeAttributes": [
-        "EMAIL"
-      ],
+      "readAttributes": ["EMAIL", "NAME", "EMAIL_VERIFIED"],
+      "writeAttributes": ["EMAIL"],
       "autoVerifiedAttributes": [
         {
           "type": "EMAIL",

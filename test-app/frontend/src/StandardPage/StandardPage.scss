@@ -3,9 +3,9 @@
 $extra-padding: 2vh;
 
 .standard-page {
-    padding-bottom: calc(gv.$footer-height + $extra-padding);
+  padding-bottom: calc(gv.$footer-height + $extra-padding);
 }
 
 .standard-page-top-padding {
-    padding-top: $extra-padding;
+  padding-top: $extra-padding;
 }

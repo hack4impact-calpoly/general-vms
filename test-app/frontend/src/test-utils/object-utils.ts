@@ -1,8 +1,7 @@
 const replacer = (_key: string, value: unknown) =>
-  typeof value === 'undefined' ? 'VAL-UNDEFINED' : value;
+  typeof value === "undefined" ? "VAL-UNDEFINED" : value;
 
-const reviver = (_key: string, value: unknown) =>
-  value === 'VAL-UNDEFINED' ? undefined : value;
+const reviver = (_key: string, value: unknown) => (value === "VAL-UNDEFINED" ? undefined : value);
 
 // Used to stringify an object and keep around "undefined"
 export const objStringifier = (obj: object) => {

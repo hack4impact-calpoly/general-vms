@@ -1,7 +1,7 @@
-import { Button, DialogActions } from '@mui/material';
-import { useState } from 'react';
-import { GeneralDialog } from '../general-dialog/GeneralDialog';
-import ErrorOutline from '@mui/icons-material/ErrorOutline';
+import { Button, DialogActions } from "@mui/material";
+import { useState } from "react";
+import { GeneralDialog } from "../general-dialog/GeneralDialog";
+import ErrorOutline from "@mui/icons-material/ErrorOutline";
 
 interface IProps {
   open: boolean;
@@ -10,8 +10,8 @@ interface IProps {
   onClose?: () => void;
 }
 
-const DEFAULT_TITLE = 'An unexpected error occurred';
-export const DEFAULT_CONTENT_TEXT = 'If this continues, please reach out to the site admins.';
+const DEFAULT_TITLE = "An unexpected error occurred";
+export const DEFAULT_CONTENT_TEXT = "If this continues, please reach out to the site admins.";
 
 export function ErrorDialog({ errorTitle, errorMessage, open, onClose }: IProps) {
   const [closedOverride, setClosedOverride] = useState<boolean>(false);
@@ -27,10 +27,15 @@ export function ErrorDialog({ errorTitle, errorMessage, open, onClose }: IProps)
       contentText={errorContent}
       dialogActions={
         <DialogActions>
-          <Button variant='contained' onClick={() => {
-            setClosedOverride(true);
-            onClose?.();
-          }}>Ok</Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              setClosedOverride(true);
+              onClose?.();
+            }}
+          >
+            Ok
+          </Button>
         </DialogActions>
       }
       titleElement={errorTitleText}
@@ -38,8 +43,8 @@ export function ErrorDialog({ errorTitle, errorMessage, open, onClose }: IProps)
       allowSelfClosure={true}
       iconInfo={{
         IconComponent: ErrorOutline,
-        color: 'white',
-        backgroundColor: 'red',
+        color: "white",
+        backgroundColor: "red",
       }}
     />
   );

@@ -5,13 +5,13 @@ import {
   DialogProps,
   DialogTitle,
   styled,
-} from '@mui/material';
-import { ReactNode, ElementType, useState } from 'react';
-import './GeneralDialog.scss';
+} from "@mui/material";
+import { ReactNode, ElementType, useState } from "react";
+import "./GeneralDialog.scss";
 
 const BootstrapDialog = styled(Dialog)(() => ({
-  '& .MuiPaper-root': {
-    minWidth: '25vw',
+  "& .MuiPaper-root": {
+    minWidth: "25vw",
   },
 }));
 
@@ -47,7 +47,7 @@ export function GeneralDialog({
 }: IProps) {
   const [actuallyOpen, setActuallyOpen] = useState(true);
 
-  const shouldShow = allowSelfClosure ? (open && actuallyOpen) : open;
+  const shouldShow = allowSelfClosure ? open && actuallyOpen : open;
 
   return (
     <BootstrapDialog
@@ -59,18 +59,17 @@ export function GeneralDialog({
       aria-labelledby={`${type}-dialog-title`}
       aria-describedby={`${type}-dialog-description`}
     >
-      <div className='inner-dialog-container'>
-        <div style={{ backgroundColor: backgroundColor || 'white' }} className='general-dialog-icon'>
-          <IconComponent fontSize="large" sx={sxOverride || { color: (color || 'black') }} />
+      <div className="inner-dialog-container">
+        <div
+          style={{ backgroundColor: backgroundColor || "white" }}
+          className="general-dialog-icon"
+        >
+          <IconComponent fontSize="large" sx={sxOverride || { color: color || "black" }} />
         </div>
         <div>
-          {useTitle && (
-            <DialogTitle id={`${type}-dialog-title`}>{titleElement}</DialogTitle>
-          )}
+          {useTitle && <DialogTitle id={`${type}-dialog-title`}>{titleElement}</DialogTitle>}
           <DialogContent>
-            <DialogContentText id={`${type}-dialog-description`}>
-              {contentText}
-            </DialogContentText>
+            <DialogContentText id={`${type}-dialog-description`}>{contentText}</DialogContentText>
           </DialogContent>
           {dialogActions}
         </div>

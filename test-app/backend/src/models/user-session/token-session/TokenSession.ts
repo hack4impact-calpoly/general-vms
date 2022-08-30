@@ -1,5 +1,5 @@
-import { Request } from 'express';
-import { IUser } from '../../user/User';
+import { Request } from "express";
+import { IUser } from "../../user/User";
 
 export interface ITokenPayload {
   id: string;
@@ -7,17 +7,17 @@ export interface ITokenPayload {
 }
 
 export class TokenSessionParserError extends Error {
-  static NO_AUTH_HEADER = 'Auth header is undefined';
-  static BAD_BEARER_TOKEN = 'Bearer token could not be parsed';
-  static TOKEN_INVALID = 'Token given could not be verified';
-  static RETRIEVAL_FAILED = 'Token could not be extracted after verified correctly';
+  static NO_AUTH_HEADER = "Auth header is undefined";
+  static BAD_BEARER_TOKEN = "Bearer token could not be parsed";
+  static TOKEN_INVALID = "Token given could not be verified";
+  static RETRIEVAL_FAILED = "Token could not be extracted after verified correctly";
 }
 
 export abstract class TokenSessionParser {
   // Parse authHeader to retrieve token
   private getBearerToken(authHeader: string) {
     // Format: "Bearer <token>"
-    const splitHeader = authHeader.split(' ');
+    const splitHeader = authHeader.split(" ");
     if (splitHeader.length < 2) {
       return null;
     }

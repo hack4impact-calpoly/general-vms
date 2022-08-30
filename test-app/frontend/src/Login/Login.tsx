@@ -1,4 +1,4 @@
-import { Authenticator } from '@aws-amplify/ui-react';
+import { Authenticator } from "@aws-amplify/ui-react";
 
 function Login() {
   return (

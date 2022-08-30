@@ -17,23 +17,23 @@ export class CustomWebError extends Error {
     switch (statCode) {
       case this.OK:
       case this.OK_CREATED:
-        return 'No known error occurred';
+        return "No known error occurred";
       case this.ERR_UNKNOWN:
-        return 'Unknown error occurred relating to fetch';
+        return "Unknown error occurred relating to fetch";
       case this.PARSE_ERROR:
-        return 'Error occurred when parsing data';
+        return "Error occurred when parsing data";
       case this.CONNECTION_REFUSED:
-        return 'Connection was refused... bad uri?';
+        return "Connection was refused... bad uri?";
       case this.UNAUTHORIZED:
-        return 'User unauthorized';
+        return "User unauthorized";
       case this.FORBIDDEN:
-        return 'User forbidden';
+        return "User forbidden";
       case this.NOT_FOUND:
-        return 'Resource not found';
+        return "Resource not found";
       case this.BAD_FORMAT:
-        return 'Bad formatting on request';
+        return "Bad formatting on request";
       default:
-        return 'Unknown error (most likely server error) occurred';
+        return "Unknown error (most likely server error) occurred";
     }
   }
 
@@ -41,7 +41,7 @@ export class CustomWebError extends Error {
     // Pass remaining arguments (including vendor specific ones) to parent constructor
     super(message);
 
-    this.name = 'CustomWebError';
+    this.name = "CustomWebError";
     this.responseCode = statCode;
     this.responseError = CustomWebError.getAppropriateErrorMsg(statCode);
   }

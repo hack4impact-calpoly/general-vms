@@ -1,8 +1,8 @@
-import 'reflect-metadata';
-import { Request } from 'express';
-import { injectable } from 'inversify';
-import { IUser } from '../user/User';
-import { ValidateReqAppendUser } from './UserSession';
+import "reflect-metadata";
+import { Request } from "express";
+import { injectable } from "inversify";
+import { IUser } from "../user/User";
+import { ValidateReqAppendUser } from "./UserSession";
 
 // This is just boilerplate BS for now. Will be changed later
 @injectable()

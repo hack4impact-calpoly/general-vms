@@ -14,18 +14,9 @@
     "target": "es2015",
     "baseUrl": "./",
     "paths": {
-      "src/*": [
-        "./src",
-        "./src/*"
-      ],
-      "@general-vms/shared": [
-        "../shared",
-        "../shared/src/*"
-      ],
-      "@general-vms/shared/*": [
-        "../shared",
-        "../shared/src/*"
-      ],
+      "src/*": ["./src", "./src/*"],
+      "@general-vms/shared": ["../shared", "../shared/src/*"],
+      "@general-vms/shared/*": ["../shared", "../shared/src/*"]
     }
   },
   "typeAcquisition": {

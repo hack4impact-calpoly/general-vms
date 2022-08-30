@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import h4ilogo from '../assets/images/logo192.png';
-import './Navbar.scss';
+import { Link } from "react-router-dom";
+import h4ilogo from "../assets/images/logo192.png";
+import "./Navbar.scss";
 
 function NavBar() {
   return (

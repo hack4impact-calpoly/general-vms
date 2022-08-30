@@ -1,7 +1,7 @@
-import { DataCircleLoader } from '../circle-loader/DataCircleLoader';
-import { DataLoaderDefaultErrorComponent, IDataLoaderProps } from '../DataLoader';
+import { DataCircleLoader } from "../circle-loader/DataCircleLoader";
+import { DataLoaderDefaultErrorComponent, IDataLoaderProps } from "../DataLoader";
 
-export interface IDataLoaderViewerProps extends Omit<IDataLoaderProps<unknown>, 'query'> {
+export interface IDataLoaderViewerProps extends Omit<IDataLoaderProps<unknown>, "query"> {
   loading: boolean;
   error: unknown;
   data: unknown;
@@ -17,7 +17,11 @@ const DataLoaderViewer = ({
   data,
 }: IDataLoaderViewerProps) => {
   if (loading) {
-    return loadingOptions?.loadingComponent || <DataCircleLoader {...loadingOptions?.defaultDataLoaderOverrides} />;
+    return (
+      loadingOptions?.loadingComponent || (
+        <DataCircleLoader {...loadingOptions?.defaultDataLoaderOverrides} />
+      )
+    );
   }
 
   if (error) {

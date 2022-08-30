@@ -4,12 +4,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "outDir": "./out-tsc/spec",
-    "types": ["node", "jest"],
+    "types": ["node", "jest"]
   },
   "typeAcquisition": { "include": ["jest"] },
-  "include": [
-    "**/**.test.ts",
-    "**/**.d.ts"
-  ],
+  "include": ["**/**.test.ts", "**/**.d.ts"],
   "exclude": ["./lib"]
 }

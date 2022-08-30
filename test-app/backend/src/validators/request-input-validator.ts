@@ -1,5 +1,5 @@
-import { injectable } from 'inversify';
-import 'reflect-metadata';
+import { injectable } from "inversify";
+import "reflect-metadata";
 
 export interface IValidateAttrs {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

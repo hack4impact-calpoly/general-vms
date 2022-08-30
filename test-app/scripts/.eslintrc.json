@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "../.eslintrc.json"
-  ],
+  "extends": ["../.eslintrc.json"],
   "parserOptions": {
     "ecmaVersion": 13,
     "project": ["./scripts/tsconfig.json"],

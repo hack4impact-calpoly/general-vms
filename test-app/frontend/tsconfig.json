@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -22,22 +18,12 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "src/*": [
-        "./src/*"
-      ],
-      "@general-vms/shared": [
-        "../shared",
-        "../shared/src/*"
-      ],
-      "@general-vms/shared/*": [
-        "../shared",
-        "../shared/src/*"
-      ],
+      "src/*": ["./src/*"],
+      "@general-vms/shared": ["../shared", "../shared/src/*"],
+      "@general-vms/shared/*": ["../shared", "../shared/src/*"]
     }
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "references": [
     {
       "path": "../shared"

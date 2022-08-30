@@ -1,9 +1,9 @@
 export const TYPES = {
-  UserSessionValidator: Symbol.for('UserSessionValidator'),
-  UserDatabase: Symbol.for('UserDatabase'),
-  ShiftDatabase: Symbol.for('ShiftDatabase'),
-  FormDatabase: Symbol.for('FormDatabase'),
-  RequestInputValidator: Symbol.for('RequestInputValidator'),
+  UserSessionValidator: Symbol.for("UserSessionValidator"),
+  UserDatabase: Symbol.for("UserDatabase"),
+  ShiftDatabase: Symbol.for("ShiftDatabase"),
+  FormDatabase: Symbol.for("FormDatabase"),
+  RequestInputValidator: Symbol.for("RequestInputValidator"),
 };
 
 export const ALL_IDENTIFIERS = Object.values(TYPES);

@@ -1,13 +1,13 @@
-import { NextFunction, Request, Response, Express } from 'express';
-import { RequestError } from './error-types';
-import { sendErrorResponse, sendUnexpectedError } from './errors';
+import { NextFunction, Request, Response, Express } from "express";
+import { RequestError } from "./error-types";
+import { sendErrorResponse, sendUnexpectedError } from "./errors";
 
 function errorLoggingMiddleware(err: unknown, _req: Request, _res: Response, next: NextFunction) {
   if (err instanceof RequestError) {
     console.error(err);
   } else {
     // Not great but okay for now
-    console.error('Received unexpected error: ' + err.toString());
+    console.error("Received unexpected error: " + err.toString());
   }
   next(err);
 }

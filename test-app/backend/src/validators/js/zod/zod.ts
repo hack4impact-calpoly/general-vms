@@ -1,7 +1,7 @@
-import 'reflect-metadata';
-import { SchemaRequestInputValidator } from 'src/validators/request-input-validator';
-import { injectable } from 'inversify';
-import { z } from 'zod';
+import "reflect-metadata";
+import { SchemaRequestInputValidator } from "src/validators/request-input-validator";
+import { injectable } from "inversify";
+import { z } from "zod";
 
 export interface ZodAdditionalAttrs {
   schema: z.ZodSchema;

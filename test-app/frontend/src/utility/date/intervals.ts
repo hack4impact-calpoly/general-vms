@@ -3,7 +3,7 @@ export enum DateDisplay {
 }
 
 export function getSlashesMMDDYYY(d: Date): string {
-  return d.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" });
 }
 
 export function evaluateDefinedDateWithDisplay(d: Date, displayType: DateDisplay): string {
@@ -15,7 +15,11 @@ export function evaluateDefinedDateWithDisplay(d: Date, displayType: DateDisplay
   }
 }
 
-export function evaluateDate(d: Date | undefined, displayType: DateDisplay, subString = 'UNSET'): string {
+export function evaluateDate(
+  d: Date | undefined,
+  displayType: DateDisplay,
+  subString = "UNSET",
+): string {
   let displayDate: string;
 
   if (d === undefined) {
@@ -32,5 +36,5 @@ export function getInterval(
   d2: Date | undefined,
   displayType = DateDisplay.SLASHES_MMDDYYYY,
 ): string {
-  return `${evaluateDate(d1, displayType, 'Present')} - ${evaluateDate(d2, displayType, 'Future')}`;
+  return `${evaluateDate(d1, displayType, "Present")} - ${evaluateDate(d2, displayType, "Future")}`;
 }

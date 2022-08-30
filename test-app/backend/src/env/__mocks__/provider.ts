@@ -1,9 +1,9 @@
-import 'reflect-metadata';
-import { Container } from 'inversify';
-import { TYPES } from '../../types';
-import SessionMock from './UserSessionValidator';
-import { MockDatabase } from '../../models/database/mock-db/mock-database';
-import { ZodValidator } from 'src/validators/js/zod/zod';
+import "reflect-metadata";
+import { Container } from "inversify";
+import { TYPES } from "../../types";
+import SessionMock from "./UserSessionValidator";
+import { MockDatabase } from "../../models/database/mock-db/mock-database";
+import { ZodValidator } from "src/validators/js/zod/zod";
 
 const container = new Container();
 

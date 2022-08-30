@@ -1,9 +1,17 @@
-import { IFormMetadataView } from '@general-vms/shared';
-import { Card, CardContent, CardHeader, IconButton, Menu, MenuItem, Typography } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import './FormCard.scss';
-import { useRef, useState } from 'react';
-import { DateDisplay, getInterval } from '../../utility/date/intervals';
+import { IFormMetadataView } from "@general-vms/shared";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
+} from "@mui/material";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import "./FormCard.scss";
+import { useRef, useState } from "react";
+import { DateDisplay, getInterval } from "../../utility/date/intervals";
 
 interface IProps {
   form: IFormMetadataView;
@@ -20,9 +28,9 @@ export const FormCard = ({ form, showOptionsMenu, showViewableStatus }: IProps) 
   };
 
   return (
-    <Card data-testid={form.formId} className='form-card-container'>
+    <Card data-testid={form.formId} className="form-card-container">
       {showOptionsMenu && (
-        <div className='more-options-container'>
+        <div className="more-options-container">
           <IconButton ref={moreOptionsIcon} sx={{ fontSize: 14 }} onClick={onMoreOptions}>
             <MoreVertIcon />
           </IconButton>
@@ -31,21 +39,21 @@ export const FormCard = ({ form, showOptionsMenu, showViewableStatus }: IProps) 
             onClose={onMoreOptions}
             anchorEl={moreOptionsIcon.current}
             anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
+              vertical: "bottom",
+              horizontal: "right",
             }}
             MenuListProps={{
-              'aria-labelledby': 'basic-button',
+              "aria-labelledby": "basic-button",
             }}
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
+              vertical: "top",
+              horizontal: "right",
             }}
             disableScrollLock={true}
           >
             <MenuItem onClick={onMoreOptions}>Edit</MenuItem>
             <MenuItem onClick={onMoreOptions}>Remove</MenuItem>
-            <MenuItem onClick={onMoreOptions}>{form.viewable ? 'Disable' : 'Enable'}</MenuItem>
+            <MenuItem onClick={onMoreOptions}>{form.viewable ? "Disable" : "Enable"}</MenuItem>
           </Menu>
         </div>
       )}
@@ -54,13 +62,9 @@ export const FormCard = ({ form, showOptionsMenu, showViewableStatus }: IProps) 
         <Typography sx={{ fontSize: 16 }}>
           {getInterval(form.startDate, form.endDate, DateDisplay.SLASHES_MMDDYYYY)}
         </Typography>
+        <Typography sx={{ fontSize: 14 }}>{form.description}</Typography>
         <Typography sx={{ fontSize: 14 }}>
-          {form.description}
-        </Typography>
-        <Typography sx={{ fontSize: 14 }}>
-          {showViewableStatus && (
-            form.viewable ? 'Viewable' : 'Hidden'
-          )}
+          {showViewableStatus && (form.viewable ? "Viewable" : "Hidden")}
         </Typography>
       </CardContent>
     </Card>

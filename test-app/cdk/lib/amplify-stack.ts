@@ -6,10 +6,11 @@ import {
   aws_codebuild as codebuild,
   SecretValue,
   CfnOutput,
-} from 'aws-cdk-lib';
-import { Construct } from 'constructs';
+} from "aws-cdk-lib";
+import { Construct } from "constructs";
 
-export interface IBranchConfig extends Omit<amplify.CfnBranchProps, 'appId' | 'stage' | 'environmentVariables'> {
+export interface IBranchConfig
+  extends Omit<amplify.CfnBranchProps, "appId" | "stage" | "environmentVariables"> {
   branchName: string;
   stage: string;
   environmentVariables?: Array<amplify.CfnBranch.EnvironmentVariableProperty>;
@@ -24,14 +25,14 @@ export interface IGitHubAccessTokenConfig {
 const BASE_CUSTOM_RULES: amplify.CfnApp.CustomRuleProperty[] = [
   {
     source: String.raw`</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json)$)([^.]+$)/>`,
-    target: '/index.html',
-    status: '200',
+    target: "/index.html",
+    status: "200",
   },
 ];
 
 function generateBuildSpec(pathToFrontendFromRoot: string): string {
   const buildSpecObj = {
-    version: '1.0',
+    version: "1.0",
     applications: [
       {
         appRoot: pathToFrontendFromRoot,
@@ -39,9 +40,9 @@ function generateBuildSpec(pathToFrontendFromRoot: string): string {
           phases: {
             build: {
               commands: [
-                '# Execute Amplify CLI with the helper script',
+                "# Execute Amplify CLI with the helper script",
                 'echo "Amplify PUSH"',
-                'amplifyPush --simple',
+                "amplifyPush --simple",
               ],
             },
           },
@@ -50,28 +51,22 @@ function generateBuildSpec(pathToFrontendFromRoot: string): string {
           phases: {
             preBuild: {
               commands: [
-                'npm ci --ignore-scripts --prefix=../',
-                'npm ci --ignore-scripts --prefix=../shared',
-                'npm run build --prefix=../shared',
-                'npm ci --ignore-scripts',
+                "npm ci --ignore-scripts --prefix=../",
+                "npm ci --ignore-scripts --prefix=../shared",
+                "npm run build --prefix=../shared",
+                "npm ci --ignore-scripts",
               ],
             },
             build: {
-              commands: [
-                'npm run build'
-              ],
+              commands: ["npm run build"],
             },
           },
           artifacts: {
-            baseDirectory: 'build',
-            files: [
-              '**/*',
-            ],
+            baseDirectory: "build",
+            files: ["**/*"],
           },
           cache: {
-            paths: [
-              'node_modules/**/*',
-            ],
+            paths: ["node_modules/**/*"],
           },
         },
       },
@@ -133,7 +128,6 @@ interface IOverrideableAmplifyProps {
 }
 
 export class AmplifyStack extends Stack {
-
   amplifyApp: amplify.CfnApp;
 
   branches: amplify.CfnBranch[];
@@ -152,11 +146,11 @@ export class AmplifyStack extends Stack {
     if (props.backendApiDomain) {
       rules = [
         {
-          source: '/api/<*>',
+          source: "/api/<*>",
           target: `${props.backendApiDomain}/api/<*>`,
-          status: '200',
+          status: "200",
         },
-        ...rules
+        ...rules,
       ];
     }
 
@@ -164,20 +158,21 @@ export class AmplifyStack extends Stack {
       name: props.name,
       environmentVariables: [
         {
-          name: 'DISABLE_ESLINT_PLUGIN',
-          value: 'true',
+          name: "DISABLE_ESLINT_PLUGIN",
+          value: "true",
         },
         {
-          name: 'AMPLIFY_MONOREPO_APP_ROOT',
+          name: "AMPLIFY_MONOREPO_APP_ROOT",
           value: props.pathToFrontendFromRoot,
         },
         {
-          name: 'AMPLIFY_DIFF_DEPLOY',
-          value: 'false',
+          name: "AMPLIFY_DIFF_DEPLOY",
+          value: "false",
         },
         {
-          name: '_LIVE_UPDATES',
-          value: '[{"name":"Amplify CLI","pkg":"@aws-amplify/cli","type":"npm","version":"latest"}]',
+          name: "_LIVE_UPDATES",
+          value:
+            '[{"name":"Amplify CLI","pkg":"@aws-amplify/cli","type":"npm","version":"latest"}]',
         },
       ],
       customRules: rules,
@@ -206,27 +201,30 @@ export class AmplifyStack extends Stack {
         enableAutoBuild: true,
         stage,
         ...otherBranchProps,
-        environmentVariables: this.setBranchEnvVariables(otherBranchProps.environmentVariables, props.backendName),
+        environmentVariables: this.setBranchEnvVariables(
+          otherBranchProps.environmentVariables,
+          props.backendName,
+        ),
       });
     });
 
-    new CfnOutput(this, 'AmplifyAppIdOutput', {
+    new CfnOutput(this, "AmplifyAppIdOutput", {
       value: this.amplifyApp.attrAppId,
-      description: 'Amplify App ID',
-      exportName: `${props.name}-amplify-appid`
+      description: "Amplify App ID",
+      exportName: `${props.name}-amplify-appid`,
     });
   }
 
   private setBranchEnvVariables(
     branchEnv: Array<amplify.CfnBranch.EnvironmentVariableProperty> | undefined,
-    backendName: string | undefined
+    backendName: string | undefined,
   ): Array<amplify.CfnBranch.EnvironmentVariableProperty> {
     if (backendName && branchEnv) {
-      return [{ name: 'USER_BRANCH', value: backendName }, ...branchEnv];
+      return [{ name: "USER_BRANCH", value: backendName }, ...branchEnv];
     } else if (branchEnv) {
       return branchEnv;
     } else if (backendName) {
-      return [{ name: 'USER_BRANCH', value: backendName }];
+      return [{ name: "USER_BRANCH", value: backendName }];
     } else {
       return [];
     }
@@ -236,10 +234,12 @@ export class AmplifyStack extends Stack {
    * For now, just references hardcoded ARN
    */
   private getServiceRole() {
-    return 'arn:aws:iam::633874248049:role/amplifyconsole-backend-role';
+    return "arn:aws:iam::633874248049:role/amplifyconsole-backend-role";
   }
 
-  private generateSubDomainSettings(branches: IBranchConfig[]): amplify.CfnDomain.SubDomainSettingProperty[] {
+  private generateSubDomainSettings(
+    branches: IBranchConfig[],
+  ): amplify.CfnDomain.SubDomainSettingProperty[] {
     return branches.map((branchConfig) => {
       return {
         branchName: branchConfig.branchName,

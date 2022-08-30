@@ -1,6 +1,6 @@
-import Footer from '../Footer/Footer';
-import Navbar from '../Navbar/Navbar';
-import './StandardPage.scss';
+import Footer from "../Footer/Footer";
+import Navbar from "../Navbar/Navbar";
+import "./StandardPage.scss";
 
 interface IStandardPageProps {
   useTopPadding?: boolean;
@@ -11,7 +11,7 @@ function StandardPage({ component, useTopPadding }: IStandardPageProps) {
   return (
     <>
       <Navbar />
-      <div className={`standard-page ${useTopPadding ? 'standard-page-top-padding' : ''}`}>
+      <div className={`standard-page ${useTopPadding ? "standard-page-top-padding" : ""}`}>
         {component}
       </div>
       <Footer />

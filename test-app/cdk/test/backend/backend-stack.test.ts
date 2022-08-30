@@ -1,27 +1,27 @@
-import * as cdk from 'aws-cdk-lib';
-import { Template } from 'aws-cdk-lib/assertions';
-import { BackendStack } from '../../lib/backend/backend-stack';
+import * as cdk from "aws-cdk-lib";
+import { Template } from "aws-cdk-lib/assertions";
+import { BackendStack } from "../../lib/backend/backend-stack";
 
-describe('BackendStack', () => {
-  it('should create with default resources', () => {
+describe("BackendStack", () => {
+  it("should create with default resources", () => {
     const app = new cdk.App();
 
-    const backendStack = new BackendStack(app, 'BackendStackTest', {
-      name: 'backend-test',
-      domainName: 'backend.com',
+    const backendStack = new BackendStack(app, "BackendStackTest", {
+      name: "backend-test",
+      domainName: "backend.com",
       allowDomain: false,
-      frontendDomain: 'frontend.com',
+      frontendDomain: "frontend.com",
     });
 
     expect(Template.fromStack(backendStack)).toMatchSnapshot();
   });
 
-  it('should create with default resources when no frontendDomain is given', () => {
+  it("should create with default resources when no frontendDomain is given", () => {
     const app = new cdk.App();
 
-    const backendStack = new BackendStack(app, 'BackendStackTest', {
-      name: 'backend-test',
-      domainName: 'backend.com',
+    const backendStack = new BackendStack(app, "BackendStackTest", {
+      name: "backend-test",
+      domainName: "backend.com",
       allowDomain: false,
     });
 

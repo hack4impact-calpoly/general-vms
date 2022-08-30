@@ -1,6 +1,6 @@
-import { ErrorResponse } from 'src/errors';
-import supertest from 'supertest';
-import { z } from 'zod';
+import { ErrorResponse } from "src/errors";
+import supertest from "supertest";
+import { z } from "zod";
 
 export type IValidationError = z.ZodIssue[];
 
@@ -25,11 +25,14 @@ export async function runValidationTest({ req, expectedErrors }: IValidationTest
   };
 }
 
-function assertValidationErrors(validationMessage: string, expectedErrors: IValidationProblem[]): void {
+function assertValidationErrors(
+  validationMessage: string,
+  expectedErrors: IValidationProblem[],
+): void {
   let err: ErrorResponse;
 
   if (validationMessage.length === 0 && expectedErrors.length > 0) {
-    fail(new Error('No response text given but expected errors'));
+    fail(new Error("No response text given but expected errors"));
   }
 
   try {

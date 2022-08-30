@@ -1,0 +1,9 @@
+build
+coverage
+node_modules
+dist
+amplify/**/*.json
+amplify/backend
+shared/lib
+cdk/cdk.out
+backend/lib

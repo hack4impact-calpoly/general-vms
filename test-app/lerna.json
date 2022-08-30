@@ -1,8 +1,4 @@
 {
-  "packages": [
-    "frontend",
-    "backend",
-    "shared"
-  ],
+  "packages": ["frontend", "backend", "shared"],
   "version": "independent"
 }

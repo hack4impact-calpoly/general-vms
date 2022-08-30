@@ -1,9 +1,9 @@
 export type UserId = string | number | undefined;
 
 export enum Roles {
-  ADMIN = 'admin',
-  STAFF = 'staff',
-  VOLUNTEER = 'volunteer',
+  ADMIN = "admin",
+  STAFF = "staff",
+  VOLUNTEER = "volunteer",
 }
 
 export type Role = Roles | undefined;
@@ -22,7 +22,7 @@ export interface IUser {
   personalInfo?: IPersonalInfo;
   email: string;
   userId: UserId;
-  role: Role,
+  role: Role;
   approved: boolean;
   decisionMade: boolean;
   cognitoSession: object | undefined;

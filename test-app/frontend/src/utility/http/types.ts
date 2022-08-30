@@ -1,4 +1,4 @@
-import { CustomWebError } from './CustomWebError';
+import { CustomWebError } from "./CustomWebError";
 
 export interface IPayloadOpts {
   payload: object;

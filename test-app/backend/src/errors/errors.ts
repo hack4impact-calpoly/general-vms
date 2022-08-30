@@ -1,9 +1,9 @@
-import { Response } from 'express';
+import { Response } from "express";
 
 export interface ErrorResponse {
   details: {
     message: string;
-  },
+  };
   status: number;
 }
 
@@ -13,7 +13,10 @@ export interface ISendErrorResponseOptions {
   status: number;
 }
 
-export function sendErrorResponse(res: Response, { message, e, status }: ISendErrorResponseOptions): void {
+export function sendErrorResponse(
+  res: Response,
+  { message, e, status }: ISendErrorResponseOptions,
+): void {
   const errorResponse: ErrorResponse = {
     details: {
       message: message ?? e?.message,
@@ -25,7 +28,7 @@ export function sendErrorResponse(res: Response, { message, e, status }: ISendEr
 
 const UNEXPECTED_ERROR_RESPONSE: ErrorResponse = {
   details: {
-    message: 'An unexpected error occurred',
+    message: "An unexpected error occurred",
   },
   status: 500,
 };

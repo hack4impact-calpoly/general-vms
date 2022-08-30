@@ -1,11 +1,15 @@
-import { Container } from 'inversify';
-import { ALL_IDENTIFIERS, IServiceSetupPromise } from 'src/types';
+import { Container } from "inversify";
+import { ALL_IDENTIFIERS, IServiceSetupPromise } from "src/types";
 
 // Waits for each promise to finish, resolving or rejecting once ALL have finished
 export async function waitOnSetupPromises(setupPromises: IServiceSetupPromise[]) {
-  return Promise.all(setupPromises.map(({ promise, ...rest }) => {
-    return promise.catch((err: unknown) => ({ ...rest, error: err })).then(() => ({ ...rest, error: null }));
-  }))
+  return Promise.all(
+    setupPromises.map(({ promise, ...rest }) => {
+      return promise
+        .catch((err: unknown) => ({ ...rest, error: err }))
+        .then(() => ({ ...rest, error: null }));
+    }),
+  )
     .then((results) => {
       results.forEach(({ identifier, error }) => {
         if (error) {
@@ -17,7 +21,7 @@ export async function waitOnSetupPromises(setupPromises: IServiceSetupPromise[])
       });
     })
     .catch((err: Error) => {
-      console.error('Early exit from waiting on setup:');
+      console.error("Early exit from waiting on setup:");
       console.error(err); // some coding error in handling happened
     });
 }

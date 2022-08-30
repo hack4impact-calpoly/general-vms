@@ -1,10 +1,10 @@
 /**
  * This is no longer necessary but may be helpful
  */
-import 'reflect-metadata';
-import { injectable, unmanaged } from 'inversify';
-import DatabaseInstance from './database';
-import { Model } from './model';
+import "reflect-metadata";
+import { injectable, unmanaged } from "inversify";
+import DatabaseInstance from "./database";
+import { Model } from "./model";
 
 @injectable()
 export class DatabaseImpls {

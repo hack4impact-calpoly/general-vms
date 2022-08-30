@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime",
-    "../.eslintrc.json"
-  ],
+  "extends": ["plugin:react/recommended", "plugin:react/jsx-runtime", "../.eslintrc.json"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true

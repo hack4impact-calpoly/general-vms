@@ -2,9 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import 'source-map-support/register';
-import serverlessExpress from '@vendia/serverless-express';
-import app from '../server';
+import "source-map-support/register";
+import serverlessExpress from "@vendia/serverless-express";
+import app from "../server";
 
 let serverlessExpressInstance;
 
@@ -16,14 +16,14 @@ function setup(event, context) {
 export function lambdaHandler(event, context) {
   console.log(`Into the handler!`);
   console.log(event);
-  console.log('context');
+  console.log("context");
   console.log(context);
 
   if (serverlessExpressInstance) {
-    console.log('Using existing setup!');
+    console.log("Using existing setup!");
     return serverlessExpressInstance(event, context);
   } else {
-    console.log('Calling setup!');
+    console.log("Calling setup!");
     return setup(event, context);
   }
 }

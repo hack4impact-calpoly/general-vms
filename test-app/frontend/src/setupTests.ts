@@ -2,12 +2,12 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom';
-import jestFetchMock from 'jest-fetch-mock';
+import "@testing-library/jest-dom";
+import jestFetchMock from "jest-fetch-mock";
 
 jestFetchMock.enableMocks();
 
 // Needed to get rid of Amplify errors
 window.URL.createObjectURL = jest.fn();
 
-jest.mock('./amplify/configure');
+jest.mock("./amplify/configure");

@@ -1,7 +1,7 @@
-import { Alert } from '@mui/material';
-import React, { ElementType, useEffect, useState } from 'react';
-import { ErrorDialog } from '../dialogs/error-dialog/ErrorDialog';
-import { DataCircleLoader, IDataCircleLoaderProps } from './circle-loader/DataCircleLoader';
+import { Alert } from "@mui/material";
+import React, { ElementType, useEffect, useState } from "react";
+import { ErrorDialog } from "../dialogs/error-dialog/ErrorDialog";
+import { DataCircleLoader, IDataCircleLoaderProps } from "./circle-loader/DataCircleLoader";
 
 export interface Query<T> {
   execute: () => Promise<T>;
@@ -31,43 +31,46 @@ export const DataLoaderDefaultErrorComponent = () => {
   );
 };
 
-const DataLoader = <T, >({
+const DataLoader = <T,>({
   loadingOptions,
   query,
   OnceLoadedComponent,
   errorComponent,
   additionalLoadingCompProps,
-} : IDataLoaderProps<T>) => {
+}: IDataLoaderProps<T>) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [data, setData] = useState<T | null>(null);
 
   useEffect(() => {
     try {
-      query.execute()
-        .then(
-          (data: T) => {
-            query.onResolve?.(data);
-            setData(data);
-          },
-        ).catch(
-          (e: Error) => {
-            query.onReject?.(e);
-            setError(e);
-          },
-        ).finally(() => setLoading(false));
+      query
+        .execute()
+        .then((data: T) => {
+          query.onResolve?.(data);
+          setData(data);
+        })
+        .catch((e: Error) => {
+          query.onReject?.(e);
+          setError(e);
+        })
+        .finally(() => setLoading(false));
     } catch (e: unknown) {
       if (e instanceof Error) {
         setError(e);
       } else {
-        setError(new Error('An unknown error occurred'));
+        setError(new Error("An unknown error occurred"));
       }
       setLoading(false);
     }
   }, []);
 
   if (loading) {
-    return loadingOptions?.loadingComponent || <DataCircleLoader {...loadingOptions?.defaultDataLoaderOverrides} />;
+    return (
+      loadingOptions?.loadingComponent || (
+        <DataCircleLoader {...loadingOptions?.defaultDataLoaderOverrides} />
+      )
+    );
   }
 
   if (error) {

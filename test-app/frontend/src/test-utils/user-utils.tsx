@@ -1,7 +1,7 @@
-import React from 'react';
-import { render, RenderOptions } from '@testing-library/react';
-import { INITIAL_USER, User } from '../models/user/User';
-import { UserContext, userReducer, UserReducerState } from '../models/user/UserStore';
+import React from "react";
+import { render, RenderOptions } from "@testing-library/react";
+import { INITIAL_USER, User } from "../models/user/User";
+import { UserContext, userReducer, UserReducerState } from "../models/user/UserStore";
 
 interface UserProviderProps {
   customUser: Partial<User>;
@@ -13,7 +13,9 @@ interface CustomUserRenderOptions extends RenderOptions {
 
 const INITIAL_STATE: UserReducerState = {
   user: INITIAL_USER,
-  dispatch: () => { throw new Error('Dispatch should have been initialized'); },
+  dispatch: () => {
+    throw new Error("Dispatch should have been initialized");
+  },
 };
 
 const CustomUserProvider: React.FC<UserProviderProps> = ({ children, customUser }) => {
@@ -27,19 +29,11 @@ const CustomUserProvider: React.FC<UserProviderProps> = ({ children, customUser 
 
   const [user, dispatch] = React.useReducer(userReducer, initialStateUser);
 
-  return (
-    <UserContext.Provider value={{ ...user, dispatch }}>
-      { children }
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={{ ...user, dispatch }}>{children}</UserContext.Provider>;
 };
 
 const UserProviderWrapper: React.FC<UserProviderProps> = ({ children, customUser }) => {
-  return (
-    <CustomUserProvider customUser={customUser}>
-      {children}
-    </CustomUserProvider>
-  );
+  return <CustomUserProvider customUser={customUser}>{children}</CustomUserProvider>;
 };
 
 // Idea here from https://github.com/testing-library/react-testing-library/issues/780
@@ -51,7 +45,7 @@ const customRender = (ui: React.ReactElement, options?: CustomUserRenderOptions)
   });
 
 // re-export everything
-export * from '@testing-library/react';
+export * from "@testing-library/react";
 
 // override render method
 export { customRender as renderWithUser };

@@ -1,11 +1,5 @@
 {
-  "watch": [
-    "server.js",
-    "src/"
-  ],
+  "watch": ["server.js", "src/"],
   "ext": "js,json,ts,mjs",
-  "ignore": [
-    ".git",
-    "node_modules"
-  ]
+  "ignore": [".git", "node_modules"]
 }

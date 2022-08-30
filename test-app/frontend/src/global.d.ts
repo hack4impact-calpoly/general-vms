@@ -1,17 +1,17 @@
-declare module '*.svg' {
+declare module "*.svg" {
   const src: string;
   export default src;
 }
 
-declare module '*.jpeg' {
+declare module "*.jpeg" {
   const src: string;
   export default src;
 }
 
-declare module '*.png' {
+declare module "*.png" {
   const src: string;
   export default src;
 }
 
-declare module '*.module.css';
-declare module '*.module.scss';
+declare module "*.module.css";
+declare module "*.module.scss";

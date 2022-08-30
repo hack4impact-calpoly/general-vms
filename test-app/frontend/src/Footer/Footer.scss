@@ -2,49 +2,49 @@
 @import "~bootstrap/scss/bootstrap";
 
 @font-face {
-    font-family: Sofia Pro Regular;
-    src: url("../assets/fonts/Sofia\ Pro\ Regular\ Az.otf");
+  font-family: Sofia Pro Regular;
+  src: url("../assets/fonts/Sofia\ Pro\ Regular\ Az.otf");
 }
 
 @font-face {
-    font-family: Sofia Pro Regular;
-    src: url("../assets/fonts/Sofia\ Pro\ Bold\ Az.otf");
-    font-weight: bold;
+  font-family: Sofia Pro Regular;
+  src: url("../assets/fonts/Sofia\ Pro\ Bold\ Az.otf");
+  font-weight: bold;
 }
 
 .main-footer {
-    background-color: gv.$primary-color;
-    color: gv.$light-font;
-    padding: 1% 0;
+  background-color: gv.$primary-color;
+  color: gv.$light-font;
+  padding: 1% 0;
 
-    position: absolute;
-    bottom: 0;
+  position: absolute;
+  bottom: 0;
 
-    width: 100%;
-    height: gv.$footer-height;
+  width: 100%;
+  height: gv.$footer-height;
 
-    text-align: center;
+  text-align: center;
+  align-items: center;
+
+  font-family: Sofia Pro Regular, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-weight: bold;
+
+  margin: 0;
+
+  .middle-info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: space-around;
+  }
 
-    font-family: Sofia Pro Regular, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-        Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    font-weight: bold;
+  .col {
+    align-self: center;
 
-    margin: 0;
-
-    .middle-info {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
+    p {
+      margin-bottom: 0;
     }
-
-    .col {
-        align-self: center;
-
-        p {
-            margin-bottom: 0;
-        }
-    }
+  }
 }

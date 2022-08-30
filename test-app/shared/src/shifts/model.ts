@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { datePreprocessSchema, laterDateAllowEqual } from '../utils/date';
+import { z } from "zod";
+import { datePreprocessSchema, laterDateAllowEqual } from "../utils/date";
 
 const BaseShift = z.object({
   start: datePreprocessSchema(),
@@ -12,4 +12,4 @@ const BaseShift = z.object({
 
 export type IShift = z.infer<typeof BaseShift>;
 
-export const ShiftSchema = laterDateAllowEqual<IShift>(BaseShift, 'start', 'end');
+export const ShiftSchema = laterDateAllowEqual<IShift>(BaseShift, "start", "end");

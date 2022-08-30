@@ -2,7 +2,7 @@ import {
   aws_certificatemanager as CertManager,
   aws_apigateway as apigw,
   aws_route53 as route53,
-} from 'aws-cdk-lib';
+} from "aws-cdk-lib";
 import { Construct } from "constructs";
 
 interface IBackendRoutingProps {
@@ -12,7 +12,6 @@ interface IBackendRoutingProps {
 }
 
 export class BackendRouting extends Construct {
-
   certificate: CertManager.Certificate;
   apiDomainName: apigw.DomainName;
   hostedZone: route53.HostedZone;
@@ -50,7 +49,7 @@ export class BackendRouting extends Construct {
     return new apigw.BasePathMapping(this, `ApiBasePathMapping`, {
       restApi,
       domainName: this.apiDomainName,
-      basePath: '(none)',
+      basePath: "(none)",
       stage: restApi.deploymentStage,
     });
   }
@@ -65,7 +64,7 @@ export class BackendRouting extends Construct {
       recordSets: [
         {
           name: `${domainName}.`,
-          type: 'A',
+          type: "A",
           aliasTarget: {
             evaluateTargetHealth: false,
             hostedZoneId: this.apiDomainName.domainNameAliasHostedZoneId,

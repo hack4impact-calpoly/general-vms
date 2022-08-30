@@ -1,8 +1,8 @@
-import 'reflect-metadata';
-import { NextFunction, Request, Response } from 'express';
-import { decorate, injectable, unmanaged } from 'inversify';
-import { IUser } from '../user/User';
-import { IGetUserAuthInfoRequest } from './types';
+import "reflect-metadata";
+import { NextFunction, Request, Response } from "express";
+import { decorate, injectable, unmanaged } from "inversify";
+import { IUser } from "../user/User";
+import { IGetUserAuthInfoRequest } from "./types";
 
 interface IValidateReq {
   validateRequest: (req: Request, res: Response) => void;
@@ -29,7 +29,11 @@ export abstract class ValidateReqAppendUser implements IValidateReq {
     return this.validateRequestAndAppendUserMiddleware(req, res);
   }
 
-  public async validateRequestAndAppendUserMiddleware(req: Request, res: Response, next?: NextFunction): Promise<void> {
+  public async validateRequestAndAppendUserMiddleware(
+    req: Request,
+    res: Response,
+    next?: NextFunction,
+  ): Promise<void> {
     try {
       const user = await this.getUserFromRequest(req);
 
@@ -38,7 +42,7 @@ export abstract class ValidateReqAppendUser implements IValidateReq {
       next?.();
     } catch (e: unknown) {
       res.status(401).json({
-        message: 'Request could not be validated',
+        message: "Request could not be validated",
       });
     }
   }

@@ -1,10 +1,10 @@
-import { Response } from 'express';
-import { IGetUserAuthInfoRequest } from '../../../src/models/user-session/types';
-import { ValidateReqAppendUser } from '../../../src/models/user-session/UserSession';
-import { IUser } from '../../../src/models/user/User';
+import { Response } from "express";
+import { IGetUserAuthInfoRequest } from "../../../src/models/user-session/types";
+import { ValidateReqAppendUser } from "../../../src/models/user-session/UserSession";
+import { IUser } from "../../../src/models/user/User";
 
 const TEST_USER = {
-  its: 'just nonsense',
+  its: "just nonsense",
 } as unknown as IUser;
 
 const mockRequest = () => {
@@ -22,10 +22,10 @@ const mockResponse = () => {
 const nextFnMock = jest.fn();
 
 class ValidateReqAppendUserImpl extends ValidateReqAppendUser {
-  getUserFromRequest = jest.fn().mockReturnValue(Promise.resolve<IUser>(TEST_USER))
+  getUserFromRequest = jest.fn().mockReturnValue(Promise.resolve<IUser>(TEST_USER));
 }
 
-describe('ValidateReqAppendUser', () => {
+describe("ValidateReqAppendUser", () => {
   let req: IGetUserAuthInfoRequest;
   let res: Response;
   let validator: ValidateReqAppendUserImpl;
@@ -40,7 +40,7 @@ describe('ValidateReqAppendUser', () => {
     jest.resetAllMocks();
   });
 
-  it('should set locals user object on IGetUserAuthInfoRequest when successful', async () => {
+  it("should set locals user object on IGetUserAuthInfoRequest when successful", async () => {
     await validator.validateRequestAndAppendUserMiddleware(req, res, nextFnMock);
 
     expect(validator.getUserFromRequest).toHaveBeenCalled();
@@ -48,7 +48,7 @@ describe('ValidateReqAppendUser', () => {
     expect(nextFnMock).toHaveBeenCalled();
   });
 
-  it('should give error response when validation fails', async () => {
+  it("should give error response when validation fails", async () => {
     validator.getUserFromRequest.mockImplementation(() => {
       throw new Error();
     });

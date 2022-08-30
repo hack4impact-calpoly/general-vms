@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const expectedHost = process.env.BACKEND_HOST || process.env.DEFAULT_BACKEND_HOST;
 
 if (!expectedHost) {
-  throw new Error('No backend host given for proxy!');
+  throw new Error("No backend host given for proxy!");
 }
 
 const PORT_REGEX = /localhost:(\d+)/;
@@ -16,13 +16,13 @@ if (portMatch) {
 }
 
 function getPortStr() {
-  return port ? `:${port}` : '';
+  return port ? `:${port}` : "";
 }
 
 module.exports = function (app) {
   // eslint-disable-next-line
   app.use(
-    '/api',
+    "/api",
     createProxyMiddleware({
       target: expectedHost,
       changeOrigin: true,
@@ -31,7 +31,7 @@ module.exports = function (app) {
 
         console.log(`\nPROXY SERVER [INFO]: [${req.method}] ${req.url} -> ${newUrl}\n`);
       },
-      logLevel: 'warn',
+      logLevel: "warn",
     }),
   );
 };

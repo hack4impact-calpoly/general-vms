@@ -7,21 +7,24 @@
     "standard",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "rules": {
     "semi": [2, "always"],
     "comma-dangle": [1, "always-multiline"],
-    "quotes": [2, "single", { "allowTemplateLiterals": true }],
+    "quotes": [2, "double", { "allowTemplateLiterals": true }],
     "indent": "off",
-    "@typescript-eslint/indent": ["error", 2],
-    "space-before-function-paren": ["error", {
-      "anonymous": "always",
-      "named": "never",
-      "asyncArrow": "always"
-    }],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
     "@typescript-eslint/no-unused-vars": [
       "warn", // or "error"
       {

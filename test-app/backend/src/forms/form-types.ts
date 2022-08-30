@@ -1,4 +1,4 @@
-import { IFormMetadataView } from '@general-vms/shared';
+import { IFormMetadataView } from "@general-vms/shared";
 
 export interface IFormsMetadata {
   forms: IFormMetadataView[];

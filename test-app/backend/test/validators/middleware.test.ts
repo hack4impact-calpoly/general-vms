@@ -1,18 +1,23 @@
-import { getMockReq, getMockRes } from '@jest-mock/express';
-import { MockResponse } from '@jest-mock/express/src/response';
-import { NextFunction, Response } from 'express';
-import { container } from 'src/env/provider';
-import { TYPES } from 'src/types';
-import { bodyValidate, paramValidate } from 'src/validators/middleware';
-import { IValidateAttrs, SchemaRequestInputValidator } from 'src/validators/request-input-validator';
-import { flushPromises } from 'test/test-utils';
+import { getMockReq, getMockRes } from "@jest-mock/express";
+import { MockResponse } from "@jest-mock/express/src/response";
+import { NextFunction, Response } from "express";
+import { container } from "src/env/provider";
+import { TYPES } from "src/types";
+import { bodyValidate, paramValidate } from "src/validators/middleware";
+import {
+  IValidateAttrs,
+  SchemaRequestInputValidator,
+} from "src/validators/request-input-validator";
+import { flushPromises } from "test/test-utils";
 
-describe('Validation middleware', () => {
+describe("Validation middleware", () => {
   function setup() {
     const validateMock = jest.fn();
-    const validatorMock = <jest.Mock<SchemaRequestInputValidator>>jest.fn().mockImplementation(() => ({
-      validate: validateMock,
-    }))();
+    const validatorMock = <jest.Mock<SchemaRequestInputValidator>>jest
+      .fn()
+      .mockImplementation(() => ({
+        validate: validateMock,
+      }))();
 
     container.rebind(TYPES.RequestInputValidator).toConstantValue(validatorMock);
 
@@ -29,7 +34,7 @@ describe('Validation middleware', () => {
     };
   }
 
-  describe('bodyValidate', () => {
+  describe("bodyValidate", () => {
     function bodySetup(attrs: IValidateAttrs) {
       const setupVals = setup();
 
@@ -39,8 +44,10 @@ describe('Validation middleware', () => {
       };
     }
 
-    test('fails when given validator throws error', async () => {
-      const { middleware, validateMock, nextFnMock, mockReq, mockRes, flush } = bodySetup({ schema: null });
+    test("fails when given validator throws error", async () => {
+      const { middleware, validateMock, nextFnMock, mockReq, mockRes, flush } = bodySetup({
+        schema: null,
+      });
       validateMock.mockRejectedValue(new Error());
 
       middleware(mockReq, mockRes as unknown as Response, nextFnMock);
@@ -52,8 +59,10 @@ describe('Validation middleware', () => {
       expect(nextFnMock.mock.calls.length).toBe(0);
     });
 
-    test('succeeds and sets body when validator succeeds', async () => {
-      const { middleware, validateMock, nextFnMock, mockReq, mockRes, flush } = bodySetup({ schema: null });
+    test("succeeds and sets body when validator succeeds", async () => {
+      const { middleware, validateMock, nextFnMock, mockReq, mockRes, flush } = bodySetup({
+        schema: null,
+      });
       validateMock.mockResolvedValue(10);
 
       middleware(mockReq, mockRes as unknown as Response, nextFnMock);
@@ -66,7 +75,7 @@ describe('Validation middleware', () => {
     });
   });
 
-  describe('paramValidate', () => {
+  describe("paramValidate", () => {
     function paramSetup(attrs: IValidateAttrs) {
       const setupVals = setup();
 
@@ -76,8 +85,10 @@ describe('Validation middleware', () => {
       };
     }
 
-    test('fails when given validator throws error', async () => {
-      const { middleware, validateMock, nextFnMock, mockReq, mockRes, flush } = paramSetup({ schema: null });
+    test("fails when given validator throws error", async () => {
+      const { middleware, validateMock, nextFnMock, mockReq, mockRes, flush } = paramSetup({
+        schema: null,
+      });
       validateMock.mockRejectedValue(new Error());
 
       middleware(mockReq, mockRes as unknown as Response, nextFnMock);
@@ -89,8 +100,10 @@ describe('Validation middleware', () => {
       expect(nextFnMock.mock.calls.length).toBe(0);
     });
 
-    test('succeeds and sets body when validator succeeds', async () => {
-      const { middleware, validateMock, nextFnMock, mockReq, mockRes, flush } = paramSetup({ schema: null });
+    test("succeeds and sets body when validator succeeds", async () => {
+      const { middleware, validateMock, nextFnMock, mockReq, mockRes, flush } = paramSetup({
+        schema: null,
+      });
       validateMock.mockResolvedValue(10);
 
       middleware(mockReq, mockRes as unknown as Response, nextFnMock);
