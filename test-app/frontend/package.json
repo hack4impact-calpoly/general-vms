@@ -6,12 +6,14 @@
     "npm": ">=7"
   },
   "dependencies": {
-    "@aws-amplify/ui-react": "^2.15.8",
+    "@aws-amplify/ui-react": "^3.4.1",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@general-vms/shared": "file:../shared",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.2",
+    "@rjsf/core": "^4.2.2",
+    "@rjsf/material-ui": "^4.2.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -82,6 +84,9 @@
     "lint-staged": "^12.1.7"
   },
   "jest": {
-    "resetMocks": false
+    "resetMocks": false,
+    "moduleNameMapper": {
+      "^@rjsf/material-ui/v5$": "<rootDir>/node_modules/@rjsf/material-ui/dist/v5.js"
+    }
   }
 }
