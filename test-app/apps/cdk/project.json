@@ -32,8 +32,7 @@
       "options": {
         "jestConfig": "apps/cdk/jest.config.ts",
         "passWithNoTests": true
-      },
-      "dependsOn": ["copy-all-assets"]
+      }
     },
     "copy-all-assets": {
       "executor": "nx:run-script",
