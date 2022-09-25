@@ -23,7 +23,7 @@ const getProjectConfig = () => {
     frontend: parsedProjectConfig.frontend || "javascript",
     framework: parsedProjectConfig?.[parsedProjectConfig.frontend].framework ?? "react",
     config: parsedProjectConfig?.[parsedProjectConfig.frontend].config || {
-      SourceDir: "frontend/src",
+      SourceDir: "apps/react-frontend/src",
       DistributionDir: "frontend/build",
       BuildCommand: "npm run-script build",
       StartCommand: "npm run-script start",
