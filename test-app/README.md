@@ -28,11 +28,11 @@ The following commands run the linter (in our case `eslint`). This does an analy
 
 **NOTE**: _These commands should be ran in the frontend/backend directory_, not in the root.
 
-### `npm run lint-fix`
+### `npm run lint -- --fix`
 
 - Runs linter and reports any errors it cannot fix while fixing those it can.
 
-### `npm run lint-check`
+### `npm run lint`
 
 - Runs linter and reports any errors. It will **not** try and fix them.
 
@@ -105,3 +105,19 @@ If you are **not** using a profile, you have 2 choices for running the Amplify s
     > `npm run setup:amplify -- --accessKey <access key ID> --secretAccessKey <secret access key>`
 
 Confirm everything worked by doing: `ls frontend/src/aws-exports.js` and the file should show up
+
+## NX
+
+[NX](https://nx.dev) is a tool used for monorepo management (each separate program/thing to manage is called a **project**). You declare dependencies in one place for all your projects and can use the `npx nx` command from anywhere in the repository to run an NX command.
+
+NX also uses the term executor similar to how running npm run-scripts work. For a given project, you can define "executors" which are alias commands that do something with options (so like lint, build, test, etc).
+
+For running a given NX command/executor for a given project (to see projects, check out the `workspace.json` file), run:
+```
+npx nx <executor> <project> [-- <flags/options>]
+```
+
+So if I want to update snapshots in the CDK project, I'd do:
+```
+npx nx test cdk -- --updateSnapshots
+```
