@@ -47,8 +47,8 @@ async function initAmplify() {
       frontend: "javascript",
       framework: "react",
       config: {
-        SourceDir: "frontend/src",
-        DistributionDir: "frontend/build",
+        SourceDir: "apps/react-frontend/src",
+        DistributionDir: "apps/react-frontend/build",
         BuildCommand: "npm run-script build",
         StartCommand: "npm run-script start",
       },
