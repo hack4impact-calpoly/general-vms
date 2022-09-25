@@ -1,11 +1,9 @@
 {
-  "extends": [
-    "../.eslintrc.json"
-  ],
+  "extends": ["../.eslintrc.json"],
   "parserOptions": {
     "ecmaVersion": 13,
     "project": ["./tsconfig.json"],
-    "sourceType": "module",
+    "sourceType": "module"
   },
   "ignorePatterns": ["**/scripts/*.js"]
 }

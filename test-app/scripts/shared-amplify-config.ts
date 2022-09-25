@@ -5,11 +5,11 @@
  * This file is used to sync the amplify directory with the current deployed one
  */
 
-import * as fs from 'fs';
-import * as path from 'path';
-import { promisify } from 'util';
-import { exec as originalExec } from 'child_process';
-import * as readline from 'readline';
+import * as fs from "fs";
+import * as path from "path";
+import { promisify } from "util";
+import { exec as originalExec } from "child_process";
+import * as readline from "readline";
 
 const exec = promisify(originalExec);
 
@@ -39,16 +39,14 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-const DELIMITER = '|@|';
+const DELIMITER = "|@|";
 
 const exportAmplifyEnvIfExists = () => {
   try {
-    const amplifyEnvFolder = fs.readFileSync(
-      path.join(__dirname, '..', '.amplify.env'),
-    );
-    const asString = amplifyEnvFolder.toString('utf-8');
-    asString.split('\n').forEach((line) => {
-      const [key, value] = line.split('=', 2);
+    const amplifyEnvFolder = fs.readFileSync(path.join(__dirname, "..", ".amplify.env"));
+    const asString = amplifyEnvFolder.toString("utf-8");
+    asString.split("\n").forEach((line) => {
+      const [key, value] = line.split("=", 2);
       process.env[key] = value;
     });
   } catch (e) {}
@@ -89,9 +87,9 @@ export const questionPromise = (question: string): Promise<string> => {
       resolve(value);
     });
 
-    rl.on('close', () => {
+    rl.on("close", () => {
       if (keepalive) {
-        reject(new Error('No answer was given'));
+        reject(new Error("No answer was given"));
       }
     });
   });
@@ -99,7 +97,7 @@ export const questionPromise = (question: string): Promise<string> => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const removeNullishDeep = (val: any): void => {
-  if (typeof val !== 'object') {
+  if (typeof val !== "object") {
     return;
   }
 
@@ -107,7 +105,7 @@ export const removeNullishDeep = (val: any): void => {
   Object.keys(val).forEach((k) => {
     if (val[k]) {
       removeNullishDeep(val[k]);
-    } else if (val[k] == null || val[k] === '') {
+    } else if (val[k] == null || val[k] === "") {
       delete val[k];
     }
   });
@@ -121,7 +119,7 @@ export function runAmplifyCommand(
 ) {
   const actualProviderConfig = {
     awscloudformation: {
-      configLevel: 'project',
+      configLevel: "project",
       useProfile: providerConfig.useProfile,
       profileName: providerConfig.profileName,
       region: providerConfig.region,
@@ -131,7 +129,7 @@ export function runAmplifyCommand(
   };
 
   if (!amplifyConfig.defaultEditor) {
-    amplifyConfig.defaultEditor = 'code';
+    amplifyConfig.defaultEditor = "code";
   }
 
   removeNullishDeep(actualProviderConfig);
@@ -155,7 +153,7 @@ export function runAmplifyCommand(
       child.stderr.pipe(process.stderr);
       process.stdin.pipe(child.stdin);
 
-      child.on('exit', (code: number) => {
+      child.on("exit", (code: number) => {
         resolve(code);
       });
     } catch (e) {
@@ -175,8 +173,8 @@ export async function runCommand(command: string, input?: string) {
       child.stderr.pipe(process.stderr);
 
       if (input) {
-        if (!input.endsWith('\n')) {
-          child.stdin.write(input + '\n');
+        if (!input.endsWith("\n")) {
+          child.stdin.write(input + "\n");
         } else {
           child.stdin.write(input);
         }
@@ -186,7 +184,7 @@ export async function runCommand(command: string, input?: string) {
         process.stdin.pipe(child.stdin);
       }
 
-      child.on('exit', (code: number) => {
+      child.on("exit", (code: number) => {
         resolve(code);
       });
     } catch (e) {
@@ -198,15 +196,15 @@ export async function runCommand(command: string, input?: string) {
 
 async function installAmplifyCLI() {
   try {
-    const amplifyVersion: string = (await exec('amplify -v')).stdout.trim();
+    const amplifyVersion: string = (await exec("amplify -v")).stdout.trim();
 
     console.log(`Found Amplify CLI version: ${amplifyVersion}`);
   } catch (e) {
-    console.log('Installing Amplify CLI globally');
+    console.log("Installing Amplify CLI globally");
 
-    await exec('npm install -g @aws-amplify/cli');
+    await exec("npm install -g @aws-amplify/cli");
 
-    console.log('Amplify CLI installed!');
+    console.log("Amplify CLI installed!");
   }
 }
 
@@ -218,20 +216,24 @@ export async function setup(additionalEnvMappings?: IAdditionalEnvMappings) {
   await installAmplifyCLI();
 
   const OPTION_TO_ENV_MAPPING: Record<string, string> = {
-    accessKey: 'AWS_AMPLIFY_VMS_ACCESS_KEY_ID',
-    secretAccessKey: 'AWS_AMPLIFY_VMS_SECRET_ACCESS_KEY',
-    profileName: 'AWS_AMPLIFY_VMS_PROFILE_NAME',
+    accessKey: "AWS_AMPLIFY_VMS_ACCESS_KEY_ID",
+    secretAccessKey: "AWS_AMPLIFY_VMS_SECRET_ACCESS_KEY",
+    profileName: "AWS_AMPLIFY_VMS_PROFILE_NAME",
     ...additionalEnvMappings,
   };
 
-  const cliOptionsEvaluated = simpleCLIParser(
-    process.argv.slice(2).join(DELIMITER),
-    ['accessKey', 'secretAccessKey', 'profileName', ...Object.keys(additionalEnvMappings || {})],
-  );
+  const cliOptionsEvaluated = simpleCLIParser(process.argv.slice(2).join(DELIMITER), [
+    "accessKey",
+    "secretAccessKey",
+    "profileName",
+    ...Object.keys(additionalEnvMappings || {}),
+  ]);
 
   Object.entries(cliOptionsEvaluated).forEach(([k, v]) => {
     if (!(k in OPTION_TO_ENV_MAPPING)) {
-      throw new Error(`Found CLI option ${k} but mapping does not exist in ${OPTION_TO_ENV_MAPPING.toString()}`);
+      throw new Error(
+        `Found CLI option ${k} but mapping does not exist in ${OPTION_TO_ENV_MAPPING.toString()}`,
+      );
     } else {
       process.env[OPTION_TO_ENV_MAPPING[k]] = v;
     }
@@ -240,12 +242,14 @@ export async function setup(additionalEnvMappings?: IAdditionalEnvMappings) {
 
 export function wrapAsyncCall(callback: () => Promise<void>) {
   try {
-    callback().then(() => {
-      process.exit(0);
-    }).catch((e: Error) => {
-      console.log(e);
-      process.exit(1);
-    });
+    callback()
+      .then(() => {
+        process.exit(0);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+        process.exit(1);
+      });
   } catch (e) {
     console.log(e);
     process.exit(1);
@@ -253,5 +257,8 @@ export function wrapAsyncCall(callback: () => Promise<void>) {
 }
 
 export function removeMultipleContiguousSpaces(str: string) {
-  return str.split(' ').filter((x) => x.length > 0).join(' ');
+  return str
+    .split(" ")
+    .filter((x) => x.length > 0)
+    .join(" ");
 }

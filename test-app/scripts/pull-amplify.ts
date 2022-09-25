@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import * as fs from 'fs';
-import * as path from 'path';
-import { questionPromise, runAmplifyCommand, setup, wrapAsyncCall } from './shared-amplify-config';
+import * as fs from "fs";
+import * as path from "path";
+import { questionPromise, runAmplifyCommand, setup, wrapAsyncCall } from "./shared-amplify-config";
 
 const getProjectConfig = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -10,25 +10,23 @@ const getProjectConfig = () => {
 
   try {
     parsedProjectConfig = JSON.parse(
-      fs.readFileSync(
-        path.join(__dirname, '..', 'amplify', '.config', 'project-config.json'),
-      ).toString(),
+      fs
+        .readFileSync(path.join(__dirname, "..", "amplify", ".config", "project-config.json"))
+        .toString(),
     );
   } catch (e) {
-    throw new Error('Could not find or parse the project-config.json file!');
+    throw new Error("Could not find or parse the project-config.json file!");
   }
 
   return {
     projectName: parsedProjectConfig.projectName,
-    frontend: parsedProjectConfig.frontend || 'javascript',
-    framework:
-      parsedProjectConfig?.[parsedProjectConfig.frontend].framework ??
-      'react',
+    frontend: parsedProjectConfig.frontend || "javascript",
+    framework: parsedProjectConfig?.[parsedProjectConfig.frontend].framework ?? "react",
     config: parsedProjectConfig?.[parsedProjectConfig.frontend].config || {
-      SourceDir: 'frontend/src',
-      DistributionDir: 'frontend/build',
-      BuildCommand: 'npm run-script build',
-      StartCommand: 'npm run-script start',
+      SourceDir: "apps/react-frontend/src",
+      DistributionDir: "frontend/build",
+      BuildCommand: "npm run-script build",
+      StartCommand: "npm run-script start",
     },
   };
 };
@@ -40,9 +38,7 @@ async function pullAmplify() {
   await setup();
 
   const teamProviderInfo: unknown = JSON.parse(
-    fs.readFileSync(
-      path.join(__dirname, '..', 'amplify', 'team-provider-info.json'),
-    ).toString(),
+    fs.readFileSync(path.join(__dirname, "..", "amplify", "team-provider-info.json")).toString(),
   );
 
   let envName = process.env.AWS_AMPLIFY_VMS_ENV_NAME;
@@ -53,11 +49,11 @@ async function pullAmplify() {
     if (backends.length > 1) {
       console.log(`Found multiple backends: ${backends.toString()}`);
       console.log(
-        'Please enter the name of the backend you\'d like to use from those listed above.',
+        "Please enter the name of the backend you'd like to use from those listed above.",
       );
 
-      const backend = await questionPromise('Desired backend: ').catch(() => {
-        throw new Error('No backend inputted!');
+      const backend = await questionPromise("Desired backend: ").catch(() => {
+        throw new Error("No backend inputted!");
       });
 
       envName = teamProviderInfo[backend];
@@ -76,23 +72,22 @@ async function pullAmplify() {
   const profileName = process.env.AWS_AMPLIFY_VMS_PROFILE_NAME;
   const useProfileName = !!profileName || false;
   const appId =
-    process.env.AWS_AMPLIFY_VMS_APP_ID ||
-    teamProviderInfo[envName].awscloudformation.AmplifyAppId;
+    process.env.AWS_AMPLIFY_VMS_APP_ID || teamProviderInfo[envName].awscloudformation.AmplifyAppId;
   const region =
     process.env.AWS_AMPLIFY_VMS_REGION ||
     teamProviderInfo[envName].awscloudformation.Region ||
-    'us-west-1';
+    "us-west-1";
 
   if (!appId || !envName) {
-    throw new Error('AppID and Environment Name must be specified!');
+    throw new Error("AppID and Environment Name must be specified!");
   }
 
-  console.log('\nAttempting to pull!\n');
+  console.log("\nAttempting to pull!\n");
 
   const projectConfig = getProjectConfig();
 
   await runAmplifyCommand(
-    'pull',
+    "pull",
     {
       useProfile: useProfileName,
       profileName,

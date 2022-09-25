@@ -1,0 +1,1293 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BackendStack should create with default resources 1`] = `
+Object {
+  "Outputs": Object {
+    "ApiGatewayApiConsoleUrl": Object {
+      "Description": "Console URL for the API Gateway API's Stage",
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".console.aws.amazon.com/lambda/home?region=",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            "#/apis/",
+            Object {
+              "Ref": "backendtestProxyLambdaRestApi24750C7F",
+            },
+            "/stages/",
+            Object {
+              "Ref": "backendtestProxyLambdaRestApiDeploymentStageprod39595393",
+            },
+          ],
+        ],
+      },
+    },
+    "ApiUrl": Object {
+      "Description": "Invoke URL for your API. Clicking this link will perform a GET request on the root resource of your API.",
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "backendtestProxyLambdaRestApi24750C7F",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "backendtestProxyLambdaRestApiDeploymentStageprod39595393",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+    "LambdaFunctionConsoleUrl": Object {
+      "Description": "Console URL for the Lambda Function",
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".console.aws.amazon.com/lambda/home?region=",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            "#/functions/",
+            Object {
+              "Ref": "backendtestProxyLambdaE1BE3AFD",
+            },
+          ],
+        ],
+      },
+    },
+    "backendtestProxyLambdaRestApiEndpoint1A1BE1FF": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "backendtestProxyLambdaRestApi24750C7F",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "backendtestProxyLambdaRestApiDeploymentStageprod39595393",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "backendtestProxyLambdaE1BE3AFD": Object {
+      "DependsOn": Array [
+        "backendtestProxyLambdaServiceRole3A04CD3F",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "95c924c84f5d023be4edee540cb2cb401a49f115d01ed403b288f6cb412771df.zip",
+        },
+        "Description": "Lambda with API",
+        "Environment": Object {
+          "Variables": Object {
+            "FRONTEND_ORIGIN": "frontend.com",
+          },
+        },
+        "FunctionName": "backend-test-ProxyLambda",
+        "Handler": "main.handler",
+        "MemorySize": 512,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaServiceRole3A04CD3F",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 30,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "backendtestProxyLambdaRestApi24750C7F": Object {
+      "Properties": Object {
+        "BinaryMediaTypes": Array [
+          "*/*",
+        ],
+        "Description": "REST API that directs all requests to Lambda function",
+        "EndpointConfiguration": Object {
+          "Types": Array [
+            "REGIONAL",
+          ],
+        },
+        "Name": "backend-test-ProxyLambdaRestApi",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "backendtestProxyLambdaRestApiANYApiPermissionBackendStackTestbackendtestProxyLambdaRestApi0DBE4AB8ANY6CAE98A0": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaE1BE3AFD",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "backendtestProxyLambdaRestApi24750C7F",
+              },
+              "/",
+              Object {
+                "Ref": "backendtestProxyLambdaRestApiDeploymentStageprod39595393",
+              },
+              "/*/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "backendtestProxyLambdaRestApiANYApiPermissionTestBackendStackTestbackendtestProxyLambdaRestApi0DBE4AB8ANY429F5F22": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaE1BE3AFD",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "backendtestProxyLambdaRestApi24750C7F",
+              },
+              "/test-invoke-stage/*/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "backendtestProxyLambdaRestApiANYD150043F": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "ANY",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "backendtestProxyLambdaE1BE3AFD",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaRestApi24750C7F",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "backendtestProxyLambdaRestApiAccountF0EE8E1F": Object {
+      "DeletionPolicy": "Retain",
+      "DependsOn": Array [
+        "backendtestProxyLambdaRestApi24750C7F",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaRestApiCloudWatchRoleF2365527",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "backendtestProxyLambdaRestApiCloudWatchRoleF2365527": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "backendtestProxyLambdaRestApiDeployment5696F0B881e742cb3488cb69b428b00d29b8e421": Object {
+      "DependsOn": Array [
+        "backendtestProxyLambdaRestApiproxyANY8C9B8DE0",
+        "backendtestProxyLambdaRestApiproxyOPTIONS9C8DF4A1",
+        "backendtestProxyLambdaRestApiproxy89667929",
+        "backendtestProxyLambdaRestApiANYD150043F",
+        "backendtestProxyLambdaRestApiOPTIONS7D414DF8",
+      ],
+      "Properties": Object {
+        "Description": "REST API that directs all requests to Lambda function",
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "backendtestProxyLambdaRestApiDeploymentStageprod39595393": Object {
+      "DependsOn": Array [
+        "backendtestProxyLambdaRestApiAccountF0EE8E1F",
+      ],
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "backendtestProxyLambdaRestApiDeployment5696F0B881e742cb3488cb69b428b00d29b8e421",
+        },
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "backendtestProxyLambdaRestApiOPTIONS7D414DF8": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Credentials": "'true'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'frontend.com'",
+                "method.response.header.Access-Control-Max-Age": "'-1'",
+                "method.response.header.Vary": "'Origin'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Credentials": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Max-Age": true,
+              "method.response.header.Vary": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaRestApi24750C7F",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "backendtestProxyLambdaRestApiproxy89667929": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaRestApi24750C7F",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "{proxy+}",
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "backendtestProxyLambdaRestApiproxyANY8C9B8DE0": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "ANY",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "backendtestProxyLambdaE1BE3AFD",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "backendtestProxyLambdaRestApiproxy89667929",
+        },
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "backendtestProxyLambdaRestApiproxyANYApiPermissionBackendStackTestbackendtestProxyLambdaRestApi0DBE4AB8ANYproxyF2F3B0C4": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaE1BE3AFD",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "backendtestProxyLambdaRestApi24750C7F",
+              },
+              "/",
+              Object {
+                "Ref": "backendtestProxyLambdaRestApiDeploymentStageprod39595393",
+              },
+              "/*/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "backendtestProxyLambdaRestApiproxyANYApiPermissionTestBackendStackTestbackendtestProxyLambdaRestApi0DBE4AB8ANYproxyB6995552": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaE1BE3AFD",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "backendtestProxyLambdaRestApi24750C7F",
+              },
+              "/test-invoke-stage/*/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "backendtestProxyLambdaRestApiproxyOPTIONS9C8DF4A1": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Credentials": "'true'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'frontend.com'",
+                "method.response.header.Access-Control-Max-Age": "'-1'",
+                "method.response.header.Vary": "'Origin'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Credentials": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Max-Age": true,
+              "method.response.header.Vary": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "backendtestProxyLambdaRestApiproxy89667929",
+        },
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "backendtestProxyLambdaServiceRole3A04CD3F": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`BackendStack should create with default resources when no frontendDomain is given 1`] = `
+Object {
+  "Outputs": Object {
+    "ApiGatewayApiConsoleUrl": Object {
+      "Description": "Console URL for the API Gateway API's Stage",
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".console.aws.amazon.com/lambda/home?region=",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            "#/apis/",
+            Object {
+              "Ref": "backendtestProxyLambdaRestApi24750C7F",
+            },
+            "/stages/",
+            Object {
+              "Ref": "backendtestProxyLambdaRestApiDeploymentStageprod39595393",
+            },
+          ],
+        ],
+      },
+    },
+    "ApiUrl": Object {
+      "Description": "Invoke URL for your API. Clicking this link will perform a GET request on the root resource of your API.",
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "backendtestProxyLambdaRestApi24750C7F",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "backendtestProxyLambdaRestApiDeploymentStageprod39595393",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+    "LambdaFunctionConsoleUrl": Object {
+      "Description": "Console URL for the Lambda Function",
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".console.aws.amazon.com/lambda/home?region=",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            "#/functions/",
+            Object {
+              "Ref": "backendtestProxyLambdaE1BE3AFD",
+            },
+          ],
+        ],
+      },
+    },
+    "backendtestProxyLambdaRestApiEndpoint1A1BE1FF": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "backendtestProxyLambdaRestApi24750C7F",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "backendtestProxyLambdaRestApiDeploymentStageprod39595393",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "backendtestProxyLambdaE1BE3AFD": Object {
+      "DependsOn": Array [
+        "backendtestProxyLambdaServiceRole3A04CD3F",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "95c924c84f5d023be4edee540cb2cb401a49f115d01ed403b288f6cb412771df.zip",
+        },
+        "Description": "Lambda with API",
+        "Environment": Object {
+          "Variables": Object {
+            "FRONTEND_ORIGIN": "*",
+          },
+        },
+        "FunctionName": "backend-test-ProxyLambda",
+        "Handler": "main.handler",
+        "MemorySize": 512,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaServiceRole3A04CD3F",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 30,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "backendtestProxyLambdaRestApi24750C7F": Object {
+      "Properties": Object {
+        "BinaryMediaTypes": Array [
+          "*/*",
+        ],
+        "Description": "REST API that directs all requests to Lambda function",
+        "EndpointConfiguration": Object {
+          "Types": Array [
+            "REGIONAL",
+          ],
+        },
+        "Name": "backend-test-ProxyLambdaRestApi",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "backendtestProxyLambdaRestApiANYApiPermissionBackendStackTestbackendtestProxyLambdaRestApi0DBE4AB8ANY6CAE98A0": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaE1BE3AFD",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "backendtestProxyLambdaRestApi24750C7F",
+              },
+              "/",
+              Object {
+                "Ref": "backendtestProxyLambdaRestApiDeploymentStageprod39595393",
+              },
+              "/*/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "backendtestProxyLambdaRestApiANYApiPermissionTestBackendStackTestbackendtestProxyLambdaRestApi0DBE4AB8ANY429F5F22": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaE1BE3AFD",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "backendtestProxyLambdaRestApi24750C7F",
+              },
+              "/test-invoke-stage/*/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "backendtestProxyLambdaRestApiANYD150043F": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "ANY",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "backendtestProxyLambdaE1BE3AFD",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaRestApi24750C7F",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "backendtestProxyLambdaRestApiAccountF0EE8E1F": Object {
+      "DeletionPolicy": "Retain",
+      "DependsOn": Array [
+        "backendtestProxyLambdaRestApi24750C7F",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaRestApiCloudWatchRoleF2365527",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "backendtestProxyLambdaRestApiCloudWatchRoleF2365527": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "backendtestProxyLambdaRestApiDeployment5696F0B89fc1d7aec76e38a9a2f039961db09156": Object {
+      "DependsOn": Array [
+        "backendtestProxyLambdaRestApiproxyANY8C9B8DE0",
+        "backendtestProxyLambdaRestApiproxyOPTIONS9C8DF4A1",
+        "backendtestProxyLambdaRestApiproxy89667929",
+        "backendtestProxyLambdaRestApiANYD150043F",
+        "backendtestProxyLambdaRestApiOPTIONS7D414DF8",
+      ],
+      "Properties": Object {
+        "Description": "REST API that directs all requests to Lambda function",
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "backendtestProxyLambdaRestApiDeploymentStageprod39595393": Object {
+      "DependsOn": Array [
+        "backendtestProxyLambdaRestApiAccountF0EE8E1F",
+      ],
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "backendtestProxyLambdaRestApiDeployment5696F0B89fc1d7aec76e38a9a2f039961db09156",
+        },
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "backendtestProxyLambdaRestApiOPTIONS7D414DF8": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Credentials": "'true'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Max-Age": "'-1'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Credentials": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Max-Age": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaRestApi24750C7F",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "backendtestProxyLambdaRestApiproxy89667929": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaRestApi24750C7F",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "{proxy+}",
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "backendtestProxyLambdaRestApiproxyANY8C9B8DE0": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "ANY",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "backendtestProxyLambdaE1BE3AFD",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Ref": "backendtestProxyLambdaRestApiproxy89667929",
+        },
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "backendtestProxyLambdaRestApiproxyANYApiPermissionBackendStackTestbackendtestProxyLambdaRestApi0DBE4AB8ANYproxyF2F3B0C4": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaE1BE3AFD",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "backendtestProxyLambdaRestApi24750C7F",
+              },
+              "/",
+              Object {
+                "Ref": "backendtestProxyLambdaRestApiDeploymentStageprod39595393",
+              },
+              "/*/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "backendtestProxyLambdaRestApiproxyANYApiPermissionTestBackendStackTestbackendtestProxyLambdaRestApi0DBE4AB8ANYproxyB6995552": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "backendtestProxyLambdaE1BE3AFD",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "backendtestProxyLambdaRestApi24750C7F",
+              },
+              "/test-invoke-stage/*/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "backendtestProxyLambdaRestApiproxyOPTIONS9C8DF4A1": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Access-Control-Allow-Credentials": "'true'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Max-Age": "'-1'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": Object {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Access-Control-Allow-Credentials": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Max-Age": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "backendtestProxyLambdaRestApiproxy89667929",
+        },
+        "RestApiId": Object {
+          "Ref": "backendtestProxyLambdaRestApi24750C7F",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "backendtestProxyLambdaServiceRole3A04CD3F": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

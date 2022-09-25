@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import * as cdk from 'aws-cdk-lib';
-import { StackProps } from 'aws-cdk-lib';
-import { AmplifyStack } from '../lib/amplify-stack';
-import { BackendStack } from '../lib/backend/backend-stack';
-import { VMS_CONSTANTS } from '../lib/constants';
+import * as cdk from "aws-cdk-lib";
+import { StackProps } from "aws-cdk-lib";
+import { AmplifyStack } from "../lib/amplify-stack";
+import { BackendStack } from "../lib/backend/backend-stack";
+import { VMS_CONSTANTS } from "../lib/constants";
 
 interface IStage {
   name: string;
@@ -16,10 +16,10 @@ const app = new cdk.App();
 
 const stages: IStage[] = [
   {
-    name: '',
-    accountId: '633874248049',
-    region: 'us-west-1',
-    backendName: 'dev',
+    name: "",
+    accountId: "633874248049",
+    region: "us-west-1",
+    backendName: "dev",
   },
 ];
 
@@ -29,7 +29,7 @@ stages.forEach((stage) => {
     env: {
       region: stage.region,
       account: stage.accountId,
-    }
+    },
   };
 
   const backendStack = new BackendStack(app, `${VMS_CONSTANTS.generalName}-BackendStack`, {
@@ -43,17 +43,17 @@ stages.forEach((stage) => {
     name: VMS_CONSTANTS.generalName,
     repository: VMS_CONSTANTS.ghRepoUrl,
     tokenConfig: {
-      secretName: 'general-vms-gh-pat',
-      secretKey: 'general-vms-PAT',
+      secretName: "general-vms-gh-pat",
+      secretKey: "general-vms-PAT",
     },
     pathToFrontendFromRoot: VMS_CONSTANTS.pathToFrontendFromRoot,
     useManualBuildSpec: true,
     branches: [
       {
-        branchName: 'amplify-test',
-        stage: 'PRODUCTION',
-        prefix: 'cole',
-      }
+        branchName: "amplify-test",
+        stage: "PRODUCTION",
+        prefix: "cole",
+      },
     ],
     backendName: stage.backendName,
     domainName: VMS_CONSTANTS.domainName,
