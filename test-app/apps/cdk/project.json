@@ -1,0 +1,45 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cdk/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/cdk",
+        "main": "apps/cdk/src/app.ts",
+        "tsConfig": "apps/cdk/tsconfig.app.json"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/cdk/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/cdk"],
+      "options": {
+        "jestConfig": "apps/cdk/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "copy-all-assets": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "copy-assets-for-cdk"
+      }
+    }
+  },
+  "tags": []
+}

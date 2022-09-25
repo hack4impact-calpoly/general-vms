@@ -7,3 +7,4 @@ amplify/backend
 shared/lib
 cdk/cdk.out
 backend/lib
+aws-exports.js
