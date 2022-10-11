@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "backend": "apps/backend",
+    "backend-v2": "apps/backend-v2",
     "cdk": "apps/cdk",
     "react-frontend": "apps/react-frontend",
     "shared": "libs/shared"
