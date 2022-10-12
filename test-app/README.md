@@ -113,11 +113,13 @@ Confirm everything worked by doing: `ls frontend/src/aws-exports.js` and the fil
 NX also uses the term executor similar to how running npm run-scripts work. For a given project, you can define "executors" which are alias commands that do something with options (so like lint, build, test, etc).
 
 For running a given NX command/executor for a given project (to see projects, check out the `workspace.json` file), run:
+
 ```
 npx nx <executor> <project> [-- <flags/options>]
 ```
 
 So if I want to update snapshots in the CDK project, I'd do:
+
 ```
 npx nx test cdk -- --updateSnapshots
 ```
