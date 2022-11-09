@@ -8,10 +8,12 @@ import {
   Delete,
   Query,
   ParseIntPipe,
+  UsePipes,
 } from "@nestjs/common";
-import { ValidationPipe } from "../validation.pipe";
-import { ShiftBodySchema, ShiftQuery } from "./shift.dto";
+import { ZodValidationPipe } from "nestjs-zod";
+import { ShiftQuery, BaseShiftDto } from "./shift.dto";
 
+@UsePipes(ZodValidationPipe)
 @Controller("shift")
 export class ShiftController {
   @Get()
@@ -32,7 +34,7 @@ export class ShiftController {
   }
 
   @Post()
-  create(@Body(new ValidationPipe()) createShiftDto: ShiftBodySchema): string {
+  create(@Body() createShiftDto: BaseShiftDto): string {
     console.log(createShiftDto);
     return "";
   }
