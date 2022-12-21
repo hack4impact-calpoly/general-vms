@@ -101,8 +101,6 @@
     "aws-amplify": "^4.3.21",
     "aws-cdk-lib": "^2.41.0",
     "bootstrap": "^5.2.1",
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.13.2",
     "constructs": "^10.1.102",
     "core-js": "^3.6.5",
     "dotenv": "^16.0.2",

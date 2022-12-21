@@ -11,13 +11,13 @@ import {
   UsePipes,
 } from "@nestjs/common";
 import { ZodValidationPipe } from "nestjs-zod";
-import { ShiftQuery, BaseShiftDto } from "./shift.dto";
+import { BaseShiftDto } from "./shift.dto";
 
 @UsePipes(ZodValidationPipe)
 @Controller("shift")
 export class ShiftController {
   @Get()
-  findAll(@Query() query: ShiftQuery): string[] {
+  findAll(@Query() query: BaseShiftDto): string[] {
     console.log(query);
     return ["This action returns all shifts"];
   }
@@ -28,7 +28,7 @@ export class ShiftController {
   }
 
   @Put(":id")
-  update(@Param("id", ParseIntPipe) id: number, @Body() updateShiftDto: ShiftQuery): string {
+  update(@Param("id", ParseIntPipe) id: number, @Body() updateShiftDto: BaseShiftDto): string {
     console.log(updateShiftDto);
     return `This action updates a #${id} shift`;
   }
