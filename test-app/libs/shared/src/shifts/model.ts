@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "nestjs-zod/z";
 import { datePreprocessSchema, laterDateAllowEqual } from "../utils/date";
 
 const BaseShift = z.object({
